@@ -1,0 +1,14 @@
+{
+  "/blog/[id]/page": "app/blog/[id]/page.js",
+  "/_not-found": "app/_not-found.js",
+  "/material_descargable/page": "app/material_descargable/page.js",
+  "/page": "app/page.js",
+  "/tests/test_de_ansiedad/page": "app/tests/test_de_ansiedad/page.js",
+  "/tests/test_de_depresion/page": "app/tests/test_de_depresion/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/intervencion-en-promocion-y-prevencion/page": "app/intervencion-en-promocion-y-prevencion/page.js",
+  "/como_trabajamos/convenios-y-profesionales/page": "app/como_trabajamos/convenios-y-profesionales/page.js",
+  "/plan-de-accion-en-salud-mental/page": "app/plan-de-accion-en-salud-mental/page.js",
+  "/como_trabajamos/page": "app/como_trabajamos/page.js",
+  "/quienes_somos/page": "app/quienes_somos/page.js"
+}
