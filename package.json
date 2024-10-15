@@ -1,7 +1,12 @@
 {
-    "type": "commonjs",
-    "scripts": {
-      "start": "next start"
-    }
+  "name": "mi-app",
+  "version": "1.0.0",
+  "description": "Aplicación pública en Azure App Service",
+  "main": "standalone/server.js",
+  "scripts": {
+    "start": "node standalone/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
-  
+}
