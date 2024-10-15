@@ -1,11 +1,11 @@
 from flask import Flask, send_from_directory
 
-app = Flask(__name__, static_folder='server/app/')
+app = Flask(__name__, static_folder='standalone')
 
 # Ruta para servir el sitio estático
 @app.route('/')
 def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, 'server.js')
 
 # Ruta de prueba para verificar que el sitio está corriendo
 @app.route('/health')
