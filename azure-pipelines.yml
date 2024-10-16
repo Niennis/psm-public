@@ -24,14 +24,6 @@ steps:
 - script: npm test
   displayName: 'Run tests'
 
-# Step to analyze code (optional)
-- task: ESLint@1
-  inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    eslintArguments: '--ext .js,.jsx'
-    failOnError: true
-  displayName: 'Run ESLint'
-
 # Step to archive build artifacts
 - task: ArchiveFiles@2
   inputs:
@@ -49,12 +41,3 @@ steps:
     artifact: 'sitioPublico '
     publishLocation: 'pipeline'
   displayName: 'Publish build artifacts'
-
-# Step to deploy to Azure App Service (example, adjust as necessary)
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Your Azure Subscription'
-    appName: 'Your App Name'
-    package: '$(Build.ArtifactStagingDirectory)/sitioPublico .zip'
-    startupCommand: 'npm start'  # or your specific command to start the app
-  displayName: 'Deploy to Azure Web App'
