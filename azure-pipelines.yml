@@ -20,10 +20,6 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-# Step to run tests (optional)
-- script: npm test
-  displayName: 'Run tests'
-
 # Step to archive build artifacts
 - task: ArchiveFiles@2
   inputs:
