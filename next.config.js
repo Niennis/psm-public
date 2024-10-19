@@ -10,6 +10,8 @@ module.exports = {
       },
     ],
   },
+  reactStrictMode: true,
+  distDir: 'build',
   output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true,
