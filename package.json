@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/core": "^0.28.0",
-    "@auth/prisma-adapter": "^2.0.0",
     "@ckeditor/ckeditor5-build-classic": "40.0.0",
     "@ckeditor/ckeditor5-react": "6.0.0",
     "@emotion/react": "^11.11.3",
@@ -26,7 +24,6 @@
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
     "@mui/system": "^5.15.15",
-    "@next-auth/prisma-adapter": "^0.4.4-canary.81",
     "@tanstack/react-query": "5.22.2",
     "@tanstack/react-query-devtools": "5.24.0",
     "antd": "5.14.1",
@@ -36,7 +33,6 @@
     "dayjs": "1.11.10",
     "feather-icons-react": "0.7.0",
     "next": "^14.1.4",
-    "next-auth": "4.24.5",
     "react": "^18",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18",
