@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "main": "server.js",  
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node server.js"  
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "40.0.0",
