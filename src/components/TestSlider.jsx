@@ -127,7 +127,7 @@ const TestSlider = ({ slides, innerRef }) => {
           ? <div style={sliderStyles}>
             {slides.length > 2 && <ChevronLeft sx={leftArrowStyles} onClick={prevSlide} />}
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
-              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ' }}>
+              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ', margin: 0 }}>
                 <h2
                   className="sailec"
                   style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>

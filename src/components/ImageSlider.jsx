@@ -122,20 +122,19 @@ const ImageSlider = ({ innerRef }) => {
     "only screen and (max-height: 700px)"
   )
 
-
   const fetch = async () => {
-    // if (!apiLlamada) {
+    if (!apiLlamada) {
 
-    //     try {
-    //       const response = await fetchBlogs();
-    //       // const result = await response.json();
-    //       setData(response);
-    //       setApiLlamada(true); // Marca que ya se hizo la llamada
-    //       console.log('RESULT', response)
-    //     } catch (error) {
-    //       console.log('ERRORSH', error.message);
-    //     }
-    // }
+        try {
+          const response = await fetchBlogs();
+          // const result = await response.json();
+          setData(response);
+          setApiLlamada(true); // Marca que ya se hizo la llamada
+          console.log('RESULT', response)
+        } catch (error) {
+          console.log('ERRORSH', error.message);
+        }
+    }
   }
 
   const resetTimeout = () => {

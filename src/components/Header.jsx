@@ -119,10 +119,11 @@ const Header = () => {
       style={{
         background: 'white',
         color: 'black',
-        margin: 0,
+        justifyContent: matches ? 'center' : 'flex-end',
+        margin: "0", // 0 72px
         maxHeight: '112px',
         minHeight: '98px',
-        justifyContent: matches ? 'center' : 'flex-end'
+        width: '100vw',
       }}
     >
       <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
@@ -144,10 +145,17 @@ const Header = () => {
             }}
           >
             <Image
-              src={logo.src}
-              width={263}
-              height={70}
               alt="Logo"
+              src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
+              priority
+              height={0}
+              width={0}
+              sizes="100%"
+              style={{
+                height: '70px',
+                width: '263px',
+                
+              }}
             />{" "}
           </Typography>
 
@@ -248,11 +256,12 @@ const Header = () => {
             <Image
               src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
               height={0}
-              width={100}
+              width={0}
               alt="logo udp"
+              sizes="100%"
               style={{
-                width: '100px',
                 height: 'auto',
+                width: '100px',
               }} />{" "}
           </Typography>
 
