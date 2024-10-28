@@ -10,9 +10,6 @@ export const fetchBlogs = async () => {
         'body': null,
       }
     })
-
-    console.log('LA DATA', data)
-
     const blogs = await data.json()
     console.log('BLOGS', blogs);
     return blogs

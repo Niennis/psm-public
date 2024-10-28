@@ -49,11 +49,11 @@ const styles = [
 ]
 
 const estimateReadingTime = text => {
-  const wordsPerMinute = 250; // Puedes ajustar este valor según la velocidad de lectura deseada
-  const words = text.split(/\s+/).length; // Divide el texto en palabras por los espacios en blanco
+  const wordsPerMinute = 250; 
+  const words = text.split(/\s+/).length; 
   const readingTimeMinutes = words / wordsPerMinute;
 
-  return Math.ceil(readingTimeMinutes); // Retorna el tiempo estimado de lectura en minutos, redondeado al entero superior
+  return Math.ceil(readingTimeMinutes); 
 }
 
 const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice, ...other }) => {
@@ -89,21 +89,21 @@ const a11yProps = (index) => {
 }
 
 const ImageSlider = ({ innerRef }) => {
-  const [slides, setSlides] = useState(blogs.slice(0, 4))
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [slides, setSlides] = useState(blogs.slice(0, 4))
+  const matches = useMediaQuery('(min-width:600px)');
+  const [isShort, setIsShort] = useState(false);
+  const totalSlides = slides.length;
+  const timeoutRef = useRef(null);
+
   const [title, setTitle] = useState(blogs[0].titulo)
   const [content, setContent] = useState(blogs[0].bajada)
   const [color, setColor] = useState(blogs[0].color)
   const [idBlog, setIdBlog] = useState(blogs[0].id)
-  const matches = useMediaQuery('(min-width:600px)');
-  const [isShort, setIsShort] = useState(false);
   const [data, setData] = useState(null)
   const [apiLlamada, setApiLlamada] = useState(false); // Nueva bandera
 
   const [value, setValue] = useState(0);
-  const divRef = useRef();
-  const totalSlides = slides.length;
-  const timeoutRef = useRef(null);
 
   const isSmallDevice = useMediaQuery(
     "only screen and (max-width : 640px)"
@@ -201,7 +201,6 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   const slideStyles = {
-    // backgroundImage: `url(${slides[currentIndex].imagen})`,
     width: '100%',
     height: imgHeightDesktop,
     backgroundPosition: 'top',
@@ -299,15 +298,10 @@ const ImageSlider = ({ innerRef }) => {
             <Image
               src={slides[currentIndex].imagen}
               alt={slides[currentIndex].imagen}
-              layout="fill"
-              // objectFit="cover"
-              // objectPosition="top"
-              // width={100}
-              // height={100}
+              fill
               sizes="100vw"
               style={{
                 borderRadius: '8px',
-                layout: 'fill',
                 margin: 'auto',
                 objectFit: 'cover',
                 objectPosition: 'top',
