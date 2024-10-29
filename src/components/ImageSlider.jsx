@@ -294,7 +294,7 @@ const ImageSlider = ({ innerRef }) => {
           {/* DESKTOP */}
           <div style={matches && slideStyles}>
             <Image
-              src={slides[currentIndex].imagen}
+              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
               alt={slides[currentIndex].imagen}
               fill
               sizes="100vw"
@@ -458,7 +458,7 @@ const ImageSlider = ({ innerRef }) => {
                       }}> Ver más + </button>
                   </Link>
                   <Image
-                    src={slides[currentIndex].imagen}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     alt={slides[currentIndex].imagen}
                     width={0}
                     height={0}
