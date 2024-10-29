@@ -56,14 +56,13 @@ const estimateReadingTime = text => {
   return Math.ceil(readingTimeMinutes); 
 }
 
-const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice, ...other }) => {
+const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => {
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
