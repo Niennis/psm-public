@@ -1,16 +1,15 @@
 'use client'
-import { useState } from "react";
-import Link from "next/link";
+import { Fragment, useState } from "react";
+import { useRouter } from 'next/navigation';
+
 import { useForm } from 'react-hook-form';
-import { useMediaQuery } from "@mui/material";
-import { saludMental01 } from "@/components/imagepath";
 import { FaArrowLeft } from "react-icons/fa";
+
+import { useMediaQuery } from "@mui/material";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Fragment } from "react";
-import { useRouter } from 'next/navigation';
+import Typography from '@mui/material/Typography';
 
 const style = {
   position: 'absolute',
@@ -28,143 +27,92 @@ const style = {
 
 const preguntas = [
   {
-    pregunta: 'Torpe o entumecido.',
-    label: 'torpe'
+    pregunta: 'Tener poco interés o placer en hacer las cosas.',
+    label: 'poco_interes'
   },
   {
-    pregunta: 'Acalorado',
-    label: 'acalorado'
+    pregunta: 'Sentirse desanimado/a, deprimido/a, o sin esperanza.',
+    label: 'desanimado'
   },
   {
-    pregunta: 'Con temblor en las piernas.',
-    label: 'temblor'
+    pregunta: 'Con problemas en dormirse o en mantenerse dormido/a, o en dormir demasiado.',
+    label: 'mal_dormir'
   },
   {
-    pregunta: 'Incapaz de relajarse.',
-    label: 'incapaz'
+    pregunta: 'Sentirse cansado/a o tener poca energía.',
+    label: 'cansado'
   },
   {
-    pregunta: 'Con temor a que ocurra lo peor.',
-    label: 'temor'
+    pregunta: 'Tener poco apetito o comer en exceso.',
+    label: 'comida'
   },
   {
-    pregunta: 'Mareado, o que se le va la cabeza.',
-    label: 'mareado'
+    pregunta: 'Sentir falta de amor propio o que sea un fracaso que decepcionara a si mismo/a a su familia.',
+    label: 'fracaso'
   },
   {
-    pregunta: 'Con latidos del corazón fuertes y acelerados.',
-    label: 'latidos'
+    pregunta: 'Tener dificultad para concentrarse en cosas tales como leer el periódico o mirar televisión.',
+    label: 'concentracion'
   },
   {
-    pregunta: 'Inestable',
-    label: 'inestable'
+    pregunta: 'Se mueve o habla tan lentamente que otra gente se podría dar cuenta o de lo contrario, está tan agitado/a o inquieto/a que se mueve mucho más de lo acostumbrado.',
+    label: 'percepcion'
   },
   {
-    pregunta: 'Atemorizado o asustado.',
-    label: 'atemorizado'
-  },
-  {
-    pregunta: 'Nervioso',
-    label: 'nervioso'
-  },
-  {
-    pregunta: 'Con sensación de bloqueo.',
-    label: 'bloqueado'
-  },
-  {
-    pregunta: 'Con temblores en las manos.',
-    label: 'temblorenmanos'
-  },
-  {
-    pregunta: 'Inquieto, inseguro.',
-    label: 'inquiero'
-  },
-  {
-    pregunta: 'Con miedo a perder el control.',
-    label: 'perdercontrol'
-  },
-  {
-    pregunta: 'Con sensación de ahogo.',
-    label: 'ahogado'
-  },
-  {
-    pregunta: 'Con temor a morir.',
-    label: 'miedoamorir'
-  },
-  {
-    pregunta: 'Con miedo.',
-    label: 'conmiedo'
-  },
-  {
-    pregunta: 'Con problemas digestivos.',
-    label: 'digestion'
-  },
-  {
-    pregunta: 'Con desvanecimientos.',
-    label: 'desvanecimientos'
-  },
-  {
-    pregunta: 'Con rubor facial.',
-    label: 'ruborfacial'
-  },
-  {
-    pregunta: 'Con sudores, frios o calientes.',
-    label: 'sudores'
+    pregunta: 'Se le han ocurrido pensamientos de que sería mejor estar muerto/a o de que haría daño de alguna manera.',
+    label: 'pensamientos_muerte'
   }
 ]
 
 const resultados = [
   {
-    puntaje: [0, 21],
-    titulo: 'Ansiedad baja',
-    descripcion: `Tu puntuación indica un nivel bajo de ansiedad, sugiriendo que los síntomas ansiosos son mínimos o ausentes. En este nivel, la ansiedad probablemente no interfiere significativamente con tus actividades diarias.`
+    puntaje: [0, 4],
+    titulo: 'Sin sintomatología depresiva',
+    descripcion: `Tus respuestas sugieren síntomas mínimos o nulos de depresión. Es probable que no estés experimentando signos significativos de depresión.`
   },
   {
-    puntaje: [22, 42],
-    titulo: 'Ansiedad moderada',
-    descripcion: `Una puntuación en este rango muestra un nivel moderado de ansiedad. Tus síntomas ansiosos son más notorios y pueden empezar a interferir con algunas de tus actividades diarias. Sería beneficioso considerar una evaluación más detallada y posiblemente algunas intervenciones para manejar la ansiedad. Te invitamos a reservar hora con nuestros servicios de salud mental. `
+    puntaje: [5, 9],
+    titulo: 'Sintomatología depresiva leve',
+    descripcion: `	Indicas síntomas leves de depresión. Aunque estos síntomas pueden no estar interfiriendo gravemente en tu vida diaria, es importante estar atento a cómo evolucionan.`
   },
   {
-    puntaje: [33, 63],
-    titulo: 'Ansiedad severa',
-    descripcion: `Este nivel indica una ansiedad severa con síntomas intensos que probablemente interfieren de manera significativa con tu rutina diaria y tu bienestar. Es recomendable buscar ayuda profesional para evaluar y tratar adecuadamente la ansiedad. Te invitamos a reservar hora con nuestros servicios de salud mental, haciendo click en el enlace.`
+    puntaje: [10, 14],
+    titulo: 'Sintomatología depresiva moderada',
+    descripcion: `Tus síntomas son moderados. Pueden estar afectando tu vida diaria y podría ser útil considerar estrategias de manejo o buscar apoyo profesional.`
+  },
+  {
+    puntaje: [15, 19],
+    titulo: 'Sintomatología depresiva moderadamente severo',
+    descripcion: `Estás experimentando síntomas depresivos moderadamente severos, los cuales probablemente están afectando de manera significativa tu rutina diaria. Sería aconsejable buscar ayuda profesional. Te invitamos a reservar hora con nuestros servicios de salud mental.`
+  },
+  {
+    puntaje: [20, 27],
+    titulo: 'Sintomatología depresiva grave',
+    descripcion: `Tus síntomas son severos y es crucial que busques ayuda profesional de inmediato para manejar estos síntomas, ya que pueden estar impactando de manera considerable en tu bienestar general. Te invitamos a reservar hora con nuestros servicios de salud mental, haciendo click en el enlace.`
   },
 ]
 
-const determinarDescripcionAsync = (puntaje) => {
-  return new Promise((resolve, reject) => {
-    try {
-      console.log('puntaje', puntaje);
-      const categoria = resultados.find(resultado => puntaje >= resultado.puntaje[0] && puntaje <= resultado.puntaje[1]);
-      console.log('categoria', categoria);
-      resolve(categoria); // Resolvemos la promesa con la categoría encontrada
-    } catch (error) {
-      console.error('Error en determinarDescripcionAsync:', error);
-      reject(error); // Rechazamos la promesa en caso de error
-    }
-  });
-};
+const determinateCategory = (puntaje) => {
+  const categoria = resultados.find(resultado => puntaje >= resultado.puntaje[0] && puntaje <= resultado.puntaje[1]);
+  return categoria
+}
 
 const ChildModal = ({ result }) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Fragment>
-      <Button onClick={() => { handleOpen() }}>Enviar correo</Button>
-      <Button onClick={() => { handleOpen() }}>Resultados anónimos</Button>
+      <Button onClick={handleOpen}>Enviar correo</Button>
+      <Button onClick={handleOpen}>Resultados anónimos</Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style }}>
+        <Box sx={{ ...style, width: '100%' }}>
           <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
             {result.descripcion}
@@ -176,59 +124,41 @@ const ChildModal = ({ result }) => {
   );
 }
 
-const TestAnsiedad = () => {
-  const [resultado, setResultado] = useState(null)
-  const matches = useMediaQuery('(min-width:600px)');
+const TestDepresion = () => {
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState()
   const router = useRouter()
+  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const isMediumSize = useMediaQuery('(min-width:768x)');
 
-  /*   const calculate = () => {
-      const data = watch()
-  
-      let values = Object.values(data);
-      let filterValues = values.filter(elemento => !isNaN(Number(elemento)) && elemento !== null);
-      // Sumamos los valores
-      let sum = filterValues.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue), 0);
-      return sum
-    } */
+  const calculate = () => {
+    const data = watch()
+    const keysToSum = [
+      "poco_interes",
+      "desanimado",
+      "mal_dormir",
+      "cansado",
+      "comida",
+      "fracaso",
+      "concentracion",
+      "percepcion",
+      "pensamientos_muerte",
+    ];
+    const sum = keysToSum.reduce((total, clave) => {
+      return total + parseInt(data[clave]); 
+    }, 0);
+    return sum
+  }
 
-  const calculateAsync = () => {
-    return new Promise((resolve, reject) => {
-      try {
-        const data = watch();
-        let values = Object.values(data);
-        let filterValues = values.filter(elemento => !isNaN(Number(elemento)) && elemento !== null);
-        // Sumamos los valores
-        let sum = filterValues.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue), 0);
-        resolve(sum); // Resolvemos la promesa con el resultado
-      } catch (error) {
-        reject(error); // Rechazamos la promesa en caso de error
-      }
-    });
-  };
+   const handleOpen = () => {
+     setOpen(true)
+     const result = calculate()
+     const response = determinateCategory(result)
+     console.log('RESULT / RESPONSE', result, response)
+     setCategory(response)
+   };
 
-  const handleOpen = async () => {
-    setOpen(true)
-    try {
-      const result = await calculateAsync() // número
-      const categoryResult = await determinarDescripcionAsync(result)
-      console.log('trycatch', result, categoryResult)
-      setCategory(categoryResult)
-    } catch (error) {
-      console.log('errorsh')
-    }
-    
-
-    // const response = determinarDescripcion(result)
-    // setCategory(response)
-    // console.log('HOLI????', response)
-  };
-  const handleClose = () => setOpen(false);
-
-  const { register, handleSubmit, watch,
-    formState: { errors }
-  } = useForm()
+  const handleClose = () => { setOpen(false); }
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
@@ -236,13 +166,13 @@ const TestAnsiedad = () => {
 
   return (
     <>
-      {matches && <div style={{
+      {isMediumSize && <div style={{
         height: '520px',
         overflow: 'hidden'
       }}>
         <img
           alt="#"
-          src={`${process.env.NEXT_PUBLIC_BASE_IMG}home_ansiedad.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_IMG}saludMental01.jpeg${process.env.NEXT_PUBLIC_KEY_IMG}`}
           width={'100%'}
           style={{
             backgroundPosition: 'center'
@@ -251,9 +181,9 @@ const TestAnsiedad = () => {
       </div>
       }
       <div className="page-wrapper sailec" style={{ margin: 'auto' }}>
-        <div style={{ marginTop: !matches && '47px' }}>
+        <div style={{ marginTop: !isMediumSize && '47px' }}>
           {/* Page Header */}
-          {matches &&
+          {isMediumSize &&
             <button className='btn mt-4 mb-2'
               style={{
                 border: '1px solid #A6A6A6',
@@ -269,37 +199,38 @@ const TestAnsiedad = () => {
             </button>
           }
           {/* /Page Header */}
-          <div className="row">
+          <div className="row m-0">
             <div className="col-sm-12">
               <div className="card" style={{ border: 'none' }}>
-                <div className="card-body" style={{ padding: matches ? '0 96px' : '32px' }}>
-                  <form>
-                    <div className="row d-flex flex-column align-items-center">
+                <div className="card-body" style={{ padding: isMediumSize ? '0 96px' : '32px' }}>
+                  <form onSubmit={onSubmit}>
+                    <div className="row d-flex flex-column align-items-center m-0">
                       <div className="col-12" style={{ padding: 0 }}>
                         <div className="form-heading">
                           <div className="card-body flex-row d-flex mt-4" style={{ paddingLeft: 0 }}>
                             <h2
-                              className={matches ? 'blog-title' : 'blog-title-sm'}>
-                              Test de Ansiedad de Beck
+                              className={isMediumSize ? 'blog-title' : 'blog-title-sm'}>
+                              Test de Síntomas de Depresión (PHQ-9)
                             </h2>
                           </div>
-                          <div className="row">
-                            <div className={`${matches ? 'blog-text' : 'blog-text-sm'} col-12 col-md-10`}>
+                          <div className="row m-0">
+                            <div className={`${isMediumSize ? 'blog-text' : 'blog-text-sm'} col-12 col-md-10`}>
                               <p>
-                                En el cuestionario hay una lista de síntomas comunes de la ansiedad. Lea cada uno de los ítems atentamente, e indique cuanto le ha afectado en la última semana incluyendo hoy:
+                                Durante las dos últimas semanas ¿con qué frecuencia le han molestado los siguientes problemas?
                               </p>
-                              <p>0 = En absoluto</p>
-                              <p>1 = Levemente</p>
-                              <p>2 = Moderadamente</p>
-                              <p>3 = Severamente</p>
+                              <p>0 = Nunca</p>
+                              <p>1 = Varios días</p>
+                              <p>2 = Más de la mitad de los días</p>
+                              <p>3 = Casi todos los días</p>
                             </div>
                           </div>
                         </div>
                       </div>
+
                       {
                         preguntas.map((item, index) => (
                           <div
-                            className={`col-12 ${matches ? 'blog-text' : 'blog-text-sm'}`}
+                            className={`col-12 ${isMediumSize ? 'blog-text' : 'blog-text-sm'}`}
                             key={index + item.label}
                             style={{
                               background: index % 2 === 0 && '#E6E9EC'
@@ -312,7 +243,7 @@ const TestAnsiedad = () => {
                               <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
                                 <div className="form-check-inline me-1 me-md-3" >
                                   <label
-                                    className={matches ? 'blog-text' : 'blog-text-sm'}
+                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}
                                   >
                                     <input
@@ -332,7 +263,7 @@ const TestAnsiedad = () => {
                                 </div>
                                 <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
                                   <label
-                                    className={matches ? 'blog-text' : 'blog-text-sm'}
+                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
@@ -351,7 +282,7 @@ const TestAnsiedad = () => {
                                 </div>
                                 <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
                                   <label
-                                    className={matches ? 'blog-text' : 'blog-text-sm'}
+                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
@@ -370,7 +301,7 @@ const TestAnsiedad = () => {
                                 </div>
                                 <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
                                   <label
-                                    className={matches ? 'blog-text' : 'blog-text-sm'}
+                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
@@ -400,7 +331,7 @@ const TestAnsiedad = () => {
                         <div className="doctor-submit text-end">
                           <button
                             type="button"
-                            className="btn btn-primary submit-form me-2"
+                            className="btn btn-primary me-2"
                             onClick={handleOpen}
                           >
                             Continuar
@@ -408,7 +339,7 @@ const TestAnsiedad = () => {
                           <button
                             type="submit"
                             className="btn btn-primary btn-hover me-2"
-                            style={{ background: '#fff', color: '#333448' }}
+                            style={{ background: '#fff', color: '#333448', marginLeft: '10px' }}
                           >
                             Cancelar
                           </button>
@@ -420,7 +351,7 @@ const TestAnsiedad = () => {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row m-0">
             <div className="col-10">
               <Modal
                 open={open}
@@ -486,11 +417,10 @@ const TestAnsiedad = () => {
                       />
                     </div>
                   </div>
-
                   <div className="col-12">
                     <div className="form-group select-gender">
                       <div className="form-check-inline">
-                        <label className="form-check-label">
+                        <label className={isMediumSize ? 'blog-text' : 'blog-text-sm'}>
                           <input
                             type="checkbox"
                             name="gender"
@@ -507,18 +437,15 @@ const TestAnsiedad = () => {
                       </div>
                     </div>
                   </div>
-                  <ChildModal result={category} />
+                 { category && <ChildModal result={category} />}
                 </Box>
               </Modal>
             </div>
-
           </div>
         </div>
       </div>
-
     </>
   )
-
 }
 
-export default TestAnsiedad;
+export default TestDepresion;
