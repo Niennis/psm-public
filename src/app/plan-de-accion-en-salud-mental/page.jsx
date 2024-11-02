@@ -6,7 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useMediaQuery } from "@mui/material";
 
 const ProtocoloAccionSaludMental = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
   const [activeTab, setActiveTab] = useState('protocolo-de-accion-en-salud-mental');
 
   const handleTabClick = (tabId) => {
@@ -14,11 +14,11 @@ const ProtocoloAccionSaludMental = () => {
   };
   return (
 
-    <div className="row prevencion flex-column d-flex " >
+    <div className="row prevencion flex-column d-flex m-0" >
       <div className="col-12" >
-        <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
+        <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+            <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Plan de acción en salud mental
             </h3>
 
@@ -47,6 +47,7 @@ const ProtocoloAccionSaludMental = () => {
                       objectPosition: 'center bottom',
                       height: '100%',
                       width: '100%',
+                      marginBottom: '10px',
                     }}
                   />
                 </div>

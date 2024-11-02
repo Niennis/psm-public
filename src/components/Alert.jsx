@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 const style = {
   position: 'absolute',
@@ -36,6 +36,5 @@ const AlertModal = ({ title, message, handleClose, open }) => {
     </div>
   );
 }
-
 
 export default AlertModal;

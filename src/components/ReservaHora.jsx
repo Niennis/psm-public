@@ -1,5 +1,6 @@
 // import { useState } from "react";
 // import Link from "next/link";
+import Image from "next/image";
 // import { CircleRounded } from "@mui/icons-material";
 import { Grid, Box, Card } from "@mui/material";
 // import TestCard from './Card'
@@ -10,12 +11,12 @@ import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import ReserveBtn from "./ReserveBtn";
 import useMediaQuery from '@mui/material/useMediaQuery';
-// import { profesional01 } from "./imagepath";
 
 const ReservaTuHora = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isLargeSize = useMediaQuery('(min-width:1024px )');
   return (
-    <div className={`container col-12 col-lg-10 align-self-center p-0 ${matches && 'mb-5'}`} style={{ background: '#f1f1f1' }}>
+    <div className={`container col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} style={{ background: '#f1f1f1' }}>
       {/* <TestCard test={slides} /> */}
       <div>
         <Box sx={{
@@ -28,7 +29,7 @@ const ReservaTuHora = () => {
         }}>
           <div className="row" style={{ margin: 0 }} >
             {
-              matches
+              isMediumSize
                 ?
                 <div
                   className={`container col-12  d-flex  justify-content-center`}
@@ -41,28 +42,33 @@ const ReservaTuHora = () => {
                   }}
                 >
                   <Card
-                    className='col-12 col-lg-4'
+                    className='col-12 col-md-4 col-lg-4'
                     sx={{
                       boxShadow: 0,
-                      display: 'inline-block',
+                      display: 'block',
                       padding: '2em 0',
                       bgcolor: '#f1f1f1'
                     }}>
-                    <CardMedia
-                      component="img"
-                      height="240"
-                      width="240"
-                      image="https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true"
-                      sx={{ borderRadius: '8px' }}
-                    />
+                    <div style={{ position: 'relative', height: '240px', width: '100%'  }}>
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                        alt="Imagen profesional"
+                        fill
+                        sizes="100%"
+                        style={{
+                          borderRadius: '8px',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    </div>
                   </Card>
 
                   <Card
-                    className='col-12 col-lg-8'
+                    className='col-12 col-md-8 col-lg-8'
                     sx={{
                       boxShadow: 0,
-                      display: 'inline-block',
-                      height: matches ? "100%" : "fit-content",
+                      display: 'block',
+                      height: isMediumSize ? "100%" : "fit-content",
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
@@ -114,7 +120,7 @@ const ReservaTuHora = () => {
 
                 :
                 <div
-                  className={`container col-12 ${matches ? 'd-flex' : ''} justify-content-center`}
+                  className={`container col-12 ${isMediumSize ? 'd-flex' : ''} justify-content-center`}
                   style={{
                     fontSize: '24px',
                     fontWeight: 400,

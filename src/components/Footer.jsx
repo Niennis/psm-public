@@ -1,18 +1,18 @@
 'use client'
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { white_logo, white_acreditacion, logo02_white } from './imagepath';
-import { Box, useMediaQuery } from '@mui/material';
 
+import { Box, useMediaQuery } from '@mui/material';
 import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BsInstagram } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import ReserveBtn from './ReserveBtn';
-import { useEffect } from 'react';
 
 const FooterDae = () => {
-  const matches = useMediaQuery('(min-width:600px)');
-
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isLargSize = useMediaQuery('(min-width:1024px)');
+  const isExtraLarge = useMediaQuery('(min-width:1440px)');
   const LINKS = [
     {
       title: 'Departamento de vida universitaria',
@@ -47,7 +47,6 @@ const FooterDae = () => {
         if (lastCheckedLink) {
           lastCheckedLink.parentElement.style.backgroundColor = '';
         }
-
         element.parentElement.style.backgroundColor = 'grey';
         element.parentElement.style.color = 'black';
         lastCheckedLink = element;
@@ -68,37 +67,39 @@ const FooterDae = () => {
 
   return (
     <>
-      <div className="row d-flex justify-content-center sailec" style={{ backgroundColor: '#2D2D2D', margin: 0 }}>
+      <div className="row d-flex justify-content-center sailec" style={{ backgroundColor: '#2D2D2D', margin: 0, width: '100%' }}>
         <Box className="container col-12 col-lg-10"
           sx={{
             color: 'white',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            maxWidth: '1294px !important'
+            // maxWidth: '1294px !important'
           }}>
 
           <div
-            className={`row mb-4 ${matches ? 'justify-content-between' : 'justify-content-center'}`}
+            className={`row mb-4 ${isMediumSize ? 'justify-content-between' : 'justify-content-center'}`}
             style={{
               padding: '20px 0',
               borderBottom: '1px solid white',
               display: 'flex',
               justifyContent: 'center',
-              gap: matches ? '0px' : '20px',
+              gap: isMediumSize ? '0px' : '30px',
               borderBottom: '1px solid white',
+              // margin:  isMediumSize ? '0' : ''
+              margin: 0,
             }}
           >
-            <div className={`col-10 col-md-8 ${matches ? '' : 'mt-4'}`}>
-              <div className="row" style={{ height: '80%' }} >
+            <div className={`col-12 col-md-9 ${isMediumSize ? '' : 'mt-4'}`}>
+              <div className="row" style={{ height: '80%',margin: 0, }} >
 
                 {
                   LINKS.map((link, index) => (
                     <div
                       key={index}
-                      className='col-lg-6 col-12 links-footer'
-                      style={{ borderBottom: '1px solid #fff', width: matches ? '47%' : '90%', margin: '10px' }}>
-                      <Link href={link.url} style={{ margin: '10px', color: '#fff' }}>
+                      className=' col-12 col-lg-5 links-footer'
+                      style={{ borderBottom: '1px solid #fff', width: isLargSize ? '47%' : '90%', margin: '10px 0 10px 10px' }}>
+                      <Link href={link.url} style={{ margin: '5px 0', color: '#fff' }}>
                         {link.title}
                       </Link>
                     </div>
@@ -107,9 +108,8 @@ const FooterDae = () => {
               </div>
             </div>
 
-
             {/* BTN RESERVAR */}
-            <div className={`col-10 col-md-3 ${matches ? '' : 'mt-4'} d-flex flex-column align-items-center justify-content-center`}
+            <div className={`col-10 col-md-3 ${isMediumSize ? '' : 'mt-4'} d-flex flex-column align-items-center justify-content-center`}
               style={{
                 backgroundColor: "#fff",
                 color: "#000",
@@ -124,17 +124,17 @@ const FooterDae = () => {
               {/* <ReserveBtn text='Reservar' bgColor="#FABB00" color="#000" /> */}
             </div>
           </div>
-          {matches
+          
+          {isMediumSize || isLargSize
             ? <>
               <div className="row my-4"
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',
-                  gap: matches ? '0px' : '20px'
+                  justifyContent: 'space-between',margin: 0,
                 }}>
                 <div className="col-10 col-lg-4 p-0">
                   <Image
-                    src={logo02_white}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02_white.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     sizes="100vw"
                     style={{
                       width: '100%',
@@ -143,7 +143,7 @@ const FooterDae = () => {
                     }}
                     width={500}
                     height={300}
-                    alt=""
+                    alt="Logo UDP"
                   />
                 </div>
                 {/* REDES SOCIALES */}
@@ -212,7 +212,7 @@ const FooterDae = () => {
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
-                  gap: matches ? '0px' : '20px'
+                  gap: isMediumSize ? '0px' : '20px'
                 }}>
 
                 {/* REDES SOCIALES */}
@@ -279,7 +279,7 @@ const FooterDae = () => {
                 </div>
                 <div className="col-10 col-lg-4 p-0 d-flex justify-content-center">
                   <Image
-                    src={logo02_white}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02_white.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     sizes="100vw"
                     style={{
                       width: '100%',
@@ -297,17 +297,19 @@ const FooterDae = () => {
         </Box>
 
         {
-          matches
+          isMediumSize || isLargSize
             ?
             <>
-              <Box className="container col-12 col-lg-10"
+              <Box className="container col-10 col-lg-10"
                 sx={{
+                  bgcolor: '#fff',
                   color: '#000',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
-                  maxWidth: '1294px !important',
-                  bgcolor: '#fff'
+                  // maxWidth: '1294px !important',
+                  textAlign: 'center',
+                  minWidth: '100vw',
                 }}>
                 <div className="row">
                   <div className="col-6" style={{ alignSelf: "center" }}>
@@ -353,7 +355,6 @@ const FooterDae = () => {
                     · @Daeudp · <a href='https://dae.udp.cl' style={{ color: '#000' }}>https://dae.udp.cl</a>
                   </p>
                 </div>
-
               </Box>
             </>
         }
@@ -361,7 +362,6 @@ const FooterDae = () => {
       {/* </div> */}
     </>
   );
-
 }
 
 export default FooterDae;

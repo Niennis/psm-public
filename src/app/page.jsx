@@ -1,17 +1,17 @@
 "use client"
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { useSection } from "@/context/SectionContext";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-// import { fetchBlogs } from '../services/BlogServices';
-import ImageSlider from '@/components/ImageSlider';
-import TestSlider from '@/components/TestSlider';
+import { fetchBlogs } from '../services/BlogServices';
 import Events from '@/components/Events';
-import FrequentAskedQuestions from '@/components/FAQ';
-import QuienesSomos from "@/components/QuienesSomos";
 import Footer from "@/components/Footer";
+import FrequentAskedQuestions from '@/components/FAQ';
+import ImageSlider from '@/components/ImageSlider';
+import QuienesSomos from "@/components/QuienesSomos";
 import ReservaTuHora from "@/components/ReservaHora";
 import SimpleBackdrop from "@/components/Backdrop";
+import TestSlider from '@/components/TestSlider';
 
 import { blogs } from "@/utils/blogs";
 
@@ -64,14 +64,14 @@ const tests = [
     id: '0',
     titulo: 'Test de ansiedad de Beck',
     bajada: 'El test de ansiedad de Beck es un cuestionario que ayuda a saber cuánta ansiedad siente una persona. Tiene 21 preguntas sobre cómo se ha sentido recientemente.',
-    url: '/tests/test_de_ansiedad',
+    url: '/tests/test-de-ansiedad',
     imagen: 'https://github.com/Niennis/imagesudp/blob/main/home_ansiedad.jpg?raw=true',
   },
   {
     id: '0',
     titulo: 'Test de depresión',
     bajada: 'El PHQ-9 es un cuestionario breve que ayuda a identificar si una persona podría estar deprimida. Consiste en 9 preguntas sobre cómo se ha sentido alguien en las últimas dos semanas.',
-    url: '/tests/test_de_depresion',
+    url: '/tests/test-de-depresion',
     imagen: 'https://github.com/Niennis/imagesudp/blob/main/saludMental01.jpeg?raw=true',
   },
 ]
@@ -202,46 +202,16 @@ const sortedEvents = [...events].sort((a, b) => {
 });
 
 export default function Home() {
-  // const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
-  //   queryKey: ['blogs'],
-  //   queryFn: async () => {
-  //     const res = await fetchBlogs();
-  //     console.log('RES', res);
-  //     return res;
-  //   }
-  // })
+
   const { setActiveSection } = useSection();
   const sectionRefs = useRef([]);
-  const isSmallDevice = useMediaQuery(
-    "only screen and (max-width : 640px)"
-  );
-  const isMediumDevice = useMediaQuery(
-    "only screen and (min-width : 641px) and (max-width : 768px)"
-  );
-  const isLargeDevice = useMediaQuery(
-    "only screen and (min-width : 769px) and (max-width : 1024px)"
-  );
-  const isExtraLargeDevice = useMediaQuery(
-    "only screen and (min-width : 1025px)"
-  );
-
-  // const [index, setIndex] = useState(0);
+  const isSmallDevice = useMediaQuery("(max-width : 640px)");
+  const isMediumDevice = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
+  const isLargeDevice = useMediaQuery("(min-width : 769px) and (max-width : 1024px)");
+  const isExtraLargeDevice = useMediaQuery("(min-width : 1025px)");
 
   const matches = useMediaQuery('(min-width:600px)');
-
- /*  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
-
-  const truncarPalabras = (texto, num) => {
-    const aux = texto.split(' ');
-
-    if (aux.length > num) {
-      return aux.slice(0, num).join(' ') + '...';
-    } else {
-      return texto;
-    }
-  } */
+  const [slides, setSlides] = useState()
 
   useEffect(() => {
     const observerOptions = {
@@ -272,37 +242,60 @@ export default function Home() {
   }, [setActiveSection]);
   // console.log('BLOGS', blogs.slice(-4 ))
 
+  const fetchData = useCallback(async () => {
+    // try {
+    //   // setIsLoading(true);
+    //   const { blogs: data } = await fetchBlogs();
+    //   // setSlides(blogs.slice(0, 4));
+    //   console.log(data)
+    //   if (data.length === 0) setSlides(blogs.slice(blogs.length - 4))
+    //   if (data.length > 0) {
+    //     setSlides(data.slice(data.length - 4));
+    //   }
+    // } catch (error) {
+    //   console.error('Error fetching blogs:', error);
+    // } finally {
+    //   // setIsLoading(false);
+    // }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+
   return (
     // <>
-      <main >
-        {/* {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice */}
-        {/* ? */}
-        {/* <SimpleBackdrop /> */}
-        {/* : */}
-        {/* <> */}
-        {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice && <SimpleBackdrop />}
-        {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-        {blogs.length > 0 && isMediumDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-        {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-        {blogs.length > 0 && isLargeDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-        {/* {isError && <p>Ha habido un error</p>} */}
-        {/* {!isError && blogs.length === 0 && <Carrousel />} */}
-        {blogs.length > 0 && <div style={{ background: '#f1f1f1' }}><ReservaTuHora innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} /> </div>}
-        {blogs.length > 0 && <div ><QuienesSomos /></div>}
-        {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+    <main style={{contentVisibility: 'auto'}}>
+      {/* {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice */}
+      {/* ? */}
+      {/* <SimpleBackdrop /> */}
+      {/* : */}
+      {/* <> */}
+      {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice && <SimpleBackdrop />}
+      {blogs.length > 0 && isSmallDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+      {blogs.length > 0 && isMediumDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+      {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+      {blogs.length > 0 && isLargeDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+      {/* {isError && <p>Ha habido un error</p>} */}
+      {/* {!isError && blogs.length === 0 && <Carrousel />} */}
+      {blogs.length > 0 && <div style={{ background: '#f1f1f1' }}><ReservaTuHora innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} /> </div>}
+      {blogs.length > 0 && <div ><QuienesSomos /></div>}
+      {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
 
-        {events.length !== 0 && <Events events={sortedEvents} matches={matches} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+      {events.length !== 0 && <Events events={sortedEvents} matches={matches} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
 
-        <div className="row" style={{ padding: 0, margin: 0 }}>
-          <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
-            <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
-          </div>
+      <div className="row" style={{ padding: 0, margin: 0 }}>
+        <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
         </div>
-        <FrequentAskedQuestions questions={questions} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />
-        <Footer matches={matches} />
-        {/* </> */}
-        {/* } */}
-      </main>
+      </div>
+      <FrequentAskedQuestions questions={questions} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />
+      <Footer matches={matches} />
+      {/* </> */}
+      {/* } */}
+    </main>
     // </>
 
   );

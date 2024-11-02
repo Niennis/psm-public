@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useSection } from "@/context/SectionContext";
 import ReserveBtn from "./ReserveBtn";
 import Link from "next/link";
-import { logo } from "./imagepath";
 import { useMediaQuery } from "@mui/material";
 import { Tooltip, Avatar } from '@mui/material';
 
@@ -13,28 +12,41 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, 
 import MenuIcon from '@mui/icons-material/Menu';
 import { FaUserCircle } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const pagesWithEvents = [
   { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas-frecuentes', label: 'preguntas-frecuentes' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material-descargable', label: 'material-descargable' },
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
 ];
 
 const pagesWithoutEvents = [
   { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas-frecuentes', label: 'preguntas-frecuentes' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material-descargable', label: 'material-descargable' },
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
 ];
 
 const subMenu = [
-  { title: 'Intervenciones', url: '/como_trabajamos', label: '/como_trabajamos' },
+  { title: 'Intervenciones', url: '/como-trabajamos', label: '/como-trabajamos' },
   { title: 'Plan de Acción', url: '/plan-de-accion-en-salud-mental', label: '/plan-de-accion-en-salud-mental' },
   { title: 'Prevención', url: '/intervencion-en-promocion-y-prevencion', label: '/intervencion-en-promocion-y-prevencion' },
-  { title: 'Convenios y profesionales', url: '/como_trabajamos/convenios-y-profesionales', label: '/convenios-y-profesionales' },
+  { title: 'Convenios y profesionales', url: '/como-trabajamos/convenios-y-profesionales', label: '/convenios-y-profesionales' },
 ];
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 641,
+      md: 769,
+      lg: 1024,
+      xl: 1536,
+    },
+  },
+});
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -44,22 +56,13 @@ const Header = () => {
   const open = Boolean(anchorEl);
   const EVENTS = 0;
   const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
-  const matches = useMediaQuery('(min-width:600px)');
   const [style, setStyle] = useState({ width: 'min-content' });
 
-  const isSmallDevice = useMediaQuery(
-    "only screen and (max-width : 640px)"
-  );
-  const isMediumDevice = useMediaQuery(
-    "only screen and (min-width : 641px) and (max-width : 768px)"
-  );
-  const isLargeDevice = useMediaQuery(
-    "only screen and (min-width : 769px) and (max-width : 1024px)"
-  );
-  const isExtraLargeDevice = useMediaQuery(
-    "only screen and (min-width : 1025px)"
-  );
+  const BOTON_RESERVAR = process.env.NEXT_PUBLIC_ACTIVATE_BUTTON === "true"
 
+  const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
+  const isLargeSize = useMediaQuery("(min-width : 769px)");
+  
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -93,13 +96,6 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
     // setActiveSection(id);
@@ -113,228 +109,256 @@ const Header = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(id);
   };
+// Controla el padding del body al abrir/cerrar el menú
+useEffect(() => {
+  if (anchorElNav) {
+    document.body.style.paddingRight = '0px';
+    const header = document.querySelector('header');
+    if (header) {
+      header.style.paddingRight = '0px';
+    }
+  } else {
+    document.body.style.paddingRight = '';
+    const header = document.querySelector('header');
+    if (header) {
+      header.style.paddingRight = '';
+    }
+  }
+}, [anchorElNav]);
 
   return (
-    <AppBar position="fixed"
-      style={{
-        background: 'white',
-        color: 'black',
-        justifyContent: matches ? 'center' : 'flex-end',
-        margin: "0", // 0 72px
-        maxHeight: '112px',
-        minHeight: '98px',
-        width: '100vw',
-      }}
-    >
-      <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
-        <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', lg: 'flex' },
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              fontFamily: 'sailec'
-            }}
-          >
-            <Image
-              alt="Logo"
-              src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
-              priority
-              height={0}
-              width={0}
-              sizes="100%"
-              style={{
-                height: '70px',
-                width: '263px',
-                
-              }}
-            />{" "}
-          </Typography>
-
-          {/*  MENU MOBILE */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', lg: 'none' },
-              }}
-            >
-              {
-                pages.map((page) => (
-                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" className="sailec">
-                      <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
-                        {page.title}
-                      </a>
-                    </Typography>
-                  </MenuItem>
-                ))
-              }
-              <MenuItem onClick={handleOpenUserMenu}>
-                <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
-                  CÓMO TRABAJAMOS <FaChevronDown />
-                </Typography>
-              </MenuItem>
-
-              <Box sx={{ flexGrow: 0 }} className={`sailec `}>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+    <ThemeProvider theme={theme}>
+      <AppBar position="fixed"
+        style={{
+          background: 'white',
+          color: 'black',
+          justifyContent: isMediumSize ? 'center' : 'flex-end',
+          margin: "0", // 0 72px
+          maxHeight: '112px',
+          minHeight: '98px',
+          width: '100vw',
+          left: '0',
+          right: '0',
+        }}
+      >
+        <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
+          <Toolbar disableGutters>
+            {isLargeSize ? (
+              <>
+                {/* MENU DASHBOARD */}
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  href="/"
+                  sx={{
+                    mr: 2,
+                    display: { xs: 'none', sm: 'none',  md: 'flex' },
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    fontFamily: 'sailec'
                   }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
                 >
-                  {subMenu.map((setting) => (
-                    <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" className="sailec">
-                        <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
-                          {setting.title}
-                        </a>
+                  <Image
+                    alt="Logo"
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                    height={0}
+                    width={0}
+                    priority
+                    sizes="100%"
+                    style={{
+                      height: '70px',
+                      width: '263px',
+
+                    }}
+                  />{" "}
+                </Typography>
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+                  {pages.map((page) => {
+                    return (
+                      <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
+                        <Button
+                          className={`sailec ${activeSection === page.label
+                            ? 'active-header'
+                            : ''
+                            }`}
+
+                          onClick={() => handleNavClick(page.label)}
+                          sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
+                        >
+                          {page.title}
+                        </Button>
+                      </Link>
+                    )
+                  }
+                  )}
+                  <Tooltip title="Como trabajamos">
+                    <Button
+                      className={`sailec ${activeSection === 'como_trabajamos'
+                        ? 'active-header'
+                        : ''
+                        }`}
+                      onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
+                      CÓMO TRABAJAMOS
+                    </Button>
+                  </Tooltip>
+
+                  <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                    <Menu
+                      sx={{ mt: '45px' }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      {subMenu.map((setting) => (
+                        <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                          <Typography textAlign="center" className="sailec">
+                            <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                              {setting.title}
+                            </a>
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Box>
+                </Box>
+              </>
+            ) : (
+              <>
+                {/*  MENU MOBILE */}
+                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none' } }}>
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                    color="inherit"
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: 'block', lg: 'none', margin: 0 },
+                    }}
+                  >
+                    {
+                      pages.map((page) => (
+                        <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center" className="sailec">
+                            <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
+                              {page.title}
+                            </a>
+                          </Typography>
+                        </MenuItem>
+                      ))
+                    }
+                    <MenuItem onClick={handleOpenUserMenu}>
+                      <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
+                        CÓMO TRABAJAMOS <FaChevronDown />
                       </Typography>
                     </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            </Menu>
-          </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: { xs: 0, lg: 2 },
-              display: { xs: 'flex', lg: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              fontFamily: 'sailec',
-            }}
-          >
-            <Image
-              src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
-              height={0}
-              width={0}
-              alt="logo udp"
-              sizes="100%"
-              style={{
-                height: 'auto',
-                width: '100px',
-              }} />{" "}
-          </Typography>
 
-          {/* MENU DASHBOARD */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {pages.map((page) => {
-              return (
-                <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
-                  <Button
-                    className={`sailec ${activeSection === page.label
-                      ? 'active-header'
-                      : ''
-                      }`}
+                    <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                      <Menu
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        {subMenu.map((setting) => (
+                          <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center" className="sailec">
+                              <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                                {setting.title}
+                              </a>
+                            </Typography>
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </Box>
+                  </Menu>
+                </Box>
+                <Typography
+                  variant="h5"
+                  noWrap
+                  component="a"
+                  href="/"
+                  sx={{
+                    mr: { xs: 0, lg: 2 },
+                    display: { xs: 'flex', lg: 'none' },
+                    flexGrow: 1,
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    fontFamily: 'sailec',
+                  }}
+                >
+                  <Image
+                    src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
+                    height={0}
+                    width={0}
+                    alt="logo udp"
+                    sizes="100%"
+                    style={{
+                      height: 'auto',
+                      width: '100px',
+                    }} />{" "}
+                </Typography>
 
-                    onClick={() => handleNavClick(page.label)}
-                    sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
-                  >
-                    {page.title}
-                  </Button>
-                </Link>
-              )
-            }
+              </>
             )}
-            <Tooltip title="Como trabajamos">
-              <Button
-                className={`sailec ${activeSection === 'como_trabajamos'
-                  ? 'active-header'
-                  : ''
-                  }`}
-                onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
-                CÓMO TRABAJAMOS
-              </Button>
-            </Tooltip>
-
-            <Box sx={{ flexGrow: 0 }} className={`sailec `}>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {subMenu.map((setting) => (
-                  <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center" className="sailec">
-                      <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
-                        {setting.title}
-                      </a>
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Box>
-
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-            <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
-              <FaUserCircle style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
-            </Link>
-          </Box> */}
-        </Toolbar>
-      </Container>
-    </AppBar >
+            {
+              BOTON_RESERVAR ?
+                <Box sx={{ flexGrow: 0 }}>
+                  <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                  <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
+                    <FaUserCircle style={{ fontSize: isMediumSize ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
+                  </Link>
+                </Box>
+                : ''
+            }
+          </Toolbar>
+        </Container>
+      </AppBar >
+    </ThemeProvider>
   );
 };
 

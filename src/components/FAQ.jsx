@@ -1,22 +1,21 @@
+import { useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { useState } from 'react';
 import { useMediaQuery } from "@mui/material";
-
 import { AddCircleOutlineOutlined, RemoveCircleOutline } from '@mui/icons-material';
 
 const FrequentAskedQuestions = ({questions}) => {
   const [expanded, setExpanded] = useState(false);
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px )');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <Box sx={{ width: '90svw', margin: 'auto auto 40px' , scrollMarginTop: '180px'}} className='container col-12 col-lg-10 ' id="preguntas_frecuentes" >
+    <Box sx={{ width: '90svw', margin: 'auto auto 40px' , scrollMarginTop: '180px'}} className='container col-12 col-lg-10 ' id="preguntas-frecuentes" >
       {
         questions.map((question, i) => (
           <Accordion
@@ -30,8 +29,8 @@ const FrequentAskedQuestions = ({questions}) => {
             }
           >
             <AccordionSummary
-              sx={{ borderBottom: matches && (expanded === question.id) && '1px solid #fff' }}
-              expandIcon={matches && (expanded === question.id
+              sx={{ borderBottom: isMediumSize && (expanded === question.id) && '1px solid #fff' }}
+              expandIcon={isMediumSize && (expanded === question.id
                 ? <RemoveCircleOutline sx={{ color: '#fff' }} />
                 : <AddCircleOutlineOutlined />)
               }
@@ -51,6 +50,4 @@ const FrequentAskedQuestions = ({questions}) => {
     </Box>
   )
 }
-
 export default FrequentAskedQuestions;
-

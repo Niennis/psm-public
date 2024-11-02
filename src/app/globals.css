@@ -105,6 +105,7 @@
 @font-face {
   font-family: sailec;
   src: url('../assets/fonts/Sailec-Font/SailecLight/SailecLight.woff2') format('woff2');
+  font-display: swap;
 }
 
 .sailec {

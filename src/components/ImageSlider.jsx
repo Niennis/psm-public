@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { CircleRounded } from "@mui/icons-material";
 import { Grid, Box, Typography, Tab, Tabs, useMediaQuery } from "@mui/material";
-import Image from "next/image";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { MdOutlineChromeReaderMode } from "react-icons/md";
 import { blogs } from "@/utils/blogs";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { fetchBlogs } from "@/services/BlogServices";
 
 const theme = createTheme({
@@ -49,11 +49,11 @@ const styles = [
 ]
 
 const estimateReadingTime = text => {
-  const wordsPerMinute = 250; 
-  const words = text.split(/\s+/).length; 
+  const wordsPerMinute = 250;
+  const words = text.split(/\s+/).length;
   const readingTimeMinutes = words / wordsPerMinute;
 
-  return Math.ceil(readingTimeMinutes); 
+  return Math.ceil(readingTimeMinutes);
 }
 
 const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => {
@@ -90,7 +90,7 @@ const a11yProps = (index) => {
 const ImageSlider = ({ innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [slides, setSlides] = useState(blogs.slice(0, 4))
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:600px)');
   const [isShort, setIsShort] = useState(false);
   const totalSlides = slides.length;
   const timeoutRef = useRef(null);
@@ -100,40 +100,27 @@ const ImageSlider = ({ innerRef }) => {
   const [color, setColor] = useState(blogs[0].color)
   const [idBlog, setIdBlog] = useState(blogs[0].id)
   const [data, setData] = useState(null)
-  const [apiLlamada, setApiLlamada] = useState(false); // Nueva bandera
+  const [apiCall, setApiCall] = useState(false); // Nueva bandera
 
   const [value, setValue] = useState(0);
 
-  const isSmallDevice = useMediaQuery(
-    "only screen and (max-width : 640px)"
-  );
-  const isMediumDevice = useMediaQuery(
-    "only screen and (min-width : 641px) and (max-width : 768px)"
-  );
-  const isLargeDevice = useMediaQuery(
-    "only screen and (min-width : 769px) and (max-width : 1024px)"
-  );
-  const isExtraLargeDevice = useMediaQuery(
-    "only screen and (min-width : 1025px)"
-  );
+  const isSmallDevice = useMediaQuery("max-width : 640px)");
+  const isMediumDevice = useMediaQuery("min-width : 641px) and (max-width : 768px)");
 
-  const isShortDevice = useMediaQuery(
-    "only screen and (max-height: 700px)"
-  )
+  const isShortDevice = useMediaQuery("max-height: 700px)")
 
   const fetch = async () => {
-    if (!apiLlamada) {
-
-        try {
-          const response = await fetchBlogs();
-          // const result = await response.json();
-          setData(response);
-          setApiLlamada(true); // Marca que ya se hizo la llamada
-          console.log('RESULT', response)
-        } catch (error) {
-          console.log('ERRORSH', error.message);
-        }
-    }
+    // if (!apiCall) {
+    //   try {
+    //     const response = await fetchBlogs();
+    //     // const result = await response.json();
+    //     setData(response);
+    //     setApiCall(true); // Marca que ya se hizo la Call
+    //     // console.log('RESULT', response)
+    //   } catch (error) {
+    //     console.log('ERRORSH', error.message);
+    //   }
+    // }
   }
 
   const resetTimeout = () => {
@@ -181,19 +168,29 @@ const ImageSlider = ({ innerRef }) => {
         window.removeEventListener('resize', handleResize);
       }
     };
-  }, [currentIndex, totalSlides, apiLlamada]);
-
+  }, [currentIndex, totalSlides, apiCall]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const truncateWords = (text, num) => {
+    if (text.length <= num) return text;
+
+    const sliced = text.slice(0, num);
+    const indexLastBlankSpace = sliced.lastIndexOf(' ');
+    return `${sliced.slice(0, indexLastBlankSpace)}...`;
+  }
 
   const imgHeightMobile = '80vh'
   const imgHeightDesktop = '100vh'
 
   const sliderStyles = {
     position: 'relative',
-    margin: 0,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
     padding: 0,
     width: '100%',
   }
@@ -203,6 +200,8 @@ const ImageSlider = ({ innerRef }) => {
     height: imgHeightDesktop,
     backgroundPosition: 'top',
     backgroundSize: 'cover',
+    position: 'relative',
+    zIndex: '-1',
   }
 
   const slideStylesMobile = {
@@ -224,34 +223,13 @@ const ImageSlider = ({ innerRef }) => {
     // color: '#fff'
   }
 
-  const truncarPalabras = (texto, num) => {
-    // const textoParrafo = texto.match(/<p>(.*?)<\/p>/);
-    const aux = texto[0].split('');
-    if (aux.length > num) {
-      const sliced = aux.slice(0, num)
-      const indexLastBlankSpace = sliced.lastIndexOf(' ')
-      return (aux.slice(3, indexLastBlankSpace).join('') + '...')
-    } else {
-      return texto;
-    }
-  }
-
-  const goToPrevious = () => {
-    const isFirstSlide = currentIndex === 0
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1
-    setCurrentIndex(newIndex)
-    setTitle(slides[newIndex].titulo)
-    setContent(truncarPalabras(slides[newIndex].bajada, 205))
-    setColor(styles[newIndex].color)
-    setIdBlog(slides[newIndex].id)
-  }
 
   const goToNext = () => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
     setTitle(slides[newIndex].titulo)
-    setContent(truncarPalabras(slides[newIndex].bajada, 205))
+    setContent(truncateWords(slides[newIndex].bajada, 205))
     setColor(styles[newIndex].color)
     setIdBlog(slides[newIndex].id)
   }
@@ -259,7 +237,7 @@ const ImageSlider = ({ innerRef }) => {
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
     setTitle(slides[slideIndex].titulo)
-    setContent(truncarPalabras(slides[slideIndex].bajada, 205))
+    setContent(truncateWords(slides[slideIndex].bajada, 205))
     setColor(styles[slideIndex].color)
     setIdBlog(slides[slideIndex].id)
   }
@@ -276,10 +254,8 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   const boxStyleMobile = {
-    // alignItems: 'center', Mejor sacarlo
     display: 'flex',
     height: isShortDevice ? '100vh' : imgHeightMobile, // 100vh si es chico, imgHeightMobile si es grande
-    // margin: 'auto 0px',
     marginTop: isShortDevice ? '-100vh' : 'calc(-80vh)', // -100vh si es chico, 'calc(-100vh + 150px)' si es grande
     padding: '24px 16px',
     textWrap: 'pretty',
@@ -287,12 +263,12 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   return (
-    <div id="inicio" style={matches ? { ...sliderStyles, height: imgHeightDesktop } : { ...sliderStyles, marginTop: '98px' }} ref={innerRef}>
+    <div id="inicio" style={isMediumSize ? { ...sliderStyles, height: imgHeightDesktop } : { ...sliderStyles, marginTop: '98px' }} ref={innerRef}>
 
-      {matches ?
+      {isMediumSize ?
         <>
           {/* DESKTOP */}
-          <div style={matches && slideStyles}>
+          <div style={isMediumSize && slideStyles}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
               alt={slides[currentIndex].imagen}
@@ -311,7 +287,7 @@ const ImageSlider = ({ innerRef }) => {
           <Box sx={{ ...boxStyleDesktop, zIndex: 99999 }}>
             <div className="row" >
               <div className="col-sm-12 sailec" style={{
-                width: '100%',
+                width: 'calc(100vw - 60px)',
                 marginLeft: '60px'
               }}>
                 <div className="d-flex flex-column">
@@ -417,7 +393,7 @@ const ImageSlider = ({ innerRef }) => {
         <>
           {/* MOBILE */}
           <div style={{ ...slideStylesMobile }}></div>
-          <Box sx={!matches && boxStyleMobile}>
+          <Box sx={!isMediumSize && boxStyleMobile}>
             <div className="row" >
               <div className="col-sm-12 sailec" style={{
                 display: 'flex',

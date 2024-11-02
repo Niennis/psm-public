@@ -1,31 +1,31 @@
 'use client'
 import Link from "next/link";
 import Image from "next/image";
-import { carrousel01 } from "@/components/imagepath";
-import { useMediaQuery } from "@mui/material";
-import FooterDae from "@/components/Footer";
-import { FaArrowLeft } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 
+import FooterDae from "@/components/Footer";
+
+import { useMediaQuery } from "@mui/material";
+import { FaArrowLeft } from "react-icons/fa";
+
 export default function QuienesSomosLayout({ children }) {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
   const router = useRouter()
   const pathname = usePathname()
 
   const isActive = (href) => {
-    console.log('HREF', pathname);
     return pathname === href ? 'quienes-somos-active' : 'nav-link-quienes-somos';
   };
 
   return (
     <>
-      {matches && <div style={{
+      {isMediumSize && <div style={{
         height: '620px',
         overflow: 'hidden',
         position: 'relative'
       }}>
         <Image
-          src='https://github.com/Niennis/imagesudp/blob/main/plan_accion_cabecera.jpg?raw=true'
+          src={`${process.env.NEXT_PUBLIC_BASE_IMG}plan_accion_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
           alt="Quienes somos cabecera"
           height={0}
           width={0}
@@ -42,10 +42,10 @@ export default function QuienesSomosLayout({ children }) {
       </div >
       }
 
-      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" /* style={{padding:0, margin: 0}} */>
+      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos m-0" /* style={{padding:0, margin: 0}} */>
         <div className="col-12 mt--md-5" style={{ padding: 0 }}>
           <div>
-            {matches &&
+            {isMediumSize &&
               <>
                 <button className='btn mt-4 mb-5'
                   style={{
@@ -62,14 +62,11 @@ export default function QuienesSomosLayout({ children }) {
                 </button>
               </>
             }
-
             {children}
           </div>
         </div>
       </div>
       <FooterDae />
-
     </>
-
   );
 }

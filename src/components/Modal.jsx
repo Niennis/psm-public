@@ -1,9 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-// import { Link } from 'react-router-dom';
-// import Link from 'next/link';
+import Typography from '@mui/material/Typography';
 
 const style = {
   position: 'absolute',
@@ -21,10 +19,6 @@ const style = {
 };
 
 const ModalConsent = ({ open, handleClose, onClick, errors }) => {
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  // console.log('errors', errors)
 
   return (
     <div>

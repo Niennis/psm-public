@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { CircleRounded, ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Grid, Box, Card } from "@mui/material";
@@ -14,7 +15,9 @@ const TestSlider = ({ slides, innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const totalSlides = slides.length;
   const timeoutRef = useRef(null);
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isLargeSize = useMediaQuery('(min-width:1025px)');
+  
   const divRef = useRef();
   const sliderStyles = {
     // height: '85svh',
@@ -71,7 +74,6 @@ const TestSlider = ({ slides, innerRef }) => {
     right: '10%'
   };
 
-
   const nextSlide = () => {
     if (currentIndex + 1 < slides.length) {
       setCurrentIndex(currentIndex + 1);
@@ -106,7 +108,7 @@ const TestSlider = ({ slides, innerRef }) => {
         5500 // Cambiar el slide cada 3 segundos
       );
     }
-    if (!matches) {
+    if (!isMediumSize) {
       resetTimeout();
       timeoutRef.current = setTimeout(
         () => setCurrentIndex((prevIndex) => (prevIndex + 2) % totalSlides),
@@ -123,23 +125,23 @@ const TestSlider = ({ slides, innerRef }) => {
   return (
     <div className='container col-12 align-self-center' style={{ padding: '0px', margin: '0px', maxWidth: '100vw', scrollMarginTop: '100px' }} id="test_autodiagnostico" ref={innerRef}>
       {
-        matches
+        isLargeSize
           ? <div style={sliderStyles}>
             {slides.length > 2 && <ChevronLeft sx={leftArrowStyles} onClick={prevSlide} />}
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
-              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ', margin: 0 }}>
+              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ',margin: 0, justifyContent: 'center', }}>
                 <h2
                   className="sailec"
                   style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
                   Test autodiagnóstico
                 </h2>
-                <div style={{ ...cardContainerStyles, justifyContent: 'center' }}>
+                <div className='col-12 col-lg-10' style={{ ...cardContainerStyles, justifyContent: 'center' }}>
                   {[0, 1].map(offset => {
                     const slideIndex = currentIndex + offset;
                     if (slideIndex < slides.length) {
                       const slide = slides[slideIndex];
                       return (
-                        <div key={slideIndex} className="col-4 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
+                        <div key={slideIndex} className="col-4 col-md-5 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: isLargeSize ? '30vw' :'100%' }}>
                           <Card
                             sx={{
                               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.45)',
@@ -148,11 +150,22 @@ const TestSlider = ({ slides, innerRef }) => {
                               width: '100%',
                               margin: 'auto',
                             }}>
-                            <CardMedia component="img" height="320" image={slide.imagen} alt="Slide image" />
+                            <div style={{ position: 'relative', height: '320px', width: '100%' }}>
+                              <Image
+                                src={slide.imagen}
+                                alt="Slide image"
+                                fill
+                                sizes="100%"
+                                style={{
+                                  borderRadius: '24px 24px 0 0',
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </div>
                             <CardContent>
                               <Typography variant="body2" color="text.secondary" className="sailec-bold"
-                                sx={{ color: 'black', fontWeight: 700, fontSize: '24px', lineHeight: '32px' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary" className="lato" sx={{ height: '3rem' }}>{slide.bajada}</Typography>
+                                sx={{ color: 'black', fontWeight: 700, fontSize: '24px', lineHeight: '32px', height: '3em' }}>{slide.titulo}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="lato" sx={{ height: '5rem' }}>{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
@@ -181,7 +194,7 @@ const TestSlider = ({ slides, innerRef }) => {
               </div>
             </Box>
             {slides.length > 2 && <ChevronRight sx={rightArrowStyles} onClick={nextSlide} />}
-            {slides.length > 2 && <div style={matches && { ...dotsContainerStyles, backgroundColor: '#F1F1F1' }}>
+            {slides.length > 2 && <div style={isMediumSize && { ...dotsContainerStyles, backgroundColor: '#F1F1F1' }}>
               {Array(Math.ceil(slides.length / 2)).fill().map((_, dotIndex) => (
                 <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
                   <CircleRounded sx={{ fontSize: '20px', margin: '0 0 24px 0', color: dotIndex === currentIndex ? '#4054B2' : '#3886FF' }} />
@@ -202,7 +215,18 @@ const TestSlider = ({ slides, innerRef }) => {
                     return (
                       <div key={slideIndex} className="col-4 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: '100%' }}>
                         <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '90%', margin: 'auto' }}>
-                          <CardMedia component="img" height="320" image={slides[currentIndex].imagen} alt="Slide image" />
+                          <div style={{ position: 'relative', height: '320px', width: '100%' }}>
+                            <Image
+                              src={slides[currentIndex].imagen}
+                              alt="Slide image"
+                              fill
+                              sizes="100%"
+                              style={{
+                                borderRadius: '12px 12px 0 0',
+                                objectFit: "cover",
+                              }}
+                            />
+                          </div>
                           <CardContent>
                             <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slides[currentIndex].titulo}</Typography>
                             <Typography variant="body2" color="text.secondary">{slides[currentIndex].bajada}</Typography>

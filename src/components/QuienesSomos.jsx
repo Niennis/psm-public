@@ -1,34 +1,26 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Grid, Box, Card } from "@mui/material";
-// import TestCard from './Card'
-// import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-// import CardContent from '@mui/material/CardContent';
+
+import { Box, Card } from "@mui/material";
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
-// import ReserveBtn from "./ReserveBtn";
 import useMediaQuery from '@mui/material/useMediaQuery';
-// import { profesional01 } from "./imagepath";
 
 const QuienesSomos = () => {
-
-  const matches = useMediaQuery('(min-width:600px)');
-
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isLargeSize = useMediaQuery('(min-width:1024px )');
 
   return (
-    <div className={`container col-12 col-lg-10 align-self-center p-0 ${matches && 'mb-5'}`} >
+    <div className={`container col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} >
       <div>
         <Box sx={{
-          // height: '45svh',
-          // width: '90svw',
           borderRadius: '32px',
-          // padding: '24px 16px',
           textWrap: 'pretty',
           margin: '0 auto',
         }}>
           <div className="row" style={{ margin: 0 }} >
             {
-              matches
+              isMediumSize
                 ?
                 <div
                   className={`container col-12  d-flex  justify-content-center`}
@@ -41,11 +33,11 @@ const QuienesSomos = () => {
                   }}
                 >
                   <Card
-                    className='col-12 col-lg-8'
+                    className='col-12 col-md-8 col-lg-8'
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',
-                      height: matches ? "100%" : "fit-content",
+                      height: isMediumSize ? "100%" : "fit-content",
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
@@ -57,7 +49,6 @@ const QuienesSomos = () => {
                       className="sailec"
                       sx={{
                         color: '#000',
-                        // textWrap: 'balance',
                         fontSize: '32px',
                         lineHeight: '40px',
                         fontWeight: 700
@@ -77,7 +68,7 @@ const QuienesSomos = () => {
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
-                        <Link href={`/quienes_somos`}>
+                        <Link href={`/quienes-somos`}>
                           <button
                             className={`btn submit-form me-2 sailec-medium `}
                             style={{
@@ -94,28 +85,31 @@ const QuienesSomos = () => {
                       </Typography>
                     </CardActions>
                   </Card>
-
                   <Card
-                    className='col-12 col-lg-4'
+                    className='col-12 col-md-4 col-lg-4'
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',
                       padding: '2em 0',
                     }}>
-                    <CardMedia
-                      component="img"
-                      height="240"
-                      width="240"
-                      image="https://github.com/Niennis/imagesudp/blob/main/home_quienes_somos.jpg?raw=true"
-                      sx={{ borderRadius: '8px' }}
-                    />
+                    <div style={{ position: 'relative', height: '240px', width: '100%' }}>
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                        alt="Quienes somos"
+                        fill
+                        sizes="100%"
+                        style={{
+                          borderRadius: '8px',
+                          objectFit:"cover",
+                          objectPosition: 'right',
+                        }}
+                      />
+                    </div>
                   </Card>
-
                 </div>
-
                 :
                 <div
-                  className={`container col-12 ${matches ? 'd-flex' : ''} justify-content-center`}
+                  className={`container col-12 ${isMediumSize ? 'd-flex' : ''} justify-content-center`}
                   style={{
                     fontSize: '24px',
                     fontWeight: 400,
@@ -143,7 +137,7 @@ const QuienesSomos = () => {
                       <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
                         El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado. Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
                       </p>
-                      <Link href={`/quienes_somos`}>
+                      <Link href={`/quienes-somos`}>
                         <button
                           className="btn submit-form me-2"
                           style={{

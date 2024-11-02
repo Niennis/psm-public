@@ -12,9 +12,14 @@ const ParserImgToImage =({ htmlContent, classType }) => {
             <Image
               src={src}
               alt={alt || 'Image'}
-              width={width === '100%' ? '500' : width}
-              height={height || 300}
-              layout={width === '100%' ? 'responsive' : 'intrinsic'}
+              width={0}
+              height={0}
+              sizes='100%'
+              style={{
+                layout: width === '100%' ? 'responsive' : 'intrinsic',
+                width: '100%',
+                height: 'auto'
+              }}
             />
           </div>
         );
