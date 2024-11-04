@@ -201,102 +201,101 @@ const sortedEvents = [...events].sort((a, b) => {
   }
 });
 
-export default function Home() {
+  export default function Home() {
 
-  const { setActiveSection } = useSection();
-  const sectionRefs = useRef([]);
-  const isSmallDevice = useMediaQuery("(max-width : 640px)");
-  const isMediumDevice = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
-  const isLargeDevice = useMediaQuery("(min-width : 769px) and (max-width : 1024px)");
-  const isExtraLargeDevice = useMediaQuery("(min-width : 1025px)");
+    const { setActiveSection } = useSection();
+    const sectionRefs = useRef([]);
+    const isSmallDevice = useMediaQuery("(max-width : 640px)");
+    const isMediumDevice = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
+    const isLargeDevice = useMediaQuery("(min-width : 769px) and (max-width : 1024px)");
+    const isExtraLargeDevice = useMediaQuery("(min-width : 1025px)");
 
-  const matches = useMediaQuery('(min-width:600px)');
-  const [slides, setSlides] = useState()
+    const matches = useMediaQuery('(min-width:600px)');
+    const [slides, setSlides] = useState()
 
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5,
-    };
+    useEffect(() => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+      };
 
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
+      const observerCallback = (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+      const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    sectionRefs.current.forEach(section => {
-      if (section) observer.observe(section);
-    });
-
-    return () => {
       sectionRefs.current.forEach(section => {
-        if (section) observer.unobserve(section);
+        if (section) observer.observe(section);
       });
-    };
-  }, [setActiveSection]);
-  // console.log('BLOGS', blogs.slice(-4 ))
 
-  const fetchData = useCallback(async () => {
-    // try {
-    //   // setIsLoading(true);
-    //   const { blogs: data } = await fetchBlogs();
-    //   // setSlides(blogs.slice(0, 4));
-    //   console.log(data)
-    //   if (data.length === 0) setSlides(blogs.slice(blogs.length - 4))
-    //   if (data.length > 0) {
-    //     setSlides(data.slice(data.length - 4));
-    //   }
-    // } catch (error) {
-    //   console.error('Error fetching blogs:', error);
-    // } finally {
-    //   // setIsLoading(false);
-    // }
-  }, []);
+      return () => {
+        sectionRefs.current.forEach(section => {
+          if (section) observer.unobserve(section);
+        });
+      };
+    }, [setActiveSection]);
+    // console.log('BLOGS', blogs.slice(-4 ))
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchData = useCallback(async () => {
+      try {
+        // setIsLoading(true);
+        const response = await fetchBlogs();
+        // setSlides(blogs.slice(0, 4));
+        if (response.length === 0) setSlides(blogs.slice(blogs.length - 4))
+        if (response.length > 0) {
+          setSlides(response.slice(response.length - 4));
+        }
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      } finally {
+        // setIsLoading(false);
+      }
+    }, []);
+
+    useEffect(() => {
+      fetchData();
+    }, []);
 
 
 
-  return (
-    // <>
-    <main style={{contentVisibility: 'auto'}}>
-      {/* {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice */}
-      {/* ? */}
-      {/* <SimpleBackdrop /> */}
-      {/* : */}
-      {/* <> */}
-      {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice && <SimpleBackdrop />}
-      {blogs.length > 0 && isSmallDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-      {blogs.length > 0 && isMediumDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-      {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-      {blogs.length > 0 && isLargeDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
-      {/* {isError && <p>Ha habido un error</p>} */}
-      {/* {!isError && blogs.length === 0 && <Carrousel />} */}
-      {blogs.length > 0 && <div style={{ background: '#f1f1f1' }}><ReservaTuHora innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} /> </div>}
-      {blogs.length > 0 && <div ><QuienesSomos /></div>}
-      {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+    return (
+      // <>
+      <main style={{ contentVisibility: 'auto' }}>
+        {/* {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice */}
+        {/* ? */}
+        {/* <SimpleBackdrop /> */}
+        {/* : */}
+        {/* <> */}
+        {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice && <SimpleBackdrop />}
+        {blogs.length > 0 && isSmallDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+        {blogs.length > 0 && isMediumDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+        {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+        {blogs.length > 0 && isLargeDevice && <ImageSlider slidesCall={slides} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+        {/* {isError && <p>Ha habido un error</p>} */}
+        {/* {!isError && blogs.length === 0 && <Carrousel />} */}
+        {blogs.length > 0 && <div style={{ background: '#f1f1f1' }}><ReservaTuHora innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} /> </div>}
+        {blogs.length > 0 && <div ><QuienesSomos /></div>}
+        {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
 
-      {events.length !== 0 && <Events events={sortedEvents} matches={matches} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+        {events.length !== 0 && <Events events={sortedEvents} matches={matches} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
 
-      <div className="row" style={{ padding: 0, margin: 0 }}>
-        <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
-          <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
+        <div className="row" style={{ padding: 0, margin: 0 }}>
+          <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
+          </div>
         </div>
-      </div>
-      <FrequentAskedQuestions questions={questions} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />
-      <Footer matches={matches} />
-      {/* </> */}
-      {/* } */}
-    </main>
-    // </>
+        <FrequentAskedQuestions questions={questions} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />
+        <Footer matches={matches} />
+        {/* </> */}
+        {/* } */}
+      </main>
+      // </>
 
-  );
-}
+    );
+  }

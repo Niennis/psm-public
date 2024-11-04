@@ -30,7 +30,7 @@ const card = (item) => (
           padding: '16px 24px 16px 24px'
         }}
       >
-        {item.titulo}
+        {item.blog_titulo}
       </Typography>
       <Typography variant="body2" className='lato'
         sx={{
@@ -39,7 +39,7 @@ const card = (item) => (
           lineHeight: '28px',
           fontWeight: 400,
         }}>
-        {item.bajada}
+        {item.descarga_bajada}
       </Typography>
     </CardContent>
     <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
@@ -68,7 +68,7 @@ const card = (item) => (
 );
 
 const Blogdetails = ({ params }) => {
-  const [blog, setBlog] = useState(blogs[params.id])
+  const [blog, setBlog] = useState(blogs[params.blog_id])
   // const [blog, setBlog] = useState({})
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isLargeSiza = useMediaQuery('(min-width:1024px)');
@@ -93,14 +93,13 @@ const Blogdetails = ({ params }) => {
             height: '620px',
             overflow: 'hidden',
           }}>
-            {console.log('IMAGEN', `${process.env.NEXT_PUBLIC_BASE_IMG}${blog.imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`)}
             <Image
               alt="#"
               height={0}
               width={0}
               sizes="100vw"
               priority
-              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${blog.imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${blog.blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
               style={{
                 backgroundPosition: 'center',
                 height: 'auto',
@@ -134,7 +133,7 @@ const Blogdetails = ({ params }) => {
                   <div className="blog-view" style={{ paddingLeft: isMediumSize && '96px' }}>
                     <div className="col-lg-12" style={{ padding: isMediumSize ? 0 : '32px 0 0 0', margin: isMediumSize ? '0' : '80px 0 0 0' }}>
                       <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
-                        {blog && blog.titulo}
+                        {blog && blog.blog_titulo}
                       </h3>
                     </div>
                     <article className="blog blog-single-post d-flex justify-content-between flex-wrap" >
@@ -142,7 +141,7 @@ const Blogdetails = ({ params }) => {
                       {/* TEXTO */}
                       <div className="sailec col-lg-10 col-12" style={{ marginLeft: '0px' }}>
                         {/* {blog.texto} */}
-                        <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.texto} />
+                        <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.blog_texto} />
                         {/* </div> */}
                       </div>
 
@@ -151,7 +150,7 @@ const Blogdetails = ({ params }) => {
                           <img src={blog.imagenes[1]} alt="" style={{ width: '600px' }} />
                         </div> */}
 
-                        <iframe width={isMediumSize ? "60%" : "100%"} height="615" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                        <iframe width={isMediumSize ? "60%" : "100%"} height="615" src={blog.blog_video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                       </div>
                         : <></>
                       }
@@ -162,9 +161,9 @@ const Blogdetails = ({ params }) => {
                       <div className="col-12">
                         <h3 className='sailec-medium mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                       </div>
-                      <div className="row d-flex my-4" style={{ padding: '0', marginLeft: '0px', marginRight: isMediumSize? '96px': 0, borderTop: '1px solid grey', textAlign: 'center' , height: 'fit-content'}} >
+                      <div className="row d-flex my-4" style={{ padding: '0', marginLeft: '0px', marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
 
-                        {blog?.downloads && blog['downloads'].map((item, index) => (
+                        {blog?.descargas && blog['descargas'].map((item, index) => (
                           <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
                             <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
                               <Card variant="outlined">{card(item)}</Card>

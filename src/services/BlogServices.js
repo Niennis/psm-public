@@ -1,3 +1,35 @@
+const groupBlogsByDescargas = (data) => {
+  const result = [];
+  const map = new Map();
+
+  data.forEach((item) => {
+    const keyBlog = `${item.blog_bajada}-${item.blog_id}-${item.blog_imagen}-${item.blog_titulo}-${item.blog_video}`;
+
+    if (!map.has(keyBlog)) {
+      map.set(keyBlog, {
+        blog_bajada: item.blog_bajada,
+        blog_id: item.blog_id,
+        blog_imagen: item.blog_imagen,
+        blog_titulo: item.blog_titulo,
+        blog_video: item.blog_video,
+        descargas: [],
+      });
+    }
+
+    const descarga = {
+      descarga_bajada: item.descarga_bajada,
+      descarga_titulo: item.descarga_titulo,
+      descarga_url: item.descarga_url,
+    };
+
+    map.get(keyBlog).descargas.push(descarga);
+  });
+
+  map.forEach((valor) => result.push(valor));
+
+  return result;
+};
+
 export const fetchBlogs = async () => {
   const BLOGS_API = 'https://showbloglist-a6dzcva7fcfmfgdu.eastus-01.azurewebsites.net/main'
   try {
@@ -5,19 +37,18 @@ export const fetchBlogs = async () => {
       method: "POST",
       headers: {
         'content-type': 'application/json',
-        // 'access-control-allow-origin': '*',
+        'access-control-allow-origin': '*',
         // 'ngrok-skip-browser-warning': 'any',
         'body': null,
       }
     })
-    const blogs = await data.json()
-    console.log('BLOGS', blogs);
-    return blogs
+    const { blogs } = await data.json()
+    const response = groupBlogsByDescargas(blogs)
+    return response
   } catch (err) {
     console.log(err)
   }
 }
-
 
 export const fetchBlog = async (id) => {
   const BLOGS_API = 'https://showblogbyid-f4dxh4bvgydmdzh6.eastus-01.azurewebsites.net/main'
@@ -31,7 +62,7 @@ export const fetchBlog = async (id) => {
       // cors: "no-cors",
       headers: {
         'content-type': 'application/json',
-        // 'access-control-allow-origin': '*',
+        'access-control-allow-origin': '*',
         // 'ngrok-skip-browser-warning': 'any'
       },
       body: JSON.stringify(body)

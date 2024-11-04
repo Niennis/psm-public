@@ -95,10 +95,10 @@ const ImageSlider = ({ innerRef }) => {
   const totalSlides = slides.length;
   const timeoutRef = useRef(null);
 
-  const [title, setTitle] = useState(blogs[0].titulo)
-  const [content, setContent] = useState(blogs[0].bajada)
-  const [color, setColor] = useState(blogs[0].color)
-  const [idBlog, setIdBlog] = useState(blogs[0].id)
+  const [title, setTitle] = useState(blogs[0].blog_titulo)
+  const [content, setContent] = useState(blogs[0].blog_bajada)
+  // const [color, setColor] = useState(blogs[0].color)
+  const [idBlog, setIdBlog] = useState(blogs[0].blog_id)
   const [data, setData] = useState(null)
   const [apiCall, setApiCall] = useState(false); // Nueva bandera
 
@@ -228,18 +228,18 @@ const ImageSlider = ({ innerRef }) => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
-    setTitle(slides[newIndex].titulo)
-    setContent(truncateWords(slides[newIndex].bajada, 205))
-    setColor(styles[newIndex].color)
-    setIdBlog(slides[newIndex].id)
+    setTitle(slides[newIndex].blog_titulo)
+    setContent(truncateWords(slides[newIndex].blog_bajada, 205))
+    // setColor(styles[newIndex].color)
+    setIdBlog(slides[newIndex].blog_id)
   }
 
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
-    setTitle(slides[slideIndex].titulo)
-    setContent(truncateWords(slides[slideIndex].bajada, 205))
-    setColor(styles[slideIndex].color)
-    setIdBlog(slides[slideIndex].id)
+    setTitle(slides[slideIndex].blog_titulo)
+    setContent(truncateWords(slides[slideIndex].blog_bajada, 205))
+    // setColor(styles[slideIndex].color)
+    setIdBlog(slides[slideIndex].blog_id)
   }
 
   const boxStyleDesktop = {
@@ -270,8 +270,8 @@ const ImageSlider = ({ innerRef }) => {
           {/* DESKTOP */}
           <div style={isMediumSize && slideStyles}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
-              alt={slides[currentIndex].imagen}
+              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+              alt={slides[currentIndex].blog_imagen}
               fill
               sizes="100vw"
               style={{
@@ -303,10 +303,10 @@ const ImageSlider = ({ innerRef }) => {
                       textWrap: 'balance',
                       fontFamily: 'sailec',
                     }}>
-                    {slides[currentIndex].titulo}
+                    {slides[currentIndex].blog_titulo}
                   </h2>
                   <p style={{ color: '#FFF' }}>
-                    <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].texto)} min.
+                    <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_texto)} min.
                   </p>
                 </div>
                 <Grid
@@ -338,7 +338,7 @@ const ImageSlider = ({ innerRef }) => {
               borderBottom: '1px solid white',
               height: isShort ? '180px' : '200px',
               marginTop: isShort ? '-210px' : '-240px',
-              marginLeft: `calc(25vw * ${slides[currentIndex].id})`,
+              marginLeft: `calc(25vw * ${slides[currentIndex].blog_id})`,
               backgroundColor: styles[currentIndex].color,
               color: "#fff",
               display: 'flex',
@@ -351,7 +351,7 @@ const ImageSlider = ({ innerRef }) => {
               isShort={isShort}
               isMediumDevice={isMediumDevice}
             >
-              {slides[currentIndex].bajada.slice(0, 200)}
+              {slides[currentIndex].blog_bajada.slice(0, 200)}
             </CustomTabPanel>
           </div>
           <ThemeProvider theme={theme}>
@@ -382,7 +382,7 @@ const ImageSlider = ({ innerRef }) => {
                     textTransform: 'capitalize',
 
                   }}
-                  label={slide.titulo}
+                  label={slide.blog_titulo}
                   {...a11yProps(slideIndex)}
                 />
               ))}
@@ -434,8 +434,8 @@ const ImageSlider = ({ innerRef }) => {
                       }}> Ver más + </button>
                   </Link>
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
-                    alt={slides[currentIndex].imagen}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                    alt={slides[currentIndex].blog_imagen}
                     width={0}
                     height={0}
                     sizes="100vw"
