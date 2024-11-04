@@ -15,18 +15,18 @@ import { FaChevronDown } from "react-icons/fa";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const pagesWithEvents = [
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
   { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas-frecuentes', label: 'preguntas-frecuentes' },
   { title: 'MATERIAL DESCARGABLE', url: '/material-descargable', label: 'material-descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
 ];
 
 const pagesWithoutEvents = [
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
   { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas-frecuentes', label: 'preguntas-frecuentes' },
   { title: 'MATERIAL DESCARGABLE', url: '/material-descargable', label: 'material-descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
 ];
 
 const subMenu = [
@@ -332,7 +332,7 @@ useEffect(() => {
                   }}
                 >
                   <Image
-                    src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     height={0}
                     width={0}
                     alt="logo udp"
