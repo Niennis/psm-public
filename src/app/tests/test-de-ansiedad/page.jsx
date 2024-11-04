@@ -131,26 +131,34 @@ const resultados = [
 ]
 
 const determinateCategory = (puntaje) => {
-  const categoria = resultados.find(resultado => puntaje >= resultado.puntaje[0] && puntaje <= resultado.puntaje[1]);
-  return categoria
+  const category = resultados.find(resultado => puntaje >= resultado.puntaje[0] && puntaje <= resultado.puntaje[1]);
+  return category
 }
 
-const ChildModal = ({ result }) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const ChildModal = ({ result, enviar }) => {
+  const [openChildModal, setOpenChildModal] = useState(false);
+  const handleOpenAnon = () => {
+    setOpenChildModal(true)
+  };
+  const handleOpenWithMail = () => {
+    enviar(result)
+    setOpenChildModal(true)
+  };
+  const handleClose = () => {
+    setOpenChildModal(false)
+  };
 
   return (
     <Fragment>
-      <Button onClick={handleOpen}>Enviar correo</Button>
-      <Button onClick={handleOpen}>Resultados anónimos</Button>
+    <Button onClick={handleOpenWithMail}>Enviar correo</Button>
+    <Button onClick={handleOpenAnon}>Resultados anónimos</Button>
       <Modal
-        open={open}
+        open={openChildModal}
         onClose={handleClose}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: '100%' }}>
+        <Box className="col-12 col-lg-10" sx={{ ...style, width: '100%' }}>
           <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
             {result.descripcion}
@@ -167,11 +175,11 @@ const TestAnsiedad = () => {
   const [category, setCategory] = useState()
   const router = useRouter()
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
-  const isMediumSize = useMediaQuery('(min-width:768x)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const [total, setTotal] = useState()
 
   const calculate = () => {
     const data = watch()
-
     const keysToSum = [
       "torpe",
       "acalorado",
@@ -195,9 +203,10 @@ const TestAnsiedad = () => {
       "ruborfacial",
       "sudores"
     ];
-    const sum = keysToSum.reduce((total, clave) => {
-      return total + parseInt(data[clave]);
+    const sum = keysToSum.reduce((total, key) => {
+      return total + parseInt(data[key]);
     }, 0);
+    setTotal(sum)
     return sum
   }
 
@@ -207,10 +216,31 @@ const TestAnsiedad = () => {
     const response = determinateCategory(result)
     setCategory(response)
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => { setOpen(false); }
 
-  const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
+  const onSubmit = handleSubmit(async (data, result) => {
+    const body = {
+      nombre: data.nombre,
+      apellido: data.apellido,
+      mail: data.email,
+      test: "test de ansiedad",
+      puntaje: total,
+      resultado: result.descripcion,
+    }
+
+    try {
+      const sendMail = await fetch('https://calculatetestpoints-fpdthpb8d3fqh2a4.eastus-01.azurewebsites.net/main', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'access-control-allow-origin': '*',
+        },
+        body: JSON.stringify(body),
+      })
+      console.log('SENDMAIL', sendMail)
+    } catch (error) {
+      console.log('UN ERROR, QUIZÁS DE CORS', error)
+    }
   })
 
   return (
@@ -275,6 +305,7 @@ const TestAnsiedad = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="col-12 col-lg-10">
                       {
                         preguntas.map((item, index) => (
                           <div
@@ -371,6 +402,8 @@ const TestAnsiedad = () => {
                           </div>
                         ))
                       }
+                      </div>
+
                       {Object.keys(errors).length !== 0 && <span className="login-danger">
                         <small>Debes seleccionar una opción por cada pregunta</small>
                       </span>
@@ -407,87 +440,91 @@ const TestAnsiedad = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px' }}>
-                    Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
-                  </Typography>
-                  <div className="col-12 ">
-                    <div className="form-group local-forms">
-                      <label>
-                        Nombre <span className="login-danger">*</span>
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder=""
-                        {...register('nombre', {
-                          required: {
-                            value: true,
-                            message: 'Nombre es requerido'
-                          }
-                        })}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-group local-forms">
-                      <label>
-                        Apellido <span className="login-danger">*</span>
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder=""
-                        {...register('apellido', {
-                          required: {
-                            value: true,
-                            message: 'Apellido es requerido'
-                          }
-                        })}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-group local-forms">
-                      <label>
-                        Email <span className="login-danger">*</span>
-                      </label>
-                      <input
-                        className="form-control"
-                        type="email"
-                        placeholder=""
-                        {...register('email', {
-                          required: {
-                            value: true,
-                            message: 'Correo electrónico es requerido'
-                          }
-                        })}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-12">
-                    <div className="form-group select-gender">
-                      <div className="form-check-inline">
-                        <label className="form-check-label">
-                          <input
-                            type="checkbox"
-                            name="gender"
-                            className="form-check-input"
-                            {...register('consentimiento', {
-                              required: {
-                                value: true,
-                                message: 'Correo electrónico es requerido'
-                              }
-                            })}
-                          />
-                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSME, con fines de investigación.
+                 {category ?
+                  <Box sx={{ ...style, fontFamily: 'sailec, san-serif' }}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', fontFamily: 'sailec, san-serif' }}>
+                      Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
+                    </Typography>
+                    <div className="col-12">
+                      <div className="form-group local-forms">
+                        <label>
+                          Nombre <span className="login-danger">*</span>
                         </label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder=""
+                          {...register('nombre', {
+                            required: {
+                              value: true,
+                              message: 'Nombre es requerido'
+                            }
+                          })}
+                        />
                       </div>
                     </div>
-                  </div>
-                  {category && <ChildModal result={category} />}
-                </Box>
+                    <div className="col-12">
+                      <div className="form-group local-forms">
+                        <label>
+                          Apellido <span className="login-danger">*</span>
+                        </label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder=""
+                          {...register('apellido', {
+                            required: {
+                              value: true,
+                              message: 'Apellido es requerido'
+                            }
+                          })}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="form-group local-forms">
+                        <label>
+                          Email <span className="login-danger">*</span>
+                        </label>
+                        <input
+                          className="form-control"
+                          type="email"
+                          placeholder=""
+                          {...register('email', {
+                            required: {
+                              value: true,
+                              message: 'Correo electrónico es requerido'
+                            }
+                          })}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="form-group select-gender">
+                        <div className="form-check-inline">
+                          <label className='blog-text-sm' style={{ fontFamily: 'sailec, san-serif' }}>
+                            <input
+                              type="checkbox"
+                              name="consentimiento"
+                              className="form-check-input"
+                              {...register('consentimiento', {
+                                required: {
+                                  value: true,
+                                  message: 'Debes aceptar el consentimiento'
+                                }
+                              })}
+                            />
+                            Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSME, con fines de investigación.
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    {category && <ChildModal result={category} enviar={onSubmit} />}
+                  </Box>
+                  : <Box sx={{ ...style, fontFamily: 'sailec, san-serif', textAlign: 'center' }}><Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', fontFamily: 'sailec, san-serif' }}>
+                    ¡Importante! Debes seleccionar una opción por cada pregunta
+                  </Typography> </Box>
+                }
               </Modal>
             </div>
           </div>
