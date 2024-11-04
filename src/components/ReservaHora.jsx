@@ -49,7 +49,7 @@ const ReservaTuHora = () => {
                       padding: '2em 0',
                       bgcolor: '#f1f1f1'
                     }}>
-                    <div style={{ position: 'relative', height: '240px', width: '100%'  }}>
+                    <div style={{ position: 'relative', height: '240px', width: '100%' }}>
                       <Image
                         src={`${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
                         alt="Imagen profesional"
@@ -97,7 +97,7 @@ const ReservaTuHora = () => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                      Si necesitas ayuda psicológica o psicopedagógica, reserva una hora con un profesional.
+                      Si sientes que necesitas ayuda de un profesional del DSME, agenda una entrevista (evaluación de despeje) en nuestra plataforma.
                     </Typography>
                     <Typography
                       variant="body2"
@@ -108,7 +108,7 @@ const ReservaTuHora = () => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                      Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
+                      Con esta evaluación podremos orientarte en relación a tus necesidades, y determinar qué tipo de ayuda podemos ofrecerte.
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
