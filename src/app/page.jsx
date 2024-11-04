@@ -114,12 +114,12 @@ const questions = [
   }, {
     id: 'question07',
     title: '¿Qué pasa si llego tarde?',
-    answer: 'El/la estudiante debe ser puntual. Si asiste 15 minutos tarde o más, deberá justificar su retraso y conversar con su psicólogo/a para agendar una nueva hora. En casos excepcionales, el terapeuta podrá atender al estudiante posterior a 15 minutos, ya sea porque éste se encuentra en proceso de alta, derivación o urgencia.'
+    answer: 'El/la estudiante debe ser puntual. Si asiste 15 minutos tarde o más, deberá justificar su retraso y contactarse con el o la profesional asignada para agendar una nueva hora. En casos excepcionales, el terapeuta podrá atender al estudiante posterior a 15 minutos, ya sea porque éste se encuentra en proceso de alta, derivación o urgencia.'
   }, {
     id: 'question08',
     title: '¿Y si no hay hora?',
     answer: `
-    Tenemos un tiempo de espera de 15 días hábiles. Si no puedes esperar este tiempo, debes considerar acudir a profesionales externos, particulares o en la red de servicio público.
+    Tenemos un tiempo de espera de 15 días hábiles aproximadamente. Si no puedes esperar este tiempo, debes considerar acudir a profesionales externos, particulares o en la red de servicio público.
 
 Números de Utilidad:
 
@@ -152,8 +152,8 @@ Dirección Instituto Psiquiátrico Dr. Jose Horwitz Barack: Olivos 837, Recoleta
     answer: 'Esta información es necesaria y sólo se utiliza en caso de existir riesgo vital y ocasiones excepcionales previo acuerdo con el o la estudiante y resguardando confidencialidad.'
   }, {
     id: 'question13',
-    title: '¿El/la psicólogo/a se puede contactar con autoridades académicas?',
-    answer: 'Se realizará contacto con la Secretaría de Estudios si ambas partes lo establecen como necesario.'
+    title: '¿Los y las profesionales se puede contactar con autoridades académicas?',
+    answer: 'Se realizará contacto con la Secretaría de Estudios, u otras autoridades o entidades de la universidad, si ambas partes lo establecen como necesario.'
   }, {
     id: 'question14',
     title: '¿Cuándo consultar?',
