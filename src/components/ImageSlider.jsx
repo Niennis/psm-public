@@ -274,13 +274,14 @@ const ImageSlider = ({ innerRef }) => {
               alt={slides[currentIndex].blog_imagen}
               fill
               sizes="100vw"
+              priority
               style={{
                 borderRadius: '8px',
                 margin: 'auto',
                 objectFit: 'cover',
                 objectPosition: 'top',
                 overflow: 'hidden',
-                zIndex: "-1",
+                zIndex: '-1',
               }}
             />
           </div>
@@ -436,11 +437,12 @@ const ImageSlider = ({ innerRef }) => {
                   <Image
                     src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     alt={slides[currentIndex].blog_imagen}
-                    width={0}
+                    priority
                     height={0}
+                    width={0}
+                    layout="responsive"
                     sizes="100vw"
                     style={{
-                      width: 'auto',
                       borderRadius: '8px',
                       margin: 'auto',
                       height: '250px',
