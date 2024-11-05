@@ -130,19 +130,19 @@ export default function Home() {
   // console.log('BLOGS', blogs.slice(-4 ))
 
   const fetchData = useCallback(async () => {
-    try {
-      // setIsLoading(true);
-      const response = await fetchBlogs();
-      // setSlides(blogs.slice(0, 4));
-      if (response.length === 0) setSlides(blogs.slice(blogs.length - 4))
-      if (response.length > 0) {
-        setSlides(response.slice(response.length - 4));
-      }
-    } catch (error) {
-      console.error('Error fetching blogs:', error);
-    } finally {
-      // setIsLoading(false);
-    }
+    // try {
+    //   // setIsLoading(true);
+    //   const response = await fetchBlogs();
+    //   // setSlides(blogs.slice(0, 4));
+    //   if (response.length === 0) setSlides(blogs.slice(blogs.length - 4))
+    //   if (response.length > 0) {
+    //     setSlides(response.slice(response.length - 4));
+    //   }
+    // } catch (error) {
+    //   console.error('Error fetching blogs:', error);
+    // } finally {
+    //   // setIsLoading(false);
+    // }
   }, []);
 
   useEffect(() => {
