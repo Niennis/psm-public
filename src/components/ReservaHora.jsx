@@ -1,5 +1,4 @@
-// import { useState } from "react";
-// import Link from "next/link";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 // import { CircleRounded } from "@mui/icons-material";
 import { Grid, Box, Card } from "@mui/material";
@@ -13,8 +12,32 @@ import ReserveBtn from "./ReserveBtn";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const ReservaTuHora = () => {
+  const [isShort, setIsShort] = useState(false);
   const isMediumSize = useMediaQuery('(min-width:768px)');
-  const isLargeSize = useMediaQuery('(min-width:1024px )');
+
+  useEffect(() => {
+    const handleResize = () => {
+      const height = window.innerHeight;
+
+      if (height < 900) {
+        setIsShort(true);
+      } else {
+        setIsShort(false);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      handleResize(); 
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  })
+
   return (
     <div className={`container col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} style={{ background: '#f1f1f1' }}>
       {/* <TestCard test={slides} /> */}
@@ -78,7 +101,7 @@ const ReservaTuHora = () => {
                     }}>
                     <Typography
                       variant="body2"
-                      className="sailec"
+                      className="header-2-bold"
                       sx={{
                         color: '#000',
                         // textWrap: 'balance',
@@ -90,7 +113,7 @@ const ReservaTuHora = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      className="sailec"
+                      className="title-regular"
                       sx={{
                         color: '#000',
                         // textWrap: 'balance',
@@ -101,7 +124,7 @@ const ReservaTuHora = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      className="sailec"
+                      className="title-regular"
                       sx={{
                         color: '#000',
                         // textWrap: 'balance',
@@ -120,20 +143,16 @@ const ReservaTuHora = () => {
 
                 :
                 <div
-                  className={`container col-12 ${isMediumSize ? 'd-flex' : ''} justify-content-center`}
+                  className={`container p-0 col-12 ${isMediumSize ? 'd-flex' : ''} justify-content-center`}
                   style={{
-                    fontSize: '24px',
-                    fontWeight: 400,
-                    lineHeight: '32px',
                     borderRadius: '12px',
-                    padding: 0,
                   }}
                 >
-                  <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'sailec', lineHeight: '30px', }}>
-                    <div className="media-body sailec" style={{ margin: '0 20px', padding: '10px 0', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
+                  <Box sx={{ bgcolor: '#99D6E9', lineHeight: '30px', }}>
+                    <div className="media-body" style={{ margin: '0 20px', padding: '10px 0', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
                       <Typography
                         variant="body2"
-                        className="sailec"
+                        className="header-2-bold"
                         sx={{
                           color: '#000',
                           // textWrap: 'balance',
@@ -145,10 +164,10 @@ const ReservaTuHora = () => {
                         Reserva tu hora
                       </Typography>
 
-                      <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
+                      <p className={`${isShort ? "body-regular" : "title-regular" }`} style={{ textWrap: 'pretty' }}>
                         Si necesitas ayuda psicológica o psicopedagógica, reserva una hora con un profesional.
                       </p>
-                      <p>
+                      <p className={`${isShort ? "body-regular" : "title-regular" }`}>
                         Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
 
                       </p>

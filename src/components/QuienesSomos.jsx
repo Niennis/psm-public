@@ -1,3 +1,5 @@
+'use client'
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,8 +9,31 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const QuienesSomos = () => {
+  const [isShort, setIsShort] = useState(false);
   const isMediumSize = useMediaQuery('(min-width:768px)');
-  const isLargeSize = useMediaQuery('(min-width:1024px )');
+  
+  useEffect(() => {
+    const handleResize = () => {
+      const height = window.innerHeight;
+
+      if (height < 900) {
+        setIsShort(true);
+      } else {
+        setIsShort(false);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      handleResize(); 
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  })
 
   return (
     <div className={`container col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} >
@@ -46,7 +71,7 @@ const QuienesSomos = () => {
                     }}>
                     <Typography
                       variant="body2"
-                      className="sailec"
+                      className="header-2-bold"
                       sx={{
                         color: '#000',
                         fontSize: '32px',
@@ -57,29 +82,37 @@ const QuienesSomos = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      className="sailec"
+                      className="title-regular"
                       sx={{
                         color: '#000',
                         // textWrap: 'balance',
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                      El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado. Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
+                      El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado.
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className="title-regular"
+                      sx={{
+                        color: '#000',
+                        // textWrap: 'balance',
+                        fontSize: '20px',
+                        lineHeight: '28px'
+                      }}>
+                       Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
                         <Link href={`/quienes-somos`}>
                           <button
-                            className={`btn submit-form me-2 sailec-medium `}
+                            className={`submit-form me-2 ui-medium font-white`}
                             style={{
                               width: '209px',
                               height: '56px',
                               backgroundColor: '#1abc9c',
                               border: `1px solid #73cdcd`,
                               borderRadius: '100px',
-                              color: '#fff',
-                              fontWeight: 500,
-                              fontSize: '16px',
                             }}> Ver más + </button>
                         </Link>
                       </Typography>
@@ -118,36 +151,26 @@ const QuienesSomos = () => {
                     padding: 0,
                   }}
                 >
-                  <Box sx={{ bgcolor: '#f1f1f1', fontFamily: 'sailec', lineHeight: '30px', }}>
-                    <div className="media-body sailec" style={{ margin: '0 20px', padding: '10px 0', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
+                  <Box sx={{ bgcolor: '#f1f1f1',  }}>
+                    <div className="media-body " style={{ margin: '0 20px', padding: '10px 0',  }}>
                       <Typography
                         variant="body2"
-                        className="sailec"
+                        className="header-2-bold"
                         sx={{
                           color: '#000',
-                          // textWrap: 'balance',
-                          fontSize: '32px',
-                          lineHeight: '40px',
-                          fontWeight: 700,
                           margin: '16px 0'
                         }}>
                         Quiénes somos
                       </Typography>
 
-                      <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
+                      <p className={`${isShort ? "body-regular" : "title-regular"} media-body `} style={{ textWrap: 'pretty' }}>
                         El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado. Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
                       </p>
                       <Link href={`/quienes-somos`}>
                         <button
-                          className="btn submit-form me-2"
+                          className="submit-form me-2 ui-medium btn-transparent-mobile "
                           style={{
-                            backgroundColor: 'transparent',
                             border: '1px solid #000',
-                            borderRadius: '100px',
-                            color: '#000',
-                            width: '116px',
-                            height: '40px',
-                            margin: '8px'
                           }}> Ver más + </button>
                       </Link>
                     </div>

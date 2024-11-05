@@ -67,7 +67,7 @@ const FooterDae = () => {
 
   return (
     <>
-      <div className="row d-flex justify-content-center sailec" style={{ backgroundColor: '#2D2D2D', margin: 0, width: '100%' }}>
+      <div className="row d-flex justify-content-center title-regular" style={{ backgroundColor: '#2D2D2D', margin: 0, width: '100%' }}>
         <Box className="container col-12 col-lg-10"
           sx={{
             color: 'white',
@@ -119,13 +119,13 @@ const FooterDae = () => {
                 textWrap: 'balance',
                 textAlign: 'center'
               }}>
-              <p style={{ fontWeight: 700, fontSize: "20px", lineHeight: "28px", margin: "10px 0 0" }}>¿Hablemos?</p>
-              <p style={{ fontSize: "14px", lineHeight: "20px", marginBottom: "8px" }}>Si necesitas ayuda, contáctanos y te ayudaremos.</p>
+              <p className="title-bold mt-3" >¿Hablemos?</p>
+              <p className="body-small-regular mb-3">Si necesitas ayuda, contáctanos y te ayudaremos.</p>
               {/* <ReserveBtn text='Reservar' bgColor="#FABB00" color="#000" /> */}
             </div>
           </div>
           
-          {isMediumSize || isLargSize
+          {(isMediumSize || isLargSize)
             ? <>
               <div className="row my-4"
                 style={{
@@ -312,18 +312,18 @@ const FooterDae = () => {
                   minWidth: '100vw',
                 }}>
                 <div className="row">
-                  <div className="col-6" style={{ alignSelf: "center" }}>
-                    <p style={{ fontSize: "14px", margin: "0px", padding: "10px 0" }}>
+                  <div className="col-6">
+                    <p className="body-small-regular m-0 px-0 py-2 text-center">
                       Dirección de Asuntos Estudiantiles - Departamento de Salud Mental Estudiantil
                     </p>
                   </div>
-                  <div className="col-2" style={{ alignSelf: "center" }}>
-                    <p style={{ fontSize: "12px", margin: "0px", padding: "10px 0" }}>
+                  <div className="col-2">
+                    <p className="body-small-regular m-0 px-0 py-2 text-center">
                       · @Daeudp · <a href='https://dae.udp.cl' style={{ color: '#000' }}>https://dae.udp.cl</a>
                     </p>
                   </div>
-                  <div className="col-4" style={{ alignSelf: "center" }}>
-                    <p style={{ fontSize: "12px", margin: "0px", padding: "10px 0" }}>
+                  <div className="col-4">
+                    <p className="body-small-regular m-0 px-0 py-2 text-center">
                       <FaLocationDot /> Av. Manuel Rodríguez 343, Santiago, Región Metropolitana
                     </p>
                   </div>
@@ -342,17 +342,17 @@ const FooterDae = () => {
                   bgcolor: '#fff',
                   borderRadius: '8px 8px 0 0',
                 }}>
-                <div className="col-12" style={{ alignSelf: "center" }}>
-                  <p style={{ fontSize: "12px", margin: "0px", padding: "10px 0" }}>
+                <div className="col-12">
+                  <p className="body-small-regular m-0 px-0 py-2 text-center">
                     <FaLocationDot /> Av. Manuel Rodríguez 343, Santiago, Región Metropolitana
                   </p>
                 </div>
-                <div className="col-12" style={{ alignSelf: "center", borderRadius: '8px 8px 0 0', backgroundColor: '#A6A6A6' }}>
-                  <p style={{ fontSize: "14px", margin: "0px", padding: "10px " }}>
+                <div className="col-12 align-self-center" style={{ borderRadius: '8px 8px 0 0', backgroundColor: '#A6A6A6' }}>
+                  <p className="body-small-regular m-0 px-0 py-2 text-center" style={{textWrap: 'balance'}}>
                     Dirección de Asuntos Estudiantiles - Departamento de Salud Mental Estudiantil
                   </p>
-                  <p style={{ fontSize: "12px", margin: "0px", padding: "10px " }}>
-                    · @Daeudp · <a href='https://dae.udp.cl' style={{ color: '#000' }}>https://dae.udp.cl</a>
+                  <p className="body-small-regular m-0 px-0 py-2 text-center">
+                    @Daeudp · <a href='https://dae.udp.cl' style={{ color: '#000' }}>https://dae.udp.cl</a>
                   </p>
                 </div>
               </Box>

@@ -131,7 +131,7 @@ const TestSlider = ({ slides, innerRef }) => {
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
               <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ',margin: 0, justifyContent: 'center', }}>
                 <h2
-                  className="sailec"
+                  className="header-2-bold"
                   style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
                   Test autodiagnóstico
                 </h2>
@@ -141,7 +141,7 @@ const TestSlider = ({ slides, innerRef }) => {
                     if (slideIndex < slides.length) {
                       const slide = slides[slideIndex];
                       return (
-                        <div key={slideIndex} className="col-4 col-md-5 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: isLargeSize ? '30vw' :'100%' }}>
+                        <div key={slideIndex} className="col-4 col-md-5" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: isLargeSize ? '30vw' :'100%' }}>
                           <Card
                             sx={{
                               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.45)',
@@ -163,23 +163,19 @@ const TestSlider = ({ slides, innerRef }) => {
                               />
                             </div>
                             <CardContent>
-                              <Typography variant="body2" color="text.secondary" className="sailec-bold"
-                                sx={{ color: 'black', fontWeight: 700, fontSize: '24px', lineHeight: '32px', height: '3em' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary" className="lato" sx={{ height: '5rem' }}>{slide.bajada}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="header-3-bold"
+                                sx={{ color: '#000', height: '2em' }}>{slide.titulo}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="body-large-regular" sx={{ height: '5.5em' }}>{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                                <Link href={slide.url} className="sailec-medium" >
-                                  <button className="btn submit-form me-2"
+                                <Link href={slide.url} className="ui-large" >
+                                  <button className=" submit-form me-2 font-white"
                                     style={{
                                       padding: '16px 32px',
                                       backgroundColor: '#4054B2',
-                                      color: 'white',
                                       border: '1px solid #A6A6A6',
                                       borderRadius: '100px',
-                                      fontWeight: 500,
-                                      fontSize: '18px',
-                                      lineHeight: '24px'
                                     }}>Realizar Test</button>
                                 </Link>
                               </Grid>
@@ -206,14 +202,13 @@ const TestSlider = ({ slides, innerRef }) => {
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
               <div className="row" style={{ paddingTop: '32px', margin: 0 }}>
                 <h2
-                  className="sailec"
-                  style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
+                  className="header-2-bold text-center">
                   Test autodiagnóstico
                 </h2>
                 <div style={cardContainerStyles}>
                   {slides.map((slide, slideIndex) => {
                     return (
-                      <div key={slideIndex} className="col-4 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: '100%' }}>
+                      <div key={slideIndex} className="col-4" style={{ width: '100%' }}>
                         <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '90%', margin: 'auto' }}>
                           <div style={{ position: 'relative', height: '320px', width: '100%' }}>
                             <Image
@@ -228,20 +223,14 @@ const TestSlider = ({ slides, innerRef }) => {
                             />
                           </div>
                           <CardContent>
-                            <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slides[currentIndex].titulo}</Typography>
-                            <Typography variant="body2" color="text.secondary">{slides[currentIndex].bajada}</Typography>
+                            <Typography className="header-3-bold" variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slides[currentIndex].titulo}</Typography>
+                            <Typography className="body-large-regular " variant="body2" color="text.secondary">{slides[currentIndex].bajada}</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
                             <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
                               <Link href={slides[currentIndex].url} >
                                 <button
-                                  className="btn submit-form me-2"
-                                  style={{
-                                    backgroundColor: '#4054B2',
-                                    color: 'white',
-                                    border: '1px solid #A6A6A6',
-                                    borderRadius: '100px'
-                                  }}>
+                                  className="btn-test-home px-3 py-2 me-2 ui-large ">
                                   Realizar Test
                                 </button>
                               </Link>

@@ -180,13 +180,13 @@ useEffect(() => {
                     return (
                       <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
                         <Button
-                          className={`sailec ${activeSection === page.label
+                          className={`ui-medium ${activeSection === page.label
                             ? 'active-header'
                             : ''
                             }`}
 
                           onClick={() => handleNavClick(page.label)}
-                          sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
+                          sx={{ ...style,  my: 2, color: 'black', display: 'block' }}
                         >
                           {page.title}
                         </Button>
@@ -196,16 +196,16 @@ useEffect(() => {
                   )}
                   <Tooltip title="Como trabajamos">
                     <Button
-                      className={`sailec ${activeSection === 'como_trabajamos'
+                      className={`ui-medium ${activeSection === 'como_trabajamos'
                         ? 'active-header'
                         : ''
                         }`}
-                      onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
+                      onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0',  color: 'black', marginTop: '16px', marginBottom: '16px' }}>
                       CÓMO TRABAJAMOS
                     </Button>
                   </Tooltip>
 
-                  <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                  <Box sx={{ flexGrow: 0 }} className="ui-medium">
                     <Menu
                       sx={{ mt: '45px' }}
                       id="menu-appbar"
@@ -224,8 +224,8 @@ useEffect(() => {
                     >
                       {subMenu.map((setting) => (
                         <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center" className="sailec">
-                            <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                          <Typography textAlign="center" className="ui-medium">
+                            <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
                               {setting.title}
                             </a>
                           </Typography>

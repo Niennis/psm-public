@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { MdOutlineChromeReaderMode } from "react-icons/md";
 import { blogs } from "@/utils/blogs";
 import { fetchBlogs } from "@/services/BlogServices";
+import './ImageSlider.css';
 
 const theme = createTheme({
   palette: {
@@ -67,12 +68,10 @@ const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => 
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography
-            className="sailec-medium"
+            className="title-regular"
             sx={{
-              fontWeight: 400,
               fontSize: isMediumDevice ? '14px' : isShort ? '18px' : '20px',
               lineHeight: isMediumDevice ? '20px' : '28px',
-              fontFamily: 'sailec'
             }}>{children}</Typography>
         </Box>
       )}
@@ -97,7 +96,6 @@ const ImageSlider = ({ innerRef }) => {
 
   const [title, setTitle] = useState(blogs[0].blog_titulo)
   const [content, setContent] = useState(blogs[0].blog_bajada)
-  // const [color, setColor] = useState(blogs[0].color)
   const [idBlog, setIdBlog] = useState(blogs[0].blog_id)
   const [data, setData] = useState(null)
   const [apiCall, setApiCall] = useState(false); // Nueva bandera
@@ -185,25 +183,6 @@ const ImageSlider = ({ innerRef }) => {
   const imgHeightMobile = '80vh'
   const imgHeightDesktop = '100vh'
 
-  const sliderStyles = {
-    position: 'relative',
-    marginTop: 0,
-    marginBottom: 0,
-    marginLeft: 0,
-    marginRight: 0,
-    padding: 0,
-    width: '100%',
-  }
-
-  const slideStyles = {
-    width: '100%',
-    height: imgHeightDesktop,
-    backgroundPosition: 'top',
-    backgroundSize: 'cover',
-    position: 'relative',
-    zIndex: '-1',
-  }
-
   const slideStylesMobile = {
     backgroundColor: styles[currentIndex].color,
     width: '100%',
@@ -211,18 +190,6 @@ const ImageSlider = ({ innerRef }) => {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
-
-  const dotsContainerStyles = {
-    display: 'flex',
-    justifyContent: 'center',
-  }
-
-  const dotStyles = {
-    margin: isShort ? '-30px 8px' : '-50px 8px',
-    cursor: 'pointer',
-    // color: '#fff'
-  }
-
 
   const goToNext = () => {
     const isLastSlide = currentIndex === slides.length - 1
@@ -251,6 +218,7 @@ const ImageSlider = ({ innerRef }) => {
     padding: '150px 0 32px 0',
     textWrap: 'pretty',
     width: '100%',
+    zIndex: 99999,
   }
 
   const boxStyleMobile = {
@@ -263,218 +231,170 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   return (
-    <div id="inicio" style={isMediumSize ? { ...sliderStyles, height: imgHeightDesktop } : { ...sliderStyles, marginTop: '98px' }} ref={innerRef}>
+    <div id="inicio" className={isMediumSize ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef}>
 
-      {isMediumSize ?
-        <>
-          {/* DESKTOP */}
-          <div style={isMediumSize && slideStyles}>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
-              alt={slides[currentIndex].blog_imagen}
-              fill
-              sizes="100vw"
-              priority
-              style={{
-                borderRadius: '8px',
-                margin: 'auto',
-                objectFit: 'cover',
-                objectPosition: 'top',
-                overflow: 'hidden',
-                zIndex: '-1',
-              }}
-            />
-          </div>
-          <Box sx={{ ...boxStyleDesktop, zIndex: 99999 }}>
-            <div className="row" >
-              <div className="col-sm-12 sailec" style={{
-                width: 'calc(100vw - 60px)',
-                marginLeft: '60px'
-              }}>
-                <div className="d-flex flex-column">
-                  <h2
-                    className="sailec"
-                    style={{
-                      marginTop: '1em',
-                      color: 'white',
-                      fontSize: 'clamp(48px, 48px, 72px)',
-                      // fontSize: isShort ? '48px' : '72px',
-                      fontWeight: 700,
-                      lineHeight: isShort ? '52px' : '116px',
-                      textWrap: 'balance',
-                      fontFamily: 'sailec',
-                    }}>
-                    {slides[currentIndex].blog_titulo}
-                  </h2>
-                  <p style={{ color: '#FFF' }}>
-                    <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_texto)} min.
-                  </p>
-                </div>
-                <Grid
-                  container
-                  direction="row"
+      {/* {isMediumSize ? */}
+      <div className="desktop-container">
+        {/* DESKTOP */}
+        <div className="slide-styles" >
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+            alt={slides[currentIndex].blog_imagen}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+            className="slide-img "
+          />
+        </div>
+        <Box sx={boxStyleDesktop}>
+          <div className="row" >
+            <div className="col-sm-12" style={{
+              width: 'calc(100vw - 60px)',
+              marginLeft: '60px'
+            }}>
+              <div className="d-flex flex-column col-10">
+                <h2
+                  className="mega-title mt-5 font-white"
                 >
-                  <Link href={`/blog/${idBlog}`}>
-                    <button
-                      className={`btn submit-form me-2 sailec-medium ${'btn-' + currentIndex}`}
-                      style={{
-                        width: '209px',
-                        height: !isShort && '56px',
-                        backgroundColor: styles[currentIndex].color,
-                        border: `1px solid ${styles[currentIndex].border}`,
-                        borderRadius: '100px',
-                        color: '#fff',
-                        fontWeight: 500,
-                        fontSize: '16px',
-                      }}> Ver más + </button>
-                  </Link>
-                </Grid>
-              </div>
-            </div>
-          </Box>
-          <div
-            key={slides[currentIndex].key}
-            className="col col-3"
-            style={{
-              borderBottom: '1px solid white',
-              height: isShort ? '180px' : '200px',
-              marginTop: isShort ? '-210px' : '-240px',
-              marginLeft: `calc(25vw * ${slides[currentIndex].blog_id})`,
-              backgroundColor: styles[currentIndex].color,
-              color: "#fff",
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <CustomTabPanel
-              value={slides[currentIndex].key}
-              index={slides[currentIndex].key}
-              isShort={isShort}
-              isMediumDevice={isMediumDevice}
-            >
-              {slides[currentIndex].blog_bajada.slice(0, 200)}
-            </CustomTabPanel>
-          </div>
-          <ThemeProvider theme={theme}>
-
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-              textColor="primary"
-              indicatorColor="white"
-            >
-              {slides.map((slide, slideIndex) => (
-                <Tab
-                  key={slideIndex}
-                  className="col-3 sailec white_menu_urls"
-                  onClick={() => goToSlide(slideIndex)}
-                  sx={{
-                    alignItems: 'baseline',
-                    bgcolor: styles[slideIndex].color,
-                    color: '#fff',
-                    fontFamily: 'sailec',
-                    fontSize: isMediumDevice ? '16px' : isShort ? '20px' : '24px',
-                    fontWeight: 700,
-                    height: '97px',
-                    lineHeight: isMediumDevice ? '22px' : '32px',
-                    maxWidth: 'unset',
-                    textAlign: 'left',
-                    textTransform: 'capitalize',
-
-                  }}
-                  label={slide.blog_titulo}
-                  {...a11yProps(slideIndex)}
-                />
-              ))}
-            </Tabs>
-          </ThemeProvider>
-
-        </> :
-        <>
-          {/* MOBILE */}
-          <div style={{ ...slideStylesMobile }}></div>
-          <Box sx={!isMediumSize && boxStyleMobile}>
-            <div className="row" >
-              <div className="col-sm-12 sailec" style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
-              }
-              }>
-                {/* <div style={{ minHeight: '30vh' }}> */}
-                <h2 style={{ color: 'white', fontSize: '30px', fontWeight: 700, lineHeight: '40px' }}>{title}</h2>
-                <p style={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontWeight: 400,
-                  lineHeight: '32px',
-                }}
-                >
-                  {content.slice(0, 205)}
+                  {slides[currentIndex].blog_titulo}
+                </h2>
+                <p className="font-white title-medium">
+                  <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_texto)} min.
                 </p>
-                {/* </div> */}
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="flex-end"
-                  alignItems="baseline"
-                  sx={{ width: '90vw' }}
-                >
-                  <Link href={`/blog/${idBlog}`}>
-                    <button
-                      className="btn submit-form me-2"
-                      style={{
-                        backgroundColor: 'transparent',
-                        border: '1px solid #FFF',
-                        borderRadius: '100px',
-                        color: '#FFF',
-                        width: '116px',
-                        height: '40px',
-                        margin: '8px'
-                      }}> Ver más + </button>
-                  </Link>
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
-                    alt={slides[currentIndex].blog_imagen}
-                    priority
-                    height={0}
-                    width={0}
-                    layout="responsive"
-                    sizes="100vw"
+              </div>
+              <Grid
+                container
+                direction="row"
+              >
+                <Link href={`/blog/${idBlog}`}>
+                  <button
+                    className={`font-white ui-medium submit-form me-2 ${'btn-' + currentIndex}`}
                     style={{
-                      borderRadius: '8px',
-                      margin: 'auto',
-                      height: '250px',
-                      maxHeight: '250px',
-                      objectPosition: 'center',
-                      objectFit: 'cover',
-                      overflow: 'hidden',
-                      width: 'auto',
-                      WebkitBoxShadow: '12px 12px 0px 0px rgba(166,166,166,1)',
-                      MozBoxShadow: '12px 12px 0px 0px rgba(166,166,166,1)',
-                      boxShadow: '12px 12px 0px 0px rgba(166,166,166,1)',
-                    }}
-                  />
+                      width: '209px',
+                      height: !isShort && '56px',
+                      backgroundColor: styles[currentIndex].color,
+                      border: `1px solid ${styles[currentIndex].border}`,
+                      borderRadius: '100px',
+                    }}> Ver más + </button>
+                </Link>
+              </Grid>
+            </div>
+          </div>
+        </Box>
+        <div
+          key={slides[currentIndex].key}
+          className="col col-3 title-regular"
+          style={{
+            borderBottom: '1px solid white',
+            height: isShort ? '180px' : '200px',
+            marginTop: isShort ? '-210px' : '-240px',
+            marginLeft: `calc(25vw * ${slides[currentIndex].blog_id})`,
+            backgroundColor: styles[currentIndex].color,
+            color: "#fff",
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <CustomTabPanel
+            value={slides[currentIndex].key}
+            index={slides[currentIndex].key}
+            isShort={isShort}
+            isMediumDevice={isMediumDevice}
+          >
+            {slides[currentIndex].blog_bajada.slice(0, 200)}
+          </CustomTabPanel>
+        </div>
+        <ThemeProvider theme={theme}>
 
-                </Grid>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+            textColor="primary"
+            indicatorColor="white"
+          >
+            {slides.map((slide, slideIndex) => (
+              <Tab
+                key={slideIndex}
+                className="col-3 header-3-bold white_menu_urls"
+                onClick={() => goToSlide(slideIndex)}
+                sx={{
+                  alignItems: 'baseline',
+                  bgcolor: styles[slideIndex].color,
+                  color: '#fff',
+                  fontSize: isMediumDevice ? '16px' : isShort ? '20px' : '24px',
+                  fontWeight: 700,
+                  height: '97px',
+                  lineHeight: isMediumDevice ? '22px' : '32px',
+                  maxWidth: 'unset',
+                  textAlign: 'left',
+                  textTransform: 'capitalize',
+
+                }}
+                label={slide.blog_titulo}
+                {...a11yProps(slideIndex)}
+              />
+            ))}
+          </Tabs>
+        </ThemeProvider>
+      </div> {/* : */}
+
+      {/* MOBILE */}
+      <div className="mobile-container">
+        <div style={slideStylesMobile}></div>
+        <Box sx={boxStyleMobile}>
+          <div className="row" >
+            <div className="col-sm-12" style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+            }
+            }>
+              {/* <div style={{ minHeight: '30vh' }}> */}
+              <h2 className={`${isShort ? "header-3-bold" : "header-1-bold"} font-white`} >{title}</h2>
+              <p className={`${isShort ? "body-regular" : "body-large-medium"} font-white`}>
+                {content.slice(0, 205)}
+              </p>
+              {/* </div> */}
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="baseline"
+                sx={{ width: '90vw' }}
+              >
+                <Link href={`/blog/${idBlog}`}>
+                  <button
+                    className="font-white submit-form me-2 lato-btn btn-slide-mobile "> Ver más + </button>
+                </Link>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                  alt={slides[currentIndex].blog_imagen}
+                  priority
+                  height={0}
+                  width={0}
+                  sizes="100vw"
+                  className="slide-img-mobile"
+                />
+              </Grid>
+              <div className='dots-container-styles'>
+                {slides.map((slide, slideIndex) => (
+                  <div
+                    key={slideIndex}
+                    className={isShort ? "dot-styles-short" : "dot-styles-large"}
+                    onClick={() => goToSlide(slideIndex)}
+                  >
+                    <CircleRounded sx={{ fontSize: '16px', color: slideIndex === currentIndex ? '#A6A6A6' : '#FFF' }} />
+                  </div>
+                ))}
               </div>
             </div>
-          </Box>
-          <div style={dotsContainerStyles}>
-            {slides.map((slide, slideIndex) => (
-              <div
-                key={slideIndex}
-                style={dotStyles}
-                onClick={() => goToSlide(slideIndex)}
-              >
-                <CircleRounded sx={{ fontSize: '16px', color: slideIndex === currentIndex ? '#A6A6A6' : '#FFF' }} />
-              </div>
-            ))}
           </div>
+        </Box>
 
-        </>
-      }
+
+      </div>
+      {/* } */}
     </div>
   )
 }
