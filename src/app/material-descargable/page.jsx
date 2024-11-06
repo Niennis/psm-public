@@ -73,7 +73,7 @@ const material_descargable = [
 const sortedByTitulo = (array) =>
   array.sort((a, b) => a.descarga_titulo.localeCompare(b.descarga_titulo, 'es', { sensitivity: 'base' }));
 
-const downloadsArray = blogs.flatMap(item => item.downloads);
+const downloadsArray = blogs.flatMap(item => item.descargas);
 const orderedResources = sortedByTitulo(downloadsArray);
 
 const splitArrayByPositions = (array) => {
