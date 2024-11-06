@@ -117,14 +117,14 @@ const IntervencionesClinicas = () => {
               color: '#000',
               fontSize: '20px',
               lineHeight: '28px',
-              fontFamily: 'sailec'
+              fontFamily: 'sailec',
             }}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
             </p>
             <p style={{
               color: '#000',
               fontSize: '20px',
               lineHeight: '28px',
-              fontFamily: 'sailec'
+              fontFamily: 'sailec',
             }}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
             </p>
           </>

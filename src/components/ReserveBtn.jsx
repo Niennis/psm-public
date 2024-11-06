@@ -13,20 +13,15 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   // const handleClose = () => setOpen(false);
   const matches = useMediaQuery('(min-width:600px)');
 
-
   return (
     <>
-      <Link href="#" className="sailec-medium" style={{cursor: 'not-allowed'}}>
+      <Link href="#" style={{cursor: 'not-allowed'}}>
         <button
-          className='btn btn-rounded btn-reservar'
+          className='btn-rounded btn-reservar ui-large btn-shadow'
           style={{
-            width: matches ? '130px' : '100px',
-            height: matches ? '56px' : '40px',
             backgroundColor: bgColor,
             color: color,
-            fontSize: matches ? '16px' : '14px',
-            fontWeight: 700,
-            cursor: 'not-allowed'
+            cursor: 'not-allowed',
           }}
         // onClick={handleOpen}
         >

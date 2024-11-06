@@ -13224,20 +13224,31 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
   border-bottom: 2px solid blue;
 }
 
-.btn.btn-rounded.btn-reservar:hover {
+.btn-reservar {
+  width:  189px  ;
+  height: 56px;
+  cursor: not-allowed;
+  padding-top: 8px ;
+  padding-bottom: 8px;
+  padding-left:  24px;
+  padding-right:  24px;
+  border-radius: 100px;
+  border: none;
+}
+
+.btn-reservar:hover {
   background-color: #dfa805 !important;
   border: none;
+}
+
+.btn-shadow:hover {
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
   -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
   -moz-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
 }
 
-.btn.btn-rounded.btn-reservar:not(:hover) {
-  border: none;
-}
-
 .btn-0:hover {
-  background-color: #3176E0 !important;
+  background-color: #3176e0 !important;
 }
 
 .btn-1:hover {
@@ -13508,7 +13519,8 @@ td:has(div.text-end) {
   background: var(--main-light-lightblue);
   border-radius: 100%;
   color: white;
-  width: 1.5rem;
+  width: 1.6em;
+  height: 1.6em;
   text-align: center;
   display: inline-block;
 }
@@ -13587,7 +13599,6 @@ td:has(div.text-end) {
 }
 
 
-
 .btn-transparent-mobile {
   background-color: transparent;
   border: 1px solid #000;
@@ -13600,6 +13611,38 @@ td:has(div.text-end) {
 .btn-test-home {
   background-color: #4054B2;
   color: white;
-  border: 1px solid #A6A6A6;
+  /* border: 1px solid #A6A6A6; */
   border-radius: 100px;
+  width:  fit-content  ;
+  height: 56px;
+  cursor: not-allowed;
+  padding-top: 8px ;
+  padding-bottom: 8px;
+  padding-left:  24px;
+  padding-right:  24px;
+  border: none;
 }
+
+.btn-test-home:hover {
+  background-color: #4054B2ee;
+  color: white;
+}
+
+.btn-test-home a:hover{
+  color: #ffffff;
+}
+
+.btn-back-desktop {
+  background-color: transparent;
+  border: 1px solid #A6A6A6;
+  height: 56px;
+  width: 163px;
+  padding: 0px 24px;
+  border-radius: 100px;
+  margin-left: 96px;
+}
+
+.wrap-balance {
+  text-wrap: balance;
+}
+
