@@ -151,15 +151,6 @@ useEffect(() => {
                   noWrap
                   component="a"
                   href="/"
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', sm: 'none',  md: 'flex' },
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    fontFamily: 'sailec'
-                  }}
                 >
                   <Image
                     alt="Logo"
@@ -200,7 +191,9 @@ useEffect(() => {
                         ? 'active-header'
                         : ''
                         }`}
-                      onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0',  color: 'black', marginTop: '16px', marginBottom: '16px' }}>
+                      onMouseOver={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0',  color: 'black', marginTop: '16px', marginBottom: '16px' }}
+                      
+                      >
                       CÓMO TRABAJAMOS
                     </Button>
                   </Tooltip>
@@ -221,6 +214,7 @@ useEffect(() => {
                       }}
                       open={Boolean(anchorElUser)}
                       onClose={handleCloseUserMenu}
+                      onMouseLeave={handleCloseUserMenu}
                     >
                       {subMenu.map((setting) => (
                         <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
@@ -270,8 +264,8 @@ useEffect(() => {
                     {
                       pages.map((page) => (
                         <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                          <Typography textAlign="center" className="sailec">
-                            <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
+                          <Typography textAlign="center" className="ui-medium">
+                            <a href={page.url} style={{ color: 'black',  }}>
                               {page.title}
                             </a>
                           </Typography>
@@ -279,14 +273,14 @@ useEffect(() => {
                       ))
                     }
                     <MenuItem onClick={handleOpenUserMenu}>
-                      <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
+                      <Typography textAlign="center" className="ui-medium font-black" >
                         CÓMO TRABAJAMOS <FaChevronDown />
                       </Typography>
                     </MenuItem>
 
-                    <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                    <Box sx={{ flexGrow: 0 }} >
                       <Menu
-                        sx={{ mt: '45px' }}
+                        sx={{ mt: '45px', }}
                         id="menu-appbar"
                         anchorEl={anchorElUser}
                         anchorOrigin={{
@@ -303,8 +297,8 @@ useEffect(() => {
                       >
                         {subMenu.map((setting) => (
                           <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center" className="sailec">
-                              <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                            <Typography textAlign="center" className="ui-medium">
+                              <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
                                 {setting.title}
                               </a>
                             </Typography>
@@ -322,13 +316,8 @@ useEffect(() => {
                   sx={{
                     mr: { xs: 0, lg: 2 },
                     display: { xs: 'flex', lg: 'none' },
-                    flexGrow: 1,
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
+                    /* flexGrow: 1, temporal mientras botones están desactivados */
                     color: 'inherit',
-                    textDecoration: 'none',
-                    fontFamily: 'sailec',
                   }}
                 >
                   <Image
@@ -350,7 +339,7 @@ useEffect(() => {
                 <Box sx={{ flexGrow: 0 }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                   <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
-                    <FaUserCircle style={{ fontSize: isMediumSize ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
+                    <FaUserCircle style={{ fontSize: isMediumSize ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', }} />
                   </Link>
                 </Box>
                 : ''
