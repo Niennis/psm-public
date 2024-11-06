@@ -30,7 +30,7 @@ const card = (item) => (
           padding: '16px 24px 16px 24px'
         }}
       >
-        {item.blog_titulo}
+        {item.descarga_titulo}
       </Typography>
       <Typography variant="body2" className='lato'
         sx={{
@@ -44,7 +44,7 @@ const card = (item) => (
     </CardContent>
     <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
       {/* {console.log(item)} */}
-      <a href={`/${item.url}`} >
+      <a href={`/${item.descarga_url}`} >
         {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
         <button
           className='btn btn-0'
@@ -68,7 +68,7 @@ const card = (item) => (
 );
 
 const Blogdetails = ({ params }) => {
-  const [blog, setBlog] = useState(blogs[params.blog_id])
+  const [blog, setBlog] = useState(null)
   // const [blog, setBlog] = useState({})
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isLargeSiza = useMediaQuery('(min-width:1024px)');
@@ -82,8 +82,11 @@ const Blogdetails = ({ params }) => {
     // setBlog(bloques[0])
     // }
     // fetchData()
-    setBlog(blogs[params.id])
-  }, [])
+    if(blogs && !blog){
+      console.log(blogs[params.id])
+      setBlog(blogs[params.id])
+    }
+  }, [params.id])
 
   return (
     <div>
@@ -93,7 +96,7 @@ const Blogdetails = ({ params }) => {
             height: '620px',
             overflow: 'hidden',
           }}>
-            <Image
+            {blog && <Image
               alt="#"
               height={0}
               width={0}
@@ -105,7 +108,7 @@ const Blogdetails = ({ params }) => {
                 height: 'auto',
                 width: '100%',
               }}
-            />
+            />}
 
           </div>}
           {isMediumSize &&
@@ -141,7 +144,7 @@ const Blogdetails = ({ params }) => {
                       {/* TEXTO */}
                       <div className="sailec col-lg-10 col-12" style={{ marginLeft: '0px' }}>
                         {/* {blog.texto} */}
-                        <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.blog_texto} />
+                        {blog && <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.blog_texto} />}
                         {/* </div> */}
                       </div>
 

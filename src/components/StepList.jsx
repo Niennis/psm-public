@@ -31,7 +31,6 @@ export default function StepList({ matches }) {
                 }}
               >
                 <ol style={{ paddingLeft: '0px' }}>
-
                   {[
                     { id: 0, title: 'Si necesitas algún servicio del departamento debes tomar hora' },
                     { id: 1, title: 'Ingresas al sitio dando click en Reservar' },
@@ -40,23 +39,22 @@ export default function StepList({ matches }) {
                     { id: 4, title: 'Debes confirmar la cita' },
                     { id: 6, title: 'Luego de la entrevista, el profesional determinará qué dispositivo es el que calza mejor con tus necesidades y agendará tus siguientes citas' }
                   ].map((item) => (
-                      <Item key={item.id} item={item.id}
-                        sx={{
-                          height: 'fit-content',
-                          padding: '20px',
-                          bgcolor: '#E6E9EC',
-                          color: '#000',
-                          fontSize: '18px',
-                          lineHeight: '24px',
-                          alignContent: 'center',
-                          margin: '10px 0'
-                        }}
-                        className='sailec'>
-                        <li>
-                          {`${item.title}`}
-                        </li>
-
-                      </Item>
+                    <Item key={item.id} item={item.id}
+                      sx={{
+                        height: 'fit-content',
+                        padding: '20px',
+                        bgcolor: '#E6E9EC',
+                        color: '#000',
+                        fontSize: '18px',
+                        lineHeight: '24px',
+                        alignContent: 'center',
+                        margin: '10px 0'
+                      }}
+                      className={matches ? "body-large-regular" : "body-regular"}>
+                      <li>
+                        {`${item.title}`}
+                      </li>
+                    </Item>
                   ))}
                 </ol>
 
