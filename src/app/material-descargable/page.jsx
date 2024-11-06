@@ -71,7 +71,7 @@ const material_descargable = [
   },
 ]
 const sortedByTitulo = (array) =>
-  array.sort((a, b) => a.titulo.localeCompare(b.titulo, 'es', { sensitivity: 'base' }));
+  array.sort((a, b) => a.descarga_titulo.localeCompare(b.descarga_titulo, 'es', { sensitivity: 'base' }));
 
 const downloadsArray = blogs.flatMap(item => item.downloads);
 const orderedResources = sortedByTitulo(downloadsArray);
@@ -145,7 +145,7 @@ export default function MaterialDescargable() {
             <div className="row" style={{ margin: 0 }}>
               <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: isMediumSize ? '45%' : '', marginRight: isMediumSize ? '10px' : 'auto' }}>
                 {even.map(item => (
-                  <div className="col-12" key={item.titulo}>
+                  <div className="col-12" key={item.descarga_titulo}>
                     <Accordion>
                       <AccordionSummary
                         className="sailec-medium"
@@ -154,14 +154,14 @@ export default function MaterialDescargable() {
                         aria-controls="panel3-content"
                         id="panel3-header"
                       >
-                        {item.titulo}
+                        {item.descarga_titulo}
                       </AccordionSummary>
                       <AccordionDetails sx={{ bgcolor: '#E6E9EC' }} className="lato">
-                        {item.bajada}
+                        {item.descarga_bajada}
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={`/downloads/${item.url}`} download={item.url} className='material-descargable-btn'>
+                          <a href={`/downloads/${item.descarga_url}`} download={item.descarga_url} className='material-descargable-btn'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
@@ -173,7 +173,7 @@ export default function MaterialDescargable() {
 
               <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: isMediumSize ? '45%' : '', marginLeft: isMediumSize ? '10px' : 'auto', marginTop: isMediumSize ? '' : '20px' }}>
                 {odd.map(item => (
-                  <div className="col-12" key={item.titulo}>
+                  <div className="col-12" key={item.descarga_titulo}>
                     <Accordion>
                       <AccordionSummary
                         className="sailec-medium"
@@ -182,14 +182,14 @@ export default function MaterialDescargable() {
                         aria-controls="panel3-content"
                         id="panel3-header"
                       >
-                        {item.titulo}
+                        {item.descarga_titulo}
                       </AccordionSummary>
                       <AccordionDetails sx={{ bgcolor: '#E6E9EC' }} className="lato">
-                        {item.bajada}
+                        {item.descarga_bajada}
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={`/downloads/${item.url}`} download={item.url} className='material-descargable-btn'>
+                          <a href={`/downloads/${item.descarga_url}`} download={item.descarga_url} className='material-descargable-btn'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
