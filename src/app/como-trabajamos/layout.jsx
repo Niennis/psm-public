@@ -1,13 +1,11 @@
 'use client'
 import Image from "next/image";
-import Link from "next/link";
-import { carrousel01 } from "@/components/imagepath";
 import { useMediaQuery } from "@mui/material";
 import FooterDae from "@/components/Footer";
 import { FaArrowLeft } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 
-export default function QuienesSomosLayout({ children }) {
+export default function ComoTrabajamos({ children }) {
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const router = useRouter()
   const pathname = usePathname()
@@ -41,27 +39,18 @@ export default function QuienesSomosLayout({ children }) {
       </div>
       }
 
-      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" /* style={{padding:0, margin: 0}} */>
-        <div className="col-12 mt--md-5" style={{ padding: 0 }}>
+      <div className="row flex-column d-flex align-items-center mt--md-5 section-quienes-somos p-0 m-0">
+        <div className="col-12 mt--md-5 p-0">
           <div>
             {isMediumSize &&
               <>
-                <button className='btn mt-4 mb-5'
-                  style={{
-                    border: '1px solid #A6A6A6',
-                    height: '56px',
-                    width: '163px',
-                    padding: '0px 24px',
-                    borderRadius: '100px',
-                    marginLeft: '96px'
-                  }}
+                <button className=' mt-4 mb-5 lato-btn btn-back-desktop'
                   onClick={() => router.back()}
                 >
                   <FaArrowLeft /> Volver
                 </button>
               </>
             }
-
             {children}
           </div>
         </div>

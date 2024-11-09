@@ -5,40 +5,35 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Section = ({ title, image, left, children, bgColor }) => {
+  const isSmallSize = useMediaQuery('(max-width:389px')
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isLargeSize = useMediaQuery('(min-width:1024px)');
 
   return (
-    <div className={`container col-12 align-self-center p-0 `} >
+    <div className={`container col-12 align-self-center p-0 m-0`} >
       <div>
         <Box sx={{
           borderRadius: '32px',
-          padding: '50px 0',
+          padding: isMediumSize ? '50px 0' : '10px 0',
           textWrap: 'pretty',
           margin: 'auto',
         }}>
-          <div className="row" style={{ margin: 0 }} >
+          <div className="row m-0" >
             {
               isLargeSize
                 ?
                 <div
-                  className={`container col-12 d-flex justify-content-center`}
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 400,
-                    lineHeight: '32px',
-                    borderRadius: '12px',
-                    marginTop: '20px',
-                  }}
+                  className={`container col-12 d-flex justify-content-center header-2-bold`}
                 >
                   {left &&
                     <Card
-                      className='col-12 col-lg-4  sailec'
+                      className='col-12 col-lg-4 '
                       sx={{
                         boxShadow: 0,
                         display: 'inline-block',
                         paddingRight: '1em',
                         bgcolor: bgColor,
+                        alignContent: 'center',
                       }}>
                       <div style={{ position: 'relative', width: '100%', height: '240px' }}>
                         <Image
@@ -53,7 +48,7 @@ const Section = ({ title, image, left, children, bgColor }) => {
                   }
                   {/* TEXTO */}
                   <Card
-                    className='col-12 col-lg-8'
+                    className="col-12 col-lg-8"
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',
@@ -66,14 +61,7 @@ const Section = ({ title, image, left, children, bgColor }) => {
                     }}>
                     <Typography
                       variant="body2"
-                      className="sailec"
-                      sx={{
-                        color: '#000',
-                        fontSize: '32px',
-                        lineHeight: '40px',
-                        fontWeight: 700,
-                        fontFamily: 'sailec'
-                      }}>
+                      className={`${isMediumSize ? "header-2-bold" : "header-3-medium"}`}>
                       {title}
                     </Typography>
                     {children}
@@ -87,6 +75,7 @@ const Section = ({ title, image, left, children, bgColor }) => {
                         display: 'inline-block',
                         paddingLeft: '1em',
                         bgcolor: bgColor,
+                        alignContent: 'center',
                       }}>
                       <div style={{ position: 'relative', width: '100%', height: '240px' }}>
                         <Image
@@ -94,7 +83,7 @@ const Section = ({ title, image, left, children, bgColor }) => {
                           alt="Descripción de la imagen"
                           fill
                           sizes="(max-height: 240px)" // Ajusta el tamaño de la imagen según el viewport
-                          style={{ objectFit: 'cover', borderRadius: '8px', maxHeight: '240px' }} // Similar a cómo se usa en CardMedia
+                          style={{ objectFit: 'cover', borderRadius: '8px', maxHeight: '240px', objectPosition: 'center' }} // Similar a cómo se usa en CardMedia
                         />
                       </div>
                     </Card>
@@ -102,7 +91,7 @@ const Section = ({ title, image, left, children, bgColor }) => {
                 </div>
                 :
                 <div
-                  className={`container col-12  d-flex  justify-content-center`}
+                  className={`container col-12  d-flex  justify-content-center p-0 m-0`}
                   style={{
                     fontSize: '24px',
                     fontWeight: 400,
@@ -113,7 +102,8 @@ const Section = ({ title, image, left, children, bgColor }) => {
                   <Card sx={{
                     maxWidth: 'fit-content',
                     bgcolor: bgColor,
-                    boxShadow: 'unset'
+                    boxShadow: 'unset',
+                    alignContent: 'center',
                   }}>
                     <div style={{ position: 'relative', width: '100%', height: '240px' }}>
                       <Image
@@ -126,14 +116,8 @@ const Section = ({ title, image, left, children, bgColor }) => {
                     </div>
                     <Typography
                       variant="body2"
-                      className="sailec"
-                      sx={{
-                        color: '#000',
-                        fontSize: '32px',
-                        lineHeight: '40px',
-                        fontWeight: 700,
-                        fontFamily: 'sailec'
-                      }}>
+                      className="header-2-bold"
+                    >
                       {title}
                     </Typography>
                     {children}

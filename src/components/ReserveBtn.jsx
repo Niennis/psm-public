@@ -15,9 +15,22 @@ const ReserveBtn = ({ text, bgColor, color }) => {
 
   return (
     <>
-      <Link href="#" style={{cursor: 'not-allowed'}}>
+      <Link href="#" style={{ cursor: 'not-allowed' }}>
         <button
-          className='btn-rounded btn-reservar ui-large btn-shadow'
+          className=' btn-reservar ui-large btn-shadow desktop-container '
+          style={{
+            backgroundColor: bgColor,
+            color: color,
+            cursor: 'not-allowed',
+          }}
+        // onClick={handleOpen}
+        >
+          <Today style={{ margin: matches ? '-2px 4px 0 0' : '-3px 0 0', fontSize: '15px' }} />
+          {text}
+        </button>
+
+        <button
+          className=' btn-reservar-mobile lato-btn btn-shadow mobile-container'
           style={{
             backgroundColor: bgColor,
             color: color,

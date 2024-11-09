@@ -135,7 +135,7 @@ const determinateCategory = (puntaje) => {
   return category
 }
 
-const ChildModal = ({ result, enviar }) => {
+const ChildModal = ({ result, enviar, isMediumSize }) => {
   const [openChildModal, setOpenChildModal] = useState(false);
   const handleOpenAnon = () => {
     setOpenChildModal(true)
@@ -150,20 +150,20 @@ const ChildModal = ({ result, enviar }) => {
 
   return (
     <Fragment>
-    <Button onClick={handleOpenWithMail}>Enviar correo</Button>
-    <Button onClick={handleOpenAnon}>Resultados anónimos</Button>
+      <Button onClick={handleOpenWithMail}>Enviar correo</Button>
+      <Button onClick={handleOpenAnon}>Resultados anónimos</Button>
       <Modal
         open={openChildModal}
         onClose={handleClose}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box className="col-12 col-lg-10" sx={{ ...style, width: '100%' }}>
+        <Box className={`${isMediumSize ? 'header-3-regular' : 'body-regular'} col-12 col-lg-10`} sx={{ ...style, width: '100%' }}>
           <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
             {result.descripcion}
           </p>
-          <Button onClick={handleClose}>Cerrar</Button>
+          <Button className="btn btn-primary me-2 lato-btn" onClick={handleClose}>Cerrar</Button>
         </Box>
       </Modal>
     </Fragment>
@@ -177,6 +177,7 @@ const TestAnsiedad = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const [total, setTotal] = useState()
+  const isSmallSize = useMediaQuery('(max-width:389px');
 
   const calculate = () => {
     const data = watch()
@@ -259,19 +260,11 @@ const TestAnsiedad = () => {
         />
       </div>
       }
-      <div className="page-wrapper sailec" style={{ margin: 'auto' }}>
+      <div className="page-wrapper" style={{ margin: 'auto' }}>
         <div style={{ marginTop: !isMediumSize && '47px' }}>
           {/* Page Header */}
           {isMediumSize &&
-            <button className='btn mt-4 mb-2'
-              style={{
-                border: '1px solid #A6A6A6',
-                height: '56px',
-                width: '163px',
-                padding: '0px 24px',
-                borderRadius: '100px',
-                marginLeft: '86px'
-              }}
+            <button className=' mt-4 mb-5 lato-btn btn-back-desktop'
               onClick={() => router.back()}
             >
               <FaArrowLeft /> Volver
@@ -284,16 +277,16 @@ const TestAnsiedad = () => {
                 <div className="card-body" style={{ padding: isMediumSize ? '0 96px' : '32px' }}>
                   <form onSubmit={onSubmit}>
                     <div className="row m-0 d-flex flex-column align-items-center">
-                      <div className="col-12" style={{ padding: 0 }}>
+                      <div className="col-12 p-0">
                         <div className="form-heading">
-                          <div className="card-body flex-row d-flex mt-4" style={{ paddingLeft: 0 }}>
+                          <div className="card-body flex-row d-flex mt-4 px-0">
                             <h2
-                              className={isMediumSize ? 'blog-title' : 'blog-title-sm'}>
+                              className={isSmallSize ? "header-2-bold" : isMediumSize ? "mega-bold" : "header-1-bold"}>
                               Test de Ansiedad de Beck
                             </h2>
                           </div>
                           <div className="row m-0">
-                            <div className={`${isMediumSize ? 'blog-text' : 'blog-text-sm'} col-12 col-md-10`}>
+                            <div className={`${isMediumSize ? 'header-3-regular' : 'body-regular'} col-12 col-md-10`}>
                               <p>
                                 En el cuestionario hay una lista de síntomas comunes de la ansiedad. Lea cada uno de los ítems atentamente, e indique cuanto le ha afectado en la última semana incluyendo hoy:
                               </p>
@@ -305,103 +298,103 @@ const TestAnsiedad = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-12 col-lg-10">
-                      {
-                        preguntas.map((item, index) => (
-                          <div
-                            className={`col-12 ${isMediumSize ? 'blog-text' : 'blog-text-sm'}`}
-                            key={index + item.label}
-                            style={{
-                              background: index % 2 === 0 && '#E6E9EC'
-                            }}
-                          >
-                            <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px', alignItems: 'end' }}>
-                              <label className="col-6 col-md-9">
-                                {item.pregunta}
-                              </label>
-                              <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
-                                <div className="form-check-inline me-1 me-md-3" >
-                                  <label
-                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
-                                    style={{ textAlign: 'center' }}
-                                  >
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={0}
-                                      className="form-check-input d-block me-0"
-                                      {...register(item.label, {
-                                        required: {
-                                          value: true,
-                                          message: 'Debes seleccionar una opción'
-                                        }
-                                      })}
-                                    />
-                                    0
-                                  </label>
-                                </div>
-                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
-                                  <label
-                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
-                                    style={{ textAlign: 'center' }}>
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={1}
-                                      className="form-check-input d-block me-0"
-                                      {...register(item.label, {
-                                        required: {
-                                          value: true,
-                                          message: 'Debes seleccionar una opción'
-                                        }
-                                      })}
-                                    />
-                                    1
-                                  </label>
-                                </div>
-                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
-                                  <label
-                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
-                                    style={{ textAlign: 'center' }}>
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={2}
-                                      className="form-check-input d-block me-0"
-                                      {...register(item.label, {
-                                        required: {
-                                          value: true,
-                                          message: 'Debes seleccionar una opción'
-                                        }
-                                      })}
-                                    />
-                                    2
-                                  </label>
-                                </div>
-                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
-                                  <label
-                                    className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
-                                    style={{ textAlign: 'center' }}>
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={3}
-                                      className="form-check-input d-block me-0"
-                                      {...register(item.label, {
-                                        required: {
-                                          value: true,
-                                          message: 'Debes seleccionar una opción'
-                                        }
-                                      })}
-                                    />
-                                    3
-                                  </label>
+                      <div className="col-12 col-lg-10 p-0">
+                        {
+                          preguntas.map((item, index) => (
+                            <div
+                              className={`col-12 ${isMediumSize ? 'header-3-regular' : 'body-regular'}`}
+                              key={index + item.label}
+                              style={{
+                                background: index % 2 === 0 && '#E6E9EC'
+                              }}
+                            >
+                              <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px', alignItems: 'end' }}>
+                                <label className="col-6 col-md-9">
+                                  {item.pregunta}
+                                </label>
+                                <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
+                                  <div className="form-check-inline me-1 me-md-3" >
+                                    <label
+                                      className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
+                                      style={{ textAlign: 'center' }}
+                                    >
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={0}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }
+                                        })}
+                                      />
+                                      0
+                                    </label>
+                                  </div>
+                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                    <label
+                                      className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
+                                      style={{ textAlign: 'center' }}>
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={1}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }
+                                        })}
+                                      />
+                                      1
+                                    </label>
+                                  </div>
+                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                    <label
+                                      className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
+                                      style={{ textAlign: 'center' }}>
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={2}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }
+                                        })}
+                                      />
+                                      2
+                                    </label>
+                                  </div>
+                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                    <label
+                                      className={isMediumSize ? 'blog-text' : 'blog-text-sm'}
+                                      style={{ textAlign: 'center' }}>
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={3}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }
+                                        })}
+                                      />
+                                      3
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        ))
-                      }
+                          ))
+                        }
                       </div>
 
                       {Object.keys(errors).length !== 0 && <span className="login-danger">
@@ -412,7 +405,7 @@ const TestAnsiedad = () => {
                         <div className="doctor-submit text-end">
                           <button
                             type="button"
-                            className="btn btn-primary submit-form me-2"
+                            className="btn btn-primary me-2 lato-btn"
                             onClick={handleOpen}
                           >
                             Continuar
@@ -440,9 +433,9 @@ const TestAnsiedad = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                 {category ?
-                  <Box sx={{ ...style, fontFamily: 'sailec, san-serif' }}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', fontFamily: 'sailec, san-serif' }}>
+                {category ?
+                  <Box className={isMediumSize ? "header-3-regular" : "body-regular"} sx={{ ...style }}>
+                    <Typography className={isMediumSize ? "header-3-regular" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
                       Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
                     </Typography>
                     <div className="col-12">
@@ -502,7 +495,7 @@ const TestAnsiedad = () => {
                     <div className="col-12">
                       <div className="form-group select-gender">
                         <div className="form-check-inline">
-                          <label className='blog-text-sm' style={{ fontFamily: 'sailec, san-serif' }}>
+                          <label className='blog-text-sm ui-small'>
                             <input
                               type="checkbox"
                               name="consentimiento"
@@ -521,7 +514,7 @@ const TestAnsiedad = () => {
                     </div>
                     {category && <ChildModal result={category} enviar={onSubmit} />}
                   </Box>
-                  : <Box sx={{ ...style, fontFamily: 'sailec, san-serif', textAlign: 'center' }}><Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', fontFamily: 'sailec, san-serif' }}>
+                  : <Box sx={{ ...style, textAlign: 'center' }}><Typography className={isMediumSize ? "header-3-regular" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
                     ¡Importante! Debes seleccionar una opción por cada pregunta
                   </Typography> </Box>
                 }

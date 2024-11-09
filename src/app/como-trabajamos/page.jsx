@@ -45,7 +45,9 @@ const questions = [
 ]
 
 const IntervencionesClinicas = () => {
+  const isSmallSize = useMediaQuery('(max-width:389px')
   const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isLargeSize = useMediaQuery('(min-width:1024px)');
   const [activeTab, setActiveTab] = useState('descripcion-general');
 
   const handleTabClick = (tabId) => {
@@ -53,17 +55,23 @@ const IntervencionesClinicas = () => {
   };
   return (
     <>
-      <div className="row prevencion flex-column d-flex m-0" >
-        <div className="col-12" >
-          <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
-            <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-              <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginTop: !isMediumSize && '20px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+      <div className="row prevencion flex-column d-flex m-0 p-0" >
+        <div className="col-12 m-0 p-0">
+          <div className="card quienes-somos"
+            style={{
+              padding: isMediumSize ? '0px 96px' : '0px 32px',
+              margin: '0px',
+              border: 'none',
+            }}>
+            <div className="card-body m-0 p-0">
+              <h3 className={isSmallSize ? "header-2-bold" : isMediumSize ? "mega-bold" : "header-1-bold"} style={{ marginTop: !isMediumSize && '120px', textWrap: 'balance' }}>
                 Intervenciones clínicas
               </h3>
               <div className="tab-content tab-dsme-content">
                 <div id="descripcion-general">
                   {/* <h2>Descripción General</h2> */}
-                  <div className="blog-content">
+                    
+                  <div className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`} >
                     <p>
                       En el área de intervención clínica el equipo del Departamento de Salud Mental Estudiantil realiza contención y apoyo emocional, acompañamiento e intervenciones psicológicas individuales breves e intervención grupal terapéutica gratuitas, a todos/as aquellos/as estudiantes de pregrado de la universidad, que lo soliciten y que manifiesten dificultades de tipo emocional, relacional, social, de rendimiento académico y/o vocacional.
                     </p>
@@ -89,19 +97,9 @@ const IntervencionesClinicas = () => {
           left={false}
           bgColor={'#f1f1f1'}
         ><>
-            <p style={{
-              color: '#000',
-              fontSize: '20px',
-              lineHeight: '28px',
-              fontFamily: 'sailec'
-            }}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
+            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
             </p>
-            <p style={{
-              color: '#000',
-              fontSize: '20px',
-              lineHeight: '28px',
-              fontFamily: 'sailec'
-            }}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
+            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
         </Section>
 
       </div>
@@ -113,19 +111,9 @@ const IntervencionesClinicas = () => {
           bgColor={'#ffffff'}
         >
           <>
-            <p style={{
-              color: '#000',
-              fontSize: '20px',
-              lineHeight: '28px',
-              fontFamily: 'sailec',
-            }}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
+            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
             </p>
-            <p style={{
-              color: '#000',
-              fontSize: '20px',
-              lineHeight: '28px',
-              fontFamily: 'sailec',
-            }}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
+            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
             </p>
           </>
         </Section>
@@ -139,12 +127,7 @@ const IntervencionesClinicas = () => {
           bgColor={'#f1f1f1'}
         >
           <>
-            <p style={{
-              color: '#000',
-              fontSize: '20px',
-              lineHeight: '28px',
-              fontFamily: 'sailec'
-            }}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
+            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
           </>
         </Section>
       </div>

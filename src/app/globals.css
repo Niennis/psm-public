@@ -13225,15 +13225,38 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 }
 
 .btn-reservar {
-  width:  189px  ;
+  width: 189px;
   height: 56px;
   cursor: not-allowed;
-  padding-top: 8px ;
+  padding-top: 8px;
   padding-bottom: 8px;
-  padding-left:  24px;
-  padding-right:  24px;
+  padding-left: 24px;
+  padding-right: 24px;
   border-radius: 100px;
   border: none;
+}
+
+.btn-reservar-mobile {
+  width: 121;
+  height: 40px;
+  cursor: not-allowed;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-radius: 100px;
+  border: none;
+}
+
+.btn-descargas {
+  background-color: #3886FF;
+  color: #FFFFFF;
+  height: 48px;
+  width: 200px;
+  padding: 4px 24px;
+  margin: 8px;
+  border-radius: 100px;
+  border: 2px solid #A5C8FF;
 }
 
 .btn-reservar:hover {
@@ -13245,6 +13268,24 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
   -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
   -moz-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
+}
+
+.btn-fa-user {
+  color: #000;
+  border: 1px solid #ff5253;
+  border-radius: 50px;
+  padding: 5px;
+  margin-left: 5px;
+  background: #b82925;
+  color: #fff;
+}
+
+.btn-fa-user-mobile{
+  font-size: 38px;
+}
+
+.btn-fa-user-desktop{
+  font-size:50px;
 }
 
 .btn-0:hover {
@@ -13262,7 +13303,6 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 .btn-3:hover {
   background-color: #B82925 !important;
 }
-
 
 
 /* BLOG */
@@ -13558,7 +13598,7 @@ td:has(div.text-end) {
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 500px) {
   .mobile {
     display: none;
   }
@@ -13588,7 +13628,7 @@ td:has(div.text-end) {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .mobile-container {
     display: block;
   }
@@ -13613,13 +13653,13 @@ td:has(div.text-end) {
   color: white;
   /* border: 1px solid #A6A6A6; */
   border-radius: 100px;
-  width:  fit-content  ;
+  width: fit-content;
   height: 56px;
   cursor: not-allowed;
-  padding-top: 8px ;
+  padding-top: 8px;
   padding-bottom: 8px;
-  padding-left:  24px;
-  padding-right:  24px;
+  padding-left: 24px;
+  padding-right: 24px;
   border: none;
 }
 
@@ -13628,7 +13668,7 @@ td:has(div.text-end) {
   color: white;
 }
 
-.btn-test-home a:hover{
+.btn-test-home a:hover {
   color: #ffffff;
 }
 
@@ -13645,4 +13685,3 @@ td:has(div.text-end) {
 .wrap-balance {
   text-wrap: balance;
 }
-

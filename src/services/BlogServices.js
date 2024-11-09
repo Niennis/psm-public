@@ -44,6 +44,7 @@ export const fetchBlogs = async () => {
     })
     const { blogs } = await data.json()
     const response = groupBlogsByDescargas(blogs)
+    // console.log('response', response)
     return response
   } catch (err) {
     console.log(err)

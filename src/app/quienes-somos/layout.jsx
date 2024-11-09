@@ -30,7 +30,7 @@ export default function QuienesSomosLayout({ children }) {
           width={0}
           sizes="100vw"
           fill
-          priority // Carga optimizada para imágenes importantes
+          priority
           style={{
             objectFit: 'cover',
             objectPosition: 'center bottom',
@@ -41,8 +41,8 @@ export default function QuienesSomosLayout({ children }) {
       </div>
       }
 
-      <div className="row flex-column d-flex align-items-center mt--md-5 section-quienes-somos m-0" style={{padding:0, margin: 0}}>
-        <div className="col-12 mt--md-5" style={{ padding: 0 }}>
+      <div className="row flex-column d-flex align-items-center mt--md-5 section-quienes-somos m-0 p-0">
+        <div className="col-12 mt--md-5 p-0">
           <div>
             {isMediumSize &&
               <>

@@ -66,13 +66,10 @@ const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => 
       aria-labelledby={`simple-tab-${index}`}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 2 }}>
           <Typography
-            className="title-regular"
-            sx={{
-              fontSize: isMediumDevice ? '14px' : isShort ? '18px' : '20px',
-              lineHeight: isMediumDevice ? '20px' : '28px',
-            }}>{children}</Typography>
+            className={`${ isMediumDevice ? "ui-large": "title-regular" }`}
+            >{children}</Typography>
         </Box>
       )}
     </div>
@@ -89,7 +86,6 @@ const a11yProps = (index) => {
 const ImageSlider = ({ innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [slides, setSlides] = useState(blogs.slice(0, 4))
-  const isMediumSize = useMediaQuery('(min-width:600px)');
   const [isShort, setIsShort] = useState(false);
   const totalSlides = slides.length;
   const timeoutRef = useRef(null);
@@ -102,10 +98,10 @@ const ImageSlider = ({ innerRef }) => {
 
   const [value, setValue] = useState(0);
 
-  const isSmallDevice = useMediaQuery("max-width : 640px)");
-  const isMediumDevice = useMediaQuery("min-width : 641px) and (max-width : 768px)");
-
-  const isShortDevice = useMediaQuery("max-height: 700px)")
+  const isSmallDevice = useMediaQuery("max-width : 767px)");
+  const isMediumDevice = useMediaQuery("(min-width : 768px) and (max-width: 1024px");
+  const isLargeDevice = useMediaQuery("(min-width : 1025px)");
+  const isShortDevice = useMediaQuery("(max-height: 700px)")
 
   const fetch = async () => {
     // if (!apiCall) {
@@ -180,6 +176,14 @@ const ImageSlider = ({ innerRef }) => {
     return `${sliced.slice(0, indexLastBlankSpace)}...`;
   }
 
+const truncateTablet = (text) => {
+  if(isMediumDevice  ) {
+    return truncateWords(text, 100)
+  } else {
+    return truncateWords(text, 200)
+  }
+}
+
   const imgHeightMobile = '80vh'
   const imgHeightDesktop = '100vh'
 
@@ -214,7 +218,7 @@ const ImageSlider = ({ innerRef }) => {
     backgroundColor: '#00000089',
     display: 'flex',
     height: imgHeightDesktop,
-    margin: `calc(-${imgHeightDesktop} - 50px) auto 0px`,
+    margin: `calc(-${imgHeightDesktop} - ${isLargeDevice ? "150px": "50px"}) auto 0px`,
     padding: '150px 0 32px 0',
     textWrap: 'pretty',
     width: '100%',
@@ -231,7 +235,7 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   return (
-    <div id="inicio" className={isMediumSize ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef}>
+    <div id="inicio" className={isMediumDevice ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef}>
 
       {/* {isMediumSize ? */}
       <div className="desktop-container">
@@ -254,7 +258,7 @@ const ImageSlider = ({ innerRef }) => {
             }}>
               <div className="d-flex flex-column col-10">
                 <h2
-                  className="mega-title mt-5 font-white"
+                  className={`${isLargeDevice ? "mega-title" : "mega-bold"} mt-5 font-white`}
                 >
                   {slides[currentIndex].blog_titulo}
                 </h2>
@@ -271,7 +275,7 @@ const ImageSlider = ({ innerRef }) => {
                     className={`font-white ui-medium submit-form me-2 ${'btn-' + currentIndex}`}
                     style={{
                       width: '209px',
-                      height: !isShort && '56px',
+                      height:  '56px',
                       backgroundColor: styles[currentIndex].color,
                       border: `1px solid ${styles[currentIndex].border}`,
                       borderRadius: '100px',
@@ -301,7 +305,7 @@ const ImageSlider = ({ innerRef }) => {
             isShort={isShort}
             isMediumDevice={isMediumDevice}
           >
-            {slides[currentIndex].blog_bajada.slice(0, 200)}
+            { truncateTablet(slides[currentIndex].blog_bajada)}
           </CustomTabPanel>
         </div>
         <ThemeProvider theme={theme}>
@@ -316,7 +320,7 @@ const ImageSlider = ({ innerRef }) => {
             {slides.map((slide, slideIndex) => (
               <Tab
                 key={slideIndex}
-                className="col-3 header-3-bold white_menu_urls"
+                className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-bold" : "title-medium"}`}
                 onClick={() => goToSlide(slideIndex)}
                 sx={{
                   alignItems: 'baseline',

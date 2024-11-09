@@ -22,7 +22,7 @@ import { FaArrowLeft, FaDownload } from "react-icons/fa";
 const card = (item) => (
   <Fragment>
     <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1' }}>
-      <Typography variant="h5" component="div" className='sailec-medium'
+      <Typography variant="h5" component="div" className='title-medium'
         sx={{
           bgcolor: "#FABB00",
           height: '6rem',
@@ -32,7 +32,7 @@ const card = (item) => (
       >
         {item.descarga_titulo}
       </Typography>
-      <Typography variant="body2" className='lato'
+      <Typography variant="body2" className='body-large-regular '
         sx={{
           padding: '16px 24px 16px 24px',
           fontSize: '18px',
@@ -47,19 +47,7 @@ const card = (item) => (
       <a href={`/${item.descarga_url}`} >
         {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
         <button
-          className='btn btn-0'
-          style={{
-            backgroundColor: "#3886FF",
-            color: '#FFF',
-            height: '48px',
-            width: '200px',
-            padding: '4px 24px',
-            margin: '8px',
-            borderRadius: '100px',
-            fontSize: '16px',
-            fontWeight: 600,
-            border: '2px solid #A5C8FF'
-          }}>
+          className='btn-0 ui-medium btn-descargas btn-0'>
           Descargar <FaDownload />
         </button>
       </a>
@@ -82,7 +70,7 @@ const Blogdetails = ({ params }) => {
     // setBlog(bloques[0])
     // }
     // fetchData()
-    if(blogs && !blog){
+    if (blogs && !blog) {
       console.log(blogs[params.id])
       setBlog(blogs[params.id])
     }
@@ -91,7 +79,7 @@ const Blogdetails = ({ params }) => {
   return (
     <div>
       <>
-        <div className="main-wrapper main-blog sailec">
+        <div className="main-wrapper main-blog">
           {isMediumSize && <div style={{
             height: '620px',
             overflow: 'hidden',
@@ -112,24 +100,16 @@ const Blogdetails = ({ params }) => {
 
           </div>}
           {isMediumSize &&
-            <button className='btn mt-4 mb-5'
-              style={{
-                border: '1px solid #A6A6A6',
-                height: '56px',
-                width: '163px',
-                padding: '0px 24px',
-                borderRadius: '100px',
-                marginLeft: '76px'
-              }}
+            <button className=' mt-4 mb-5 lato-btn btn-back-desktop'
               onClick={() => router.back()}
             >
               <FaArrowLeft /> Volver
             </button>}
           <div className="page-wrapper" style={{ marginLeft: 'unset' }}>
-            <div className="content" style={{ padding: 0 }}>
+            <div className="content p-0">
 
               {/* /Page Header */}
-              <div className="row d-flex justify-content-center" style={{ margin: 0 }}>
+              <div className="row d-flex justify-content-center m-0">
 
                 {/* CONTENIDO DEL BLOG */}
                 <div className="col-12 " style={{ padding: isMediumSize ? 0 : '24px' }}>
@@ -142,7 +122,7 @@ const Blogdetails = ({ params }) => {
                     <article className="blog blog-single-post d-flex justify-content-between flex-wrap" >
 
                       {/* TEXTO */}
-                      <div className="sailec col-lg-10 col-12" style={{ marginLeft: '0px' }}>
+                      <div className="header-3-regular col-lg-10 col-12" style={{ marginLeft: '0px' }}>
                         {/* {blog.texto} */}
                         {blog && <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.blog_texto} />}
                         {/* </div> */}
@@ -159,12 +139,12 @@ const Blogdetails = ({ params }) => {
                       }
                     </article>
 
-                    <div className="row d-flex my-4" style={{ padding: '0', marginLeft: '0px', marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center' }} >
+                    <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center' }} >
                       {/* {console.log('leblog', blog.downloads)} */}
                       <div className="col-12">
-                        <h3 className='sailec-medium mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
+                        <h3 className='header-2-bold mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                       </div>
-                      <div className="row d-flex my-4" style={{ padding: '0', marginLeft: '0px', marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
+                      <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
 
                         {blog?.descargas && blog['descargas'].map((item, index) => (
                           <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>

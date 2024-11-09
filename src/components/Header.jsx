@@ -62,7 +62,8 @@ const Header = () => {
 
   const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
   const isLargeSize = useMediaQuery("(min-width : 769px)");
-  
+  const isExtaLargeSize = useMediaQuery("(min-width: 1025px)");
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -109,22 +110,22 @@ const Header = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(id);
   };
-// Controla el padding del body al abrir/cerrar el menú
-useEffect(() => {
-  if (anchorElNav) {
-    document.body.style.paddingRight = '0px';
-    const header = document.querySelector('header');
-    if (header) {
-      header.style.paddingRight = '0px';
+  // Controla el padding del body al abrir/cerrar el menú
+  useEffect(() => {
+    if (anchorElNav) {
+      document.body.style.paddingRight = '0px';
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.paddingRight = '0px';
+      }
+    } else {
+      document.body.style.paddingRight = '';
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.paddingRight = '';
+      }
     }
-  } else {
-    document.body.style.paddingRight = '';
-    const header = document.querySelector('header');
-    if (header) {
-      header.style.paddingRight = '';
-    }
-  }
-}, [anchorElNav]);
+  }, [anchorElNav]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -171,13 +172,13 @@ useEffect(() => {
                     return (
                       <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
                         <Button
-                          className={`ui-medium ${activeSection === page.label
+                          className={`${ isExtaLargeSize? "ui-medium" : "ui-small"} ${activeSection === page.label
                             ? 'active-header'
                             : ''
                             }`}
 
                           onClick={() => handleNavClick(page.label)}
-                          sx={{ ...style,  my: 2, color: 'black', display: 'block' }}
+                          sx={{ ...style, m: 2, color: 'black', display: 'block', width: 'min-content' }}
                         >
                           {page.title}
                         </Button>
@@ -187,13 +188,12 @@ useEffect(() => {
                   )}
                   <Tooltip title="Como trabajamos">
                     <Button
-                      className={`ui-medium ${activeSection === 'como_trabajamos'
+                      className={`${ isExtaLargeSize? "ui-medium" : "ui-small" } ${activeSection === 'como_trabajamos'
                         ? 'active-header'
                         : ''
                         }`}
-                      onMouseOver={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0',  color: 'black', marginTop: '16px', marginBottom: '16px' }}
-                      
-                      >
+                      onMouseOver={handleOpenUserMenu} sx={{ ...style, p: 0, m: 2, width: 'min-content', color: 'black', marginTop: '16px', marginBottom: '16px' }}
+                    >
                       CÓMO TRABAJAMOS
                     </Button>
                   </Tooltip>
@@ -265,7 +265,7 @@ useEffect(() => {
                       pages.map((page) => (
                         <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                           <Typography textAlign="center" className="ui-medium">
-                            <a href={page.url} style={{ color: 'black',  }}>
+                            <a href={page.url} style={{ color: 'black', }}>
                               {page.title}
                             </a>
                           </Typography>
@@ -336,10 +336,10 @@ useEffect(() => {
             )}
             {
               BOTON_RESERVAR ?
-                <Box sx={{ flexGrow: 0 }}>
+                <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                   <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
-                    <FaUserCircle style={{ fontSize: isMediumSize ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', }} />
+                    <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>
                 : ''

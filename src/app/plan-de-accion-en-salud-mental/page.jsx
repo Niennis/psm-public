@@ -6,6 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useMediaQuery } from "@mui/material";
 
 const ProtocoloAccionSaludMental = () => {
+  const isSmallSize = useMediaQuery('(max-width:389px')
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const [activeTab, setActiveTab] = useState('protocolo-de-accion-en-salud-mental');
 
@@ -14,17 +15,22 @@ const ProtocoloAccionSaludMental = () => {
   };
   return (
 
-    <div className="row prevencion flex-column d-flex m-0" >
-      <div className="col-12" >
-        <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
-          <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-            <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+    <div className="row prevencion flex-column d-flex m-0 p-0" >
+      <div className="col-12 m-0 p-0">
+        <div className="card quienes-somos"
+          style={{
+            padding: isMediumSize ? '0px 96px' : '0px 32px',
+            margin: '0px',
+            border: 'none',
+          }}>
+          <div className="card-body m-0 p-0">
+            <h3 className={isSmallSize ? "header-2-bold" : isMediumSize ? "mega-bold" : "header-1-bold"} style={{ marginTop: !isMediumSize && '120px', textWrap: 'balance' }}>
               Plan de acción en salud mental
             </h3>
 
             <div className="tab-content tab-dsme-content">
               <div className={`tab-pane ${activeTab === 'protocolo-de-accion-en-salud-mental' ? 'show active' : ''}`} id="protocolo-de-accion-en-salud-mental">
-                <div className="blog-content">
+                <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
                   <p>
                     Este plan tiene como objetivo establecer las acciones y directrices estandarizadas que permitan realizar una respuesta adecuada consistente en identificar, contener y derivar casos de urgencia y emergencia de carácter psiquiátrico y/o psicológico ocurridos en la Universidad.
                   </p>
