@@ -172,7 +172,7 @@ const Header = () => {
                     return (
                       <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
                         <Button
-                          className={`${ isExtaLargeSize? "ui-medium" : "ui-small"} ${activeSection === page.label
+                          className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === page.label
                             ? 'active-header'
                             : ''
                             }`}
@@ -188,7 +188,7 @@ const Header = () => {
                   )}
                   <Tooltip title="Como trabajamos">
                     <Button
-                      className={`${ isExtaLargeSize? "ui-medium" : "ui-small" } ${activeSection === 'como_trabajamos'
+                      className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === 'como_trabajamos'
                         ? 'active-header'
                         : ''
                         }`}
@@ -227,6 +227,13 @@ const Header = () => {
                       ))}
                     </Menu>
                   </Box>
+                </Box>
+                {/* BOTON RESERVAR DESKTOP */}
+                <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                  <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                  <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
+                    <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
+                  </Link>
                 </Box>
               </>
             ) : (
@@ -331,19 +338,15 @@ const Header = () => {
                       width: '100px',
                     }} />{" "}
                 </Typography>
-
-              </>
-            )}
-            {
-              BOTON_RESERVAR ?
+                {/* BOTON RESERVAR MOBILE */}
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                   <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
                     <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>
-                : ''
-            }
+              </>
+            )}
           </Toolbar>
         </Container>
       </AppBar >
