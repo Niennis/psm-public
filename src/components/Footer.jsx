@@ -121,7 +121,7 @@ const FooterDae = () => {
               }}>
               <p className="title-bold mt-3" >¿Hablemos?</p>
               <p className="body-small-regular mb-3">Si necesitas ayuda, contáctanos y te ayudaremos.</p>
-              {/* <ReserveBtn text='Reservar' bgColor="#FABB00" color="#000" /> */}
+              <ReserveBtn text='Reservar' bgColor="#FABB00" color="#000" />
             </div>
           </div>
           
