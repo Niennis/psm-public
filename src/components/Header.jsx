@@ -231,7 +231,7 @@ const Header = () => {
                 {/* BOTON RESERVAR DESKTOP */}
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
+                  <Link href="https://sitioprivado-b2beb6cmh0b7cuf7.eastus-01.azurewebsites.net/#profesionales" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
                     <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>
@@ -341,7 +341,7 @@ const Header = () => {
                 {/* BOTON RESERVAR MOBILE */}
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
+                  <Link href="https://sitioprivado-b2beb6cmh0b7cuf7.eastus-01.azurewebsites.net/#profesionales" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
                     <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>

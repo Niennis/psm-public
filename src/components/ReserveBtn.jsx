@@ -15,7 +15,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
 
   return (
     <>
-      <Link href="#">
+      <Link href="https://sitioprivado-b2beb6cmh0b7cuf7.eastus-01.azurewebsites.net/#estudiantes">
         <button
           className=' btn-reservar ui-large btn-shadow desktop-container '
           style={{
