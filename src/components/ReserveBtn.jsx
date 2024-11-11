@@ -15,13 +15,12 @@ const ReserveBtn = ({ text, bgColor, color }) => {
 
   return (
     <>
-      <Link href="#" style={{ cursor: 'not-allowed' }}>
+      <Link href="#">
         <button
           className=' btn-reservar ui-large btn-shadow desktop-container '
           style={{
             backgroundColor: bgColor,
             color: color,
-            cursor: 'not-allowed',
           }}
         // onClick={handleOpen}
         >
@@ -34,7 +33,6 @@ const ReserveBtn = ({ text, bgColor, color }) => {
           style={{
             backgroundColor: bgColor,
             color: color,
-            cursor: 'not-allowed',
           }}
         // onClick={handleOpen}
         >
