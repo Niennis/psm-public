@@ -198,7 +198,7 @@ const Header = () => {
                     </Button>
                   </Tooltip>
 
-                  <Box sx={{ flexGrow: 0 }} className="ui-medium">
+                  <Box sx={{ flexGrow: 0, border: '1px solid yellow' }} className="ui-medium" >
                     <Menu
                       sx={{ mt: '45px' }}
                       id="menu-appbar"
@@ -214,11 +214,11 @@ const Header = () => {
                       }}
                       open={Boolean(anchorElUser)}
                       onClose={handleCloseUserMenu}
-                      onMouseLeave={handleCloseUserMenu}
                     >
                       {subMenu.map((setting) => (
                         <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center" className="ui-medium">
+                          <Typography textAlign="center" className="ui-medium"
+                            onMouseLeave={handleCloseUserMenu}>
                             <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
                               {setting.title}
                             </a>
