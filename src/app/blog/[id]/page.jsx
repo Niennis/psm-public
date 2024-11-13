@@ -43,8 +43,7 @@ const card = (item) => (
       </Typography>
     </CardContent>
     <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
-      {/* {console.log(item)} */}
-      <a href={`/${item.descarga_url}`} >
+      <a href={item.descarga_url} >
         {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
         <button
           className='btn-0 ui-medium btn-descargas btn-0'>

@@ -84,7 +84,7 @@ export const blogs = [
       {
         descarga_titulo: 'Mindfulness como técnica para reducir la ansiedad',
         descarga_bajada: 'Descubre cómo la práctica del mindfulness puede ayudarte a reducir la ansiedad, enfocándote en el momento presente y observando tus pensamientos sin juzgar.',
-        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/01%20Cinco%20técnicas%20para%20reducir%20la%20ansiedad/descargables/Mindfulness%20como%20t%C3%A9cnica%20para%20reducir%20la%20ansiedad.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/01%20Cinco%20t%C3%A9cnicas%20para%20reducir%20la%20ansiedad/descargables/Mindfulness%20como%20te%CC%81cnica%20para%20reducir%20la%20ansiedad.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       }
     ]
   },
@@ -131,11 +131,12 @@ export const blogs = [
       {
         descarga_titulo: 'Estrategias de intervención para la prevención del suicidio',
         descarga_bajada: 'Explora estrategias efectivas de intervención para prevenir el suicidio, incluyendo cómo hablar abiertamente, escuchar con empatía y proporcionar apoyo adecuado.',
-        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/02%20Suicidio%20c%C3%B3mo%20buscar%20ayuda%20y%20ayudar/descargables/Estrategias%20de%20intervenci%C3%B3n%20para%20la%20prevenci%C3%B3n%20del%20suicidio.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/02%20Suicidio%20cómo%20buscar%20ayuda%20y%20ayudar/descargables/Estrategias%20de%20intervenci%C3%B3n%20para%20la%20prevenci%C3%B3n%20del%20suicidio.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       },
       {
         descarga_titulo: 'Prevención del suicidio ¿Cómo identificar señales de alerta?',
-        descarga_bajada: 'Aprende a identificar señales de alerta y prevenir el suicidio con estrategias efectivas y un enfoque integral de apoyo.',descarga_url: 'prevencion_del_suicidio.pdf'
+        descarga_bajada: 'Aprende a identificar señales de alerta y prevenir el suicidio con estrategias efectivas y un enfoque integral de apoyo.',
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/02%20Suicidio%20c%C3%B3mo%20buscar%20ayuda%20y%20ayudar/descargables/Prevenci%C3%B3n%20del%20suicidio%20%C2%BFC%C3%B3mo%20identificar%20se%C3%B1ales%20de%20alerta_.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       }
     ]
   },
@@ -179,7 +180,7 @@ export const blogs = [
       {
         descarga_titulo: 'Alcohol y drogas: ¿cómo evito los excesos?',
         descarga_bajada: 'Descubre estrategias eficaces para evitar el consumo excesivo de alcohol y drogas, fomentando un ambiente universitario saludable y seguro.',
-        descarga_url: 'alcohol_y_drogas.pdf'
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/03%20Drogas%20y%20alcohol%20c%C3%B3mo%20evitar%20el%20exceso/descargables/Alcohol%20y%20drogas_%20%C2%BFc%C3%B3mo%20evito%20los%20excesos_.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       },
       {
         descarga_titulo: 'Señales de riesgo en mi consumo de alcohol y drogas',
@@ -246,12 +247,12 @@ export const blogs = [
       {
         descarga_titulo: 'Construye tu plan de adaptación universitario',
         descarga_bajada: 'Desarrolla un plan integral para adaptarte a la vida universitaria, equilibrando lo académico, social y personal.',
-        descarga_url: 'construye_tu_plan_de_adaptacion.pdf'
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/05%20%C2%BFPrimeros%20d%C3%ADas%20en%20la%20U_%20Tips%20%C3%BAtiles/descargables/construye%20tu%20plan%20de%20adaptacio%CC%81n%20(1).pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       },
       {
         descarga_titulo: 'Tips para mi adaptación universitaria',
         descarga_bajada: 'Consejos prácticos para gestionar el tiempo, construir redes y cuidar tu bienestar en tu adaptación universitaria.',
-        descarga_url: 'tips_para_mi_adaptacion_universitaria.pdf'
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/05%20%C2%BFPrimeros%20d%C3%ADas%20en%20la%20U_%20Tips%20%C3%BAtiles/descargables/Tips%20para%20mi%20adaptacio%CC%81n%20universitaria%20(1).pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       }
     ]
   },
