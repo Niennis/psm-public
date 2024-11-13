@@ -102,7 +102,7 @@ export const blogs = [
 </ol>
 <p>Identificar tus emociones y compartirlas es el primer paso para superar el aislamiento. No subestimes el poder de compartir cómo te sientes con alguien que pueda ofrecerte un apoyo genuino.</p>
 
-<img src="${process.env.NEXT_PUBLIC_BASE_IMG}suicidio02.jpg${process.env.NEXT_PUBLIC_KEY_IMG}" alt="" width="100%" class="blog-img"/>
+<img src="${process.env.NEXT_PUBLIC_BASE_IMG}02%20Suicidio%20c%C3%B3mo%20buscar%20ayuda%20y%20ayudar/im%C3%A1genes/iStock-1455922844.jpg${process.env.NEXT_PUBLIC_KEY_IMG}" alt="" width="100%" class="blog-img"/>
 
 <h2>Cómo ayudar</h2>
 <p>Si conoces a alguien que está pasando por un momento difícil y considera el suicidio, aquí tienes tres pasos concretos que puedes seguir para ofrecer tu ayuda:</p>
