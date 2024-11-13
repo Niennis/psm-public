@@ -93,29 +93,41 @@ Dirección Instituto Psiquiátrico Dr. Jose Horwitz Barack: Olivos 837, Recoleta
     Los motivos de consulta psicológica más comunes están asociados al estrés, ansiedad, depresión, dificultades en las relaciones familiares y de pareja y consumo problemático de sustancias.
 
 Te recomendamos consultar si:
-
+<ul>
+<li>
 No puedes concentrarte adecuadamente en tus tareas académicas y/o laborales y tu rendimiento se ha visto afectado;
-
+</li>
+<li>
 Estás experimentando sentimientos de tristeza, agobio, enojo y/o frustración y tus problemas se mantienen, pese a tus esfuerzos y ayuda de las personas más cercanas para superar o mejorar las situaciones que te preocupan;
-
+</li>
+<li>
 Te preocupas excesivamente, sueles esperas el peor resultado y te sientes con frecuencia sobrepasado/a;
-
+</li>
+<li>
 Te estás llevando mal con tu familia, pareja y/o amigos/as y te cuesta comunicarte y/o disfrutar de la compañía de otros;
-
+</li>
+<li>
 Te cuesta disfrutar de actividades que antes eran de tu gusto;
-
+</li>
+<li>
 Tiendes a aislarte y encerrarte en ti mismo/a, evitando el contacto con tu red de apoyo cercana;
-
+</li>
+<li>
 Identificas que tienes un consumo problemático de sustancias;
-
+</li>
+<li>
 Habitualmente tienes malestares físicos como dolores estomacales, opresión en el pecho, dolor de espalda entre otros, que pueden ser atribuibles al estrés;
-
+</li>
+<li>
 Has sufrido episodios de crisis, experimentando síntomas como: dificultad para respirar, opresión en el pecho, traspiración, aceleración del ritmo cardiaco y/o sensación de intenso temor;
-
-Si has vivido experiencias traumáticas:
-
+</li>
+<li>
+Si has vivido experiencias traumáticas;
+</li>
+<li>
 Si presentas dificultad para conciliar el sueño y/o comer;
-
+</li>
+</ul>
 Las recomendaciones previas no abarcan todos los motivos que pueden motivar una consulta psicológica, sólo son una guía. Te invitamos a consultar en caso de que experimentes algunas de las situaciones descritas o bien tengas otras preocupaciones pue puedan ser abordadas en conjunto con un especialista. ¡Recuerda que es muy importante la consulta precoz, no dejes pasar tiempo!
     `
   }
@@ -154,9 +166,9 @@ const FrequentAskedQuestions = () => {
               <Typography className={'ui-large'}> {question.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography className={'ui-medium'}>
+              {/* <Typography className={'ui-medium'}>
                 {question.answer}
-              </Typography>
+              </Typography> */}<div dangerouslySetInnerHTML={{ __html: `<ul>${question.answer}</ul>` }} />
             </AccordionDetails>
           </Accordion>
         ))

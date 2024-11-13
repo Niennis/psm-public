@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Section from "@/components/Section";
-import FrequentAskedQuestions from "@/components/FAQ";
 import { useMediaQuery } from "@mui/material";
 
 const questions = [
@@ -81,7 +80,6 @@ const IntervencionesClinicas = () => {
 
                   </div>
 
-                  <FrequentAskedQuestions questions={questions} />
                 </div>
 
               </div>
