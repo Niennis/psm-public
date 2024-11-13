@@ -198,7 +198,7 @@ const Header = () => {
                     </Button>
                   </Tooltip>
 
-                  <Box sx={{ flexGrow: 0, border: '1px solid yellow' }} className="ui-medium" >
+                  <Box sx={{ flexGrow: 0, }} className="ui-medium" >
                     <Menu
                       sx={{ mt: '45px' }}
                       id="menu-appbar"
