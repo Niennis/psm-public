@@ -120,7 +120,7 @@ const ChildModal = ({ result, enviar, isMediumSize }) => {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box className={`${isMediumSize ? 'header-3-regular' : 'body-regular'} col-12 col-lg-10` }sx={{ ...style, width: '100%' }}>
+        <Box className={`${isMediumSize ? 'header-3-regular' : 'body-regular'} col-12 col-lg-10`} sx={{ ...style, width: '100%' }}>
           <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
             {result.descripcion}
@@ -362,13 +362,17 @@ const TestDepresion = () => {
                           >
                             Continuar
                           </button>
-                          <button
-                            type="submit"
-                            className="btn btn-primary btn-hover me-2"
-                            style={{ background: '#fff', color: '#333448', marginLeft: '10px' }}
+                          <Link
+                            href={"/"}
                           >
-                            Cancelar
-                          </button>
+                            <button
+                              type="submit"
+                              className="btn btn-primary btn-hover me-2"
+                              style={{ background: '#fff', color: '#333448', marginLeft: '10px' }}
+                            >
+                              Cancelar
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -464,9 +468,9 @@ const TestDepresion = () => {
                         </div>
                       </div>
                     </div>
-                    {category && <ChildModal result={category} enviar={onSubmit} isMediumSize={isMediumSize}/>}
+                    {category && <ChildModal result={category} enviar={onSubmit} isMediumSize={isMediumSize} />}
                   </Box>
-                  : <Box sx={{ ...style, textAlign: 'center' }}><Typography  className={isMediumSize ? "header-3-regular" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
+                  : <Box sx={{ ...style, textAlign: 'center' }}><Typography className={isMediumSize ? "header-3-regular" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
                     ¡Importante! Debes seleccionar una opción por cada pregunta
                   </Typography> </Box>
                 }

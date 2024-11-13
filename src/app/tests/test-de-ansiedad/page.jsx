@@ -1,5 +1,6 @@
 'use client'
 import { Fragment, useState } from "react";
+import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
 import { useForm } from 'react-hook-form';
@@ -410,13 +411,17 @@ const TestAnsiedad = () => {
                           >
                             Continuar
                           </button>
-                          <button
-                            type="submit"
-                            className="btn btn-primary btn-hover me-2"
-                            style={{ background: '#fff', color: '#333448', marginLeft: '10px' }}
+                          <Link
+                          href={"/"}
                           >
-                            Cancelar
-                          </button>
+                            <button
+                              type="submit"
+                              className="btn btn-primary btn-hover me-2"
+                              style={{ background: '#fff', color: '#333448', marginLeft: '10px' }}
+                            >
+                              Cancelar
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
