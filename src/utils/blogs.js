@@ -79,7 +79,8 @@ export const blogs = [
     descargas: [
       {
         descarga_titulo: '5 Técnicas para Reducir la Ansiedad',
-        descarga_bajada: 'Descubre cinco poderosas técnicas para aliviar la ansiedad: respiración controlada, autoinstrucciones, grounding, visualización y meditación guiada, todas disponibles para descargar.',descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/01%20Cinco%20técnicas%20para%20reducir%20la%20ansiedad/descargables/5%20técnicas%20para%20reducir%20la%20ansiedad.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
+        descarga_bajada: 'Descubre cinco poderosas técnicas para aliviar la ansiedad: respiración controlada, autoinstrucciones, grounding, visualización y meditación guiada, todas disponibles para descargar.',
+        descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/01%20Cinco%20técnicas%20para%20reducir%20la%20ansiedad/descargables/5%20técnicas%20para%20reducir%20la%20ansiedad.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       },
       {
         descarga_titulo: 'Mindfulness como técnica para reducir la ansiedad',

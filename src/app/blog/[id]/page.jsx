@@ -47,6 +47,7 @@ const card = (item) => (
         {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
         <button
           className='btn-0 ui-medium btn-descargas btn-0'>
+            {item.descarga_url}
           Descargar <FaDownload />
         </button>
       </a>
