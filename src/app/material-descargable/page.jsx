@@ -155,7 +155,7 @@ export default function MaterialDescargable() {
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={`/downloads/${item.descarga_url}`} download={item.descarga_url} className='material-descargable-btn ui-medium'>
+                          <a href={item.descarga_url} download={item.descarga_url} className='material-descargable-btn ui-medium'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
@@ -183,7 +183,7 @@ export default function MaterialDescargable() {
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={`/downloads/${item.descarga_url}`} download={item.descarga_url} className='material-descargable-btn ui-medium'>
+                          <a href={item.descarga_url} download={item.descarga_url} className='material-descargable-btn ui-medium'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
