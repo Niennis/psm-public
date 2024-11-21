@@ -218,7 +218,7 @@ const truncateTablet = (text) => {
     backgroundColor: '#00000089',
     display: 'flex',
     height: imgHeightDesktop,
-    margin: `calc(-${imgHeightDesktop} - ${isLargeDevice ? "150px": "50px"}) auto 0px`,
+    margin: `calc(-${imgHeightDesktop} - ${isLargeDevice ? "155px": "50px"}) auto 0px`,
     padding: '150px 0 32px 0',
     textWrap: 'pretty',
     width: '100%',
@@ -320,7 +320,7 @@ const truncateTablet = (text) => {
             {slides.map((slide, slideIndex) => (
               <Tab
                 key={slideIndex}
-                className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-bold" : "title-medium"}`}
+                className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-medium" : "title-regular"}`}
                 onClick={() => goToSlide(slideIndex)}
                 sx={{
                   alignItems: 'baseline',

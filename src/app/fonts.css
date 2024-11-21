@@ -317,9 +317,9 @@
 
 .header-2-medium {
   font-family: 'Work Sans';
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 500;
-  line-height:40px ;
+  /* line-height:38px ; */
   letter-spacing: 0em;
 }
 
