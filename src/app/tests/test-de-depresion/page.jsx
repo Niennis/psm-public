@@ -3,6 +3,8 @@ import { Fragment, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
+import { sendMailTests } from "@/services/TestServices";
+
 import { useForm } from 'react-hook-form';
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -11,6 +13,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
+import { Alert } from '@mui/material';
+
 
 const style = {
   position: 'absolute',
@@ -141,6 +145,8 @@ const TestDepresion = () => {
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isSmallSize = useMediaQuery('(max-width:389px');
   const [total, setTotal] = useState()
+  const [success, setSuccess] = useState('initial')
+  const [error, setError] = useState('')
 
   const calculate = () => {
     const data = watch()
@@ -177,24 +183,27 @@ const TestDepresion = () => {
       apellido: data.apellido,
       mail: data.email,
       test: "test de depresión",
-      puntaje: total,
+      puntaje: total.toString(),
       resultado: result.descripcion,
     }
 
     try {
-      const sendMail = await fetch('https://calculatetestpoints-fpdthpb8d3fqh2a4.eastus-01.azurewebsites.net/main', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'access-control-allow-origin': '*',
-        },
-        body: JSON.stringify(body),
-      })
-      console.log('SENDMAIL', sendMail)
+      const sendMail = await sendMailTests(body)
+      if (sendMail.validacion === true) {
+        setSuccess('success')
+      } else {
+        setSuccess('fail')
+        setError(`Intenta nuevamente`)
+      }
     } catch (error) {
-      console.log('UN ERROR, QUIZÁS DE CORS', error)
+      console.log('Error de conexión, intenta de nuevo más tarde.', error)
+      setError('Error de conexión, intenta de nuevo más tarde.')
     }
   })
+
+  const handleOnClose = () => {
+    setSuccess('initial')
+  }
 
   return (
     <>
@@ -397,7 +406,7 @@ const TestDepresion = () => {
                     </Typography>
                     <div className="col-12">
                       <div className="form-group local-forms">
-                        <label>
+                        <label style={{ top: '-20px' }}>
                           Nombre <span className="login-danger">*</span>
                         </label>
                         <input
@@ -415,7 +424,7 @@ const TestDepresion = () => {
                     </div>
                     <div className="col-12">
                       <div className="form-group local-forms">
-                        <label>
+                        <label style={{ top: '-20px' }}>
                           Apellido <span className="login-danger">*</span>
                         </label>
                         <input
@@ -433,7 +442,7 @@ const TestDepresion = () => {
                     </div>
                     <div className="col-12">
                       <div className="form-group local-forms">
-                        <label>
+                        <label style={{ top: '-20px' }}>
                           Email <span className="login-danger">*</span>
                         </label>
                         <input
@@ -480,6 +489,66 @@ const TestDepresion = () => {
           </div>
         </div>
       </div>
+      {
+        success === 'success'
+          ?
+          <div style={{
+            height: '100%',
+            position: 'fixed',
+            top: '0',
+            width: '100%',
+            zIndex: 99999,
+            background: '#00000080'
+          }}>
+            {/* <div className="col-sm-12 col-lg-6"> */}
+            <Alert
+              severity="success"
+              onClose={handleOnClose}
+              sx={{
+                zIndex: 'tooltip',
+                position: 'absolute',
+                left: '30%',
+                width: '50%',
+                padding: '50px',
+                bottom: '50vh'
+              }}
+              spacing={2}
+            >
+              El mail se ha enviado correctamente. Revisa tu bandeja de entrada.
+            </Alert>
+            {/* </div> */}
+          </div>
+
+          : success === 'fail'
+            ?
+            <div className="row" style={{
+              height: '100%',
+              position: 'fixed',
+              top: '0',
+              width: '100%',
+              zIndex: 99999,
+              background: '#00000080'
+            }}>
+              <div className="col-sm-12 col-lg-6">
+                <Alert
+                  severity="error"
+                  onClose={() => { setSuccess('initial') }}
+                  sx={{
+                    zIndex: 'tooltip',
+                    position: 'absolute',
+                    left: '30%',
+                    width: '50%',
+                    padding: '50px',
+                    bottom: '50vh'
+                  }}
+                  spacing={2}
+                >
+                  Ha ocurrido un problema. {error}
+                </Alert>
+              </div>
+            </div>
+            : ''
+      }
     </>
   )
 }
