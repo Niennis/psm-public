@@ -12,10 +12,11 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
   const matches = useMediaQuery('(min-width:600px)');
-
+  const URL_RESERVAR = process.env.NEXT_PUBLIC_URL_RESERVAR
+  
   return (
     <>
-      <Link href="https://sitioprivado-b2beb6cmh0b7cuf7.eastus-01.azurewebsites.net/#estudiantes">
+      <Link href={URL_RESERVAR}>
         <button
           className=' btn-reservar ui-large btn-shadow desktop-container '
           style={{
