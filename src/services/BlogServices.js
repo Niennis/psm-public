@@ -132,22 +132,4 @@ export const updateBlog = async (blog, id) => {
   }
 }
 
-export const changeStatus = async (id, status) => {
-  const BLOGS_API = process.env.NEXT_PUBLIC_BLOG_API + `/api/blogs/${id}`
-  try {
-    const data = await fetch(BLOGS_API, {
-      method: "PATCH",
-      headers: {
-        'content-type': 'application/json',
-        'access-control-allow-origin': '*',
-        'ngrok-skip-browser-warning': 'any'
-      },
-      body: JSON.stringify({ status })
-    })
-    return data
-  } catch (err) {
-    console.log(err)
-  }
-}
-
  */

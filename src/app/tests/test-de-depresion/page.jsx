@@ -78,7 +78,7 @@ const resultados = [
   {
     puntaje: [5, 9],
     titulo: 'Sintomatología depresiva leve',
-    descripcion: `	Indicas síntomas leves de depresión. Aunque estos síntomas pueden no estar interfiriendo gravemente en tu vida diaria, es importante estar atento a cómo evolucionan.`
+    descripcion: `Indicas síntomas leves de depresión. Aunque estos síntomas pueden no estar interfiriendo gravemente en tu vida diaria, es importante estar atento a cómo evolucionan.`
   },
   {
     puntaje: [10, 14],

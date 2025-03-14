@@ -123,12 +123,12 @@ const resultados = [
     descripcion: `Tu puntuación indica un nivel bajo de ansiedad, sugiriendo que los síntomas ansiosos son mínimos o ausentes. En este nivel, la ansiedad probablemente no interfiere significativamente con tus actividades diarias.`
   },
   {
-    puntaje: [22, 42],
+    puntaje: [22, 35],
     titulo: 'Ansiedad moderada',
     descripcion: `Una puntuación en este rango muestra un nivel moderado de ansiedad. Tus síntomas ansiosos son más notorios y pueden empezar a interferir con algunas de tus actividades diarias. Sería beneficioso considerar una evaluación más detallada y posiblemente algunas intervenciones para manejar la ansiedad. Te invitamos a reservar hora con nuestros servicios de salud mental. `
   },
   {
-    puntaje: [33, 63],
+    puntaje: [36, 63],
     titulo: 'Ansiedad severa',
     descripcion: `Este nivel indica una ansiedad severa con síntomas intensos que probablemente interfieren de manera significativa con tu rutina diaria y tu bienestar. Es recomendable buscar ayuda profesional para evaluar y tratar adecuadamente la ansiedad. Te invitamos a reservar hora con nuestros servicios de salud mental, haciendo click en el enlace.`
   },
