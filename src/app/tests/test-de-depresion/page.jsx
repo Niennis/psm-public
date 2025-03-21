@@ -109,7 +109,7 @@ const ChildModal = ({ result, enviar, isMediumSize }) => {
   };
   const handleOpenWithMail = () => {
     enviar(result)
-    setOpenChildModal(true)
+    // setOpenChildModal(true)
   };
   const handleClose = () => {
     setOpenChildModal(false)
@@ -213,7 +213,7 @@ const TestDepresion = () => {
       }}>
         <img
           alt="#"
-          src={`${process.env.NEXT_PUBLIC_BASE_IMG}saludMental01.jpeg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}saludMental01.jpeg`}
           width={'100%'}
           style={{
             backgroundPosition: 'center'
