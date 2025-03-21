@@ -19,40 +19,102 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { FaArrowLeft, FaDownload } from "react-icons/fa";
 
-const card = (item) => (
-  <Fragment>
-    <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1' }}>
-      <Typography variant="h5" component="div" className='title-medium'
-        sx={{
-          bgcolor: "#FABB00",
-          height: '6rem',
-          minHeight: 'fit-content',
-          padding: '16px 24px 16px 24px'
-        }}
-      >
-        {item.descarga_titulo}
-      </Typography>
-      <Typography variant="body2" className='body-large-regular '
-        sx={{
-          padding: '16px 24px 16px 24px',
-          fontSize: '18px',
-          lineHeight: '28px',
-          fontWeight: 400,
-        }}>
-        {item.descarga_bajada}
-      </Typography>
-    </CardContent>
-    <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
-      <a href={item.descarga_url} >
-        {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
-        <button
-          className='btn-0 ui-medium btn-descargas btn-0'>
-          Descargar <FaDownload />
-        </button>
-      </a>
-    </CardActions>
-  </Fragment>
-);
+
+const normalizarTexto = (texto) => {
+  // Expresiones regulares dinámicas para base y key
+  const baseRegex = new RegExp(`(${process.env.NEXT_PUBLIC_BASE_IMG})`, "i");
+  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
+  const keyRegex = new RegExp(removeInterrogationMark, "i");
+
+  // Expresión regular para la URL (nombre de archivo de imagen con extensión)
+  const urlRegex = /(\b\w+\.(jpg|png|gif|jpeg|webp)\b)/i;
+
+  // Extraer las partes
+  const baseMatch = texto.match(baseRegex);
+  const urlMatch = texto.match(urlRegex);
+  const keyMatch = texto.match(keyRegex);
+
+  // Verificar que cada parte esté presente
+  if (!baseMatch || !urlMatch || !keyMatch) {
+    throw new Error("El texto no contiene base, url o key válidos.");
+  }
+
+  // Obtener los valores únicos (en caso de que haya duplicados)
+  const base = baseMatch[1];
+  const url = urlMatch[1];
+  const key = keyMatch[1];
+
+  // Reconstruir el texto en el orden correcto
+  return `${base} ${url} ${key}`;
+}
+const prepareImg = (src) => {
+  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
+  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
+  const match_key = src.match(new RegExp(removeInterrogationMark)) || []
+
+  if (match_base.length > 1 || match_key.length > 1) {
+    normalizarTexto(src)
+  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+
+    return `/api/file-proxy?filePath=${src}`
+  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+    const removeKey = src.split('?')[0]
+    return `/api/file-proxy?filePath=${removeKey}`
+  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+
+    return `/api/file-proxy?filePath=${src}`
+  } else if (src.includes(process.env.NEXT_PUBLIC_KEY_IMG) && !src.includes(process.env.NEXT_PUBLIC_BASE_IMG)) {
+
+    return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
+  } else if (!src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+
+    return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
+  }
+}
+
+
+const card = (item) => {
+
+  if (item.descarga_url.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+    item.descarga_url = item.descarga_url.split('?')[0]
+  }
+
+  return (
+    <Fragment>
+      <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1' }}>
+        <Typography variant="h5" component="div" className='title-medium'
+          sx={{
+            bgcolor: "#FABB00",
+            height: '6rem',
+            minHeight: 'fit-content',
+            padding: '16px 24px 16px 24px'
+          }}
+        >
+          {item.descarga_titulo}
+        </Typography>
+        <Typography variant="body2" className='body-large-regular '
+          sx={{
+            padding: '16px 24px 16px 24px',
+            fontSize: '18px',
+            lineHeight: '28px',
+            fontWeight: 400,
+            minHeight: '8rem'
+          }}>
+          {item.descarga_bajada}
+        </Typography>
+      </CardContent>
+      <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
+        <a href={`/api/file-proxy?filePath=${item.descarga_url}`}>
+          {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
+          <button
+            className='btn-0 ui-medium btn-descargas btn-0'>
+            Descargar <FaDownload />
+          </button>
+        </a>
+      </CardActions>
+    </Fragment>
+  );
+}
 
 const Blogdetails = ({ params }) => {
   const [blog, setBlog] = useState(null)
@@ -60,19 +122,26 @@ const Blogdetails = ({ params }) => {
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isLargeSiza = useMediaQuery('(min-width:1024px)');
   const isExtraLargeSiza = useMediaQuery('(min-width:1440px)');
+  const [descargas, setDescargas] = useState()
   const router = useRouter()
 
   useEffect(() => {
-    // const fetchData = async() => {
-    // const data = await fetchBlog(params.id);
+    const fetchData = async () => {
+      const { blogs: data } = await fetchBlog(params.id);
 
-    // setBlog(bloques[0])
-    // }
-    // fetchData()
-    if (blogs && !blog) {
-      console.log(blogs[params.id])
-      setBlog(blogs[params.id])
+      setBlog(data[0])
+      const newArray = data.map(item => ({
+        descarga_bajada: item.descarga_bajada,
+        descarga_titulo: item.descarga_titulo,
+        descarga_url: item.descarga_url
+      }));
+      setDescargas(newArray)
+
     }
+    fetchData()
+    // if (blogs && !blog) {
+    //   setBlog(blogs[params.id])
+    // }
   }, [params.id])
 
   return (
@@ -89,7 +158,7 @@ const Blogdetails = ({ params }) => {
               width={0}
               sizes="100vw"
               priority
-              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${blog.blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+              src={prepareImg(blog?.blog_imagen)}
               style={{
                 backgroundPosition: 'center',
                 height: 'auto',
@@ -139,19 +208,28 @@ const Blogdetails = ({ params }) => {
                     </article>
 
                     <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center' }} >
-                      {/* {console.log('leblog', blog.downloads)} */}
                       <div className="col-12">
                         <h3 className='header-2-bold mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                       </div>
                       <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
 
-                        {blog?.descargas && blog['descargas'].map((item, index) => (
+                        {descargas && descargas?.map((item, index) => (
                           <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
                             <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
                               <Card variant="outlined">{card(item)}</Card>
                             </Box>
                           </div>
                         ))}
+
+                        {/*  {
+                          descargas && descargas.map((item, index) => (
+                            <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
+                              <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
+                                <Card variant="outlined">{card(item)}</Card>
+                              </Box>
+                            </div>
+                          ))
+                        } */}
                       </div>
                     </div>
                   </div>

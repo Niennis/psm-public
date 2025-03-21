@@ -10,6 +10,60 @@ import { blogs } from "@/utils/blogs";
 import { fetchBlogs } from "@/services/BlogServices";
 import './ImageSlider.css';
 
+
+const normalizarTexto = (texto) => {
+  // Expresiones regulares dinámicas para base y key
+  const baseRegex = new RegExp(`(${process.env.NEXT_PUBLIC_BASE_IMG})`, "i");
+  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
+  const keyRegex = new RegExp(removeInterrogationMark, "i");
+
+  // Expresión regular para la URL (nombre de archivo de imagen con extensión)
+  const urlRegex = /(\b\w+\.(jpg|png|gif|jpeg|webp)\b)/i;
+
+  // Extraer las partes
+  const baseMatch = texto.match(baseRegex);
+  const urlMatch = texto.match(urlRegex);
+  const keyMatch = texto.match(keyRegex);
+
+  // Verificar que cada parte esté presente
+  if (!baseMatch || !urlMatch || !keyMatch) {
+    throw new Error("El texto no contiene base, url o key válidos.");
+  }
+
+  // Obtener los valores únicos (en caso de que haya duplicados)
+  const base = baseMatch[1];
+  const url = urlMatch[1];
+  const key = keyMatch[1];
+
+  // Reconstruir el texto en el orden correcto
+  return `${base} ${url} ${key}`;
+}
+
+const prepareImg = (src) => {
+  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
+  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
+  const match_key = src.match(new RegExp(removeInterrogationMark)) || []
+
+  if (match_base.length > 1 || match_key.length > 1) {
+    normalizarTexto(src)
+  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+
+    return `/api/file-proxy?filePath=${src}`
+  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+    const removeKey = src.split('?')[0]
+    return `/api/file-proxy?filePath=${removeKey}`
+  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+
+    return `/api/file-proxy?filePath=${src}`
+  } else if (src.includes(process.env.NEXT_PUBLIC_KEY_IMG) && !src.includes(process.env.NEXT_PUBLIC_BASE_IMG)) {
+
+    return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
+  } else if (!src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+
+    return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -85,9 +139,11 @@ const a11yProps = (index) => {
 
 const ImageSlider = ({ innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [slides, setSlides] = useState(blogs.slice(0, 4))
+  const [slides, setSlides] = useState()
+  // const [slides, setSlides] = useState(blogs.slice(0, 4))
   const [isShort, setIsShort] = useState(false);
-  const totalSlides = slides.length;
+  const totalSlides = 4;
+  // const totalSlides = slides?.length;
   const timeoutRef = useRef(null);
 
   const [title, setTitle] = useState(blogs[0].blog_titulo)
@@ -99,22 +155,26 @@ const ImageSlider = ({ innerRef }) => {
   const [value, setValue] = useState(0);
 
   const isSmallDevice = useMediaQuery("max-width : 767px)");
-  const isMediumDevice = useMediaQuery("(min-width : 768px) and (max-width: 1024px");
-  const isLargeDevice = useMediaQuery("(min-width : 1025px)");
-  const isShortDevice = useMediaQuery("(max-height: 700px)")
+  const isMediumDevice = useMediaQuery("(min-width : 768px) and (max-width: 1280px");
+  const isLargeDevice = useMediaQuery("(min-width : 1281px)");
+  const isShortDevice = useMediaQuery("(max-height: 600px)")
+  
+  const isWideScreen = useMediaQuery("(min-aspect-ratio: 1.8")
+  const isTooWide = useMediaQuery("(min-aspect-ratio: 2")
+  const aspectRatio = window.innerWidth / window.innerHeight;
+console.log(aspectRatio);
 
   const fetch = async () => {
-    // if (!apiCall) {
-    //   try {
-    //     const response = await fetchBlogs();
-    //     // const result = await response.json();
-    //     setData(response);
-    //     setApiCall(true); // Marca que ya se hizo la Call
-    //     // console.log('RESULT', response)
-    //   } catch (error) {
-    //     console.log('ERRORSH', error.message);
-    //   }
-    // }
+    if (!apiCall) {
+      try {
+        const response = await fetchBlogs();
+        const reverse = response.reverse()
+        setApiCall(true); // Marca que ya se hizo la Call
+        setSlides(reverse.slice(0, 4))
+      } catch (error) {
+        console.log('Error:', error.message);
+      }
+    }
   }
 
   const resetTimeout = () => {
@@ -194,7 +254,7 @@ const truncateTablet = (text) => {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
-
+// Carrusel
   const goToNext = () => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
@@ -204,7 +264,7 @@ const truncateTablet = (text) => {
     // setColor(styles[newIndex].color)
     setIdBlog(slides[newIndex].blog_id)
   }
-
+// Seleccionar artículo
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
     setTitle(slides[slideIndex].blog_titulo)
@@ -238,11 +298,13 @@ const truncateTablet = (text) => {
     <div id="inicio" className={isMediumDevice ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef}>
 
       {/* {isMediumSize ? */}
-      <div className="desktop-container">
+     {slides &&  <div className="desktop-container">
         {/* DESKTOP */}
         <div className="slide-styles" >
+          
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+            src={prepareImg(slides[currentIndex].blog_imagen)}
+            // src={slides[currentIndex].blog_imagen.includes(process.env.NEXT_PUBLIC_KEY_IMG) ? `${slides[currentIndex].blog_imagen}` : `${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
             alt={slides[currentIndex].blog_imagen}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -256,14 +318,17 @@ const truncateTablet = (text) => {
               width: 'calc(100vw - 60px)',
               marginLeft: '60px'
             }}>
-              <div className="d-flex flex-column col-10">
+              <div className={`d-flex flex-column  ${ !isWideScreen || !isLargeDevice ? "col-12" :"col-10"}`}>
                 <h2
-                  className={`${isLargeDevice ? "mega-title" : "mega-bold"} mt-5 font-white`}
+                  className={`${!isLargeDevice && isWideScreen ? "mega-bold" : !isLargeDevice && !isWideScreen ? "mega-bold" : isLargeDevice && isTooWide ? "mega-bold" : "mega-title"} mt-5 font-white`}
                 >
                   {slides[currentIndex].blog_titulo}
                 </h2>
-                <p className="font-white title-medium">
+                {/* <p className="font-white title-medium">
                   <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_texto)} min.
+                </p> */}
+                <p className="font-white title-medium">
+                  <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_bajada)} min.
                 </p>
               </div>
               <Grid
@@ -286,13 +351,13 @@ const truncateTablet = (text) => {
           </div>
         </Box>
         <div
-          key={slides[currentIndex].key}
+          key={slides[currentIndex].blog_titulo}
           className="col col-3 title-regular"
           style={{
             borderBottom: '1px solid white',
             height: isShort ? '180px' : '200px',
             marginTop: isShort ? '-210px' : '-240px',
-            marginLeft: `calc(25vw * ${slides[currentIndex].blog_id})`,
+            marginLeft: `calc(25vw * ${currentIndex})`,
             backgroundColor: styles[currentIndex].color,
             color: "#fff",
             display: 'flex',
@@ -300,8 +365,8 @@ const truncateTablet = (text) => {
           }}
         >
           <CustomTabPanel
-            value={slides[currentIndex].key}
-            index={slides[currentIndex].key}
+            value={currentIndex}
+            index={currentIndex}
             isShort={isShort}
             isMediumDevice={isMediumDevice}
           >
@@ -326,7 +391,7 @@ const truncateTablet = (text) => {
                   alignItems: 'baseline',
                   bgcolor: styles[slideIndex].color,
                   color: '#fff',
-                  fontSize: isMediumDevice ? '16px' : isShort ? '20px' : '24px',
+                  fontSize: isMediumDevice ? '12px' : isShort ? '20px' : '24px',
                   fontWeight: 700,
                   height: '97px',
                   lineHeight: isMediumDevice ? '22px' : '32px',
@@ -341,10 +406,10 @@ const truncateTablet = (text) => {
             ))}
           </Tabs>
         </ThemeProvider>
-      </div> {/* : */}
+      </div>} {/* : */}
 
       {/* MOBILE */}
-      <div className="mobile-container">
+     {slides &&  <div className="mobile-container">
         <div style={slideStylesMobile}></div>
         <Box sx={boxStyleMobile}>
           <div className="row" >
@@ -372,7 +437,7 @@ const truncateTablet = (text) => {
                     className="font-white submit-form me-2 lato-btn btn-slide-mobile "> Ver más + </button>
                 </Link>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                  src={prepareImg(slides[currentIndex].blog_imagen)}
                   alt={slides[currentIndex].blog_imagen}
                   priority
                   height={0}
@@ -397,7 +462,7 @@ const truncateTablet = (text) => {
         </Box>
 
 
-      </div>
+      </div>}
       {/* } */}
     </div>
   )

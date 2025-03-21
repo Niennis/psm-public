@@ -91,7 +91,7 @@ const IntervencionesClinicas = () => {
       <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'¿Qué es la entrevista de despeje?'}
-          image={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_entrevista_despeje.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          image={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_entrevista_despeje.jpg`}
           left={false}
           bgColor={'#f1f1f1'}
         ><>
@@ -104,7 +104,7 @@ const IntervencionesClinicas = () => {
       <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#ffffff' }}>
         <Section
           title={'Intervenciones grupales'}
-          image={`${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          image={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_cabecera.jpg`}
           left={true}
           bgColor={'#ffffff'}
         >
@@ -120,7 +120,7 @@ const IntervencionesClinicas = () => {
       <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'Intervenciones psicoeducativas'}
-          image={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_psicoeducativas.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          image={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_psicoeducativas.jpg`}
           left={false}
           bgColor={'#f1f1f1'}
         >

@@ -37,7 +37,7 @@ const PromocionYPrevencion = () => {
               </div>
 
               <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_texto.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_texto.jpg`}
                 alt="plan de acción imagen"
                 height={0}
                 width={0}

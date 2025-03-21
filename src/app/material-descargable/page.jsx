@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import FooterDae from "@/components/Footer";
-import { blogs } from "@/utils/blogs";
+// import { blogs } from "@/utils/blogs";
 
 import { useMediaQuery } from "@mui/material";
 
@@ -17,6 +17,8 @@ import Button from '@mui/material/Button';
 import { FaDownload } from "react-icons/fa";
 
 import SimpleBackdrop from "@/components/Backdrop";
+import { useEffect, useState } from "react";
+import { fetchBlogs } from "@/services/BlogServices";
 
 const material_descargable = [
   {
@@ -73,8 +75,6 @@ const material_descargable = [
 const sortedByTitulo = (array) =>
   array.sort((a, b) => a.descarga_titulo.localeCompare(b.descarga_titulo, 'es', { sensitivity: 'base' }));
 
-const downloadsArray = blogs.flatMap(item => item.descargas);
-const orderedResources = sortedByTitulo(downloadsArray);
 
 const splitArrayByPositions = (array) => {
   return array.reduce((result, element, index) => {
@@ -83,12 +83,40 @@ const splitArrayByPositions = (array) => {
   }, [[], []]);
 }
 
-const [even, odd] = splitArrayByPositions(orderedResources);
 
 export default function MaterialDescargable() {
+  const [apiCall, setApiCall] = useState(false); // Nueva bandera
+  const [blogs, setBlogs] = useState([])
   const isSmallSize = useMediaQuery('(max-width:389px')
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const router = useRouter()
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (!apiCall) {
+        try {
+          const response = await fetchBlogs();
+          setApiCall(true); // Marca que ya se hizo la Call
+          setBlogs(response)
+        } catch (error) {
+          console.log('Error:', error.message);
+        }
+      }
+    }
+    fetch()
+  }, [apiCall])
+
+  const downloadsArray = blogs.flatMap(item => item.descargas);
+  const orderedResources = sortedByTitulo(downloadsArray);
+  const urlProxy = orderedResources.map(item => {
+    if (item.descarga_url.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+      item.descarga_url = item.descarga_url.split('?')[0]
+    } else {
+      item.descarga_url
+    }
+    return item
+  })
+  const [even, odd] = splitArrayByPositions(urlProxy);
 
   return (
     <>
@@ -98,7 +126,7 @@ export default function MaterialDescargable() {
         position: 'relative'
       }}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_IMG}saludMental03.jpeg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}saludMental03.jpeg`}
           alt="Quienes somos cabecera"
           height={0}
           width={0}
@@ -130,7 +158,7 @@ export default function MaterialDescargable() {
               </h3>
             </div>
 
-            <div  className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
+            <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
               <p>
                 El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
               </p>
@@ -155,7 +183,7 @@ export default function MaterialDescargable() {
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={item.descarga_url} download={item.descarga_url} className='material-descargable-btn ui-medium'>
+                          <a href={`/api/file-proxy?filePath=${item.descarga_url}`} /* download={`/api/file-proxy?filePath=${item.descarga_url}`} */ className='material-descargable-btn ui-medium'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
@@ -183,7 +211,7 @@ export default function MaterialDescargable() {
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={item.descarga_url} download={item.descarga_url} className='material-descargable-btn ui-medium'>
+                          <a href={`/api/file-proxy?filePath=${item.descarga_url}`} /* download={`/api/file-proxy?filePath=${item.descarga_url}`} */ className='material-descargable-btn ui-medium'>
                             Descargar <FaDownload />
                           </a>
                         </Button>

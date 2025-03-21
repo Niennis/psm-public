@@ -28,9 +28,9 @@ const ReservaTuHora = () => {
 
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', handleResize);
-      handleResize(); 
+      handleResize();
     }
-    
+
     return () => {
       if (typeof window !== 'undefined') {
         window.removeEventListener('resize', handleResize);
@@ -74,7 +74,7 @@ const ReservaTuHora = () => {
                     }}>
                     <div style={{ position: 'relative', height: '240px', width: '100%' }}>
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg`}
                         alt="Imagen profesional"
                         fill
                         sizes="100%"
@@ -164,10 +164,10 @@ const ReservaTuHora = () => {
                         Reserva tu hora
                       </Typography>
 
-                      <p className={`${isShort ? "body-regular" : "title-regular" }`} style={{ textWrap: 'pretty' }}>
+                      <p className={`${isShort ? "body-regular" : "title-regular"}`} style={{ textWrap: 'pretty' }}>
                         Si necesitas ayuda psicológica o psicopedagógica, reserva una hora con un profesional.
                       </p>
-                      <p className={`${isShort ? "body-regular" : "title-regular" }`}>
+                      <p className={`${isShort ? "body-regular" : "title-regular"}`}>
                         Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
 
                       </p>

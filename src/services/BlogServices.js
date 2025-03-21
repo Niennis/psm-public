@@ -31,7 +31,7 @@ const groupBlogsByDescargas = (data) => {
 };
 
 export const fetchBlogs = async () => {
-  const BLOGS_API = 'https://showbloglist-a6dzcva7fcfmfgdu.eastus-01.azurewebsites.net/main'
+  const BLOGS_API = process.env.NEXT_PUBLIC_SHOW_BLOGLIST
   try {
     const data = await fetch(BLOGS_API, {
       method: "POST",
@@ -52,7 +52,7 @@ export const fetchBlogs = async () => {
 }
 
 export const fetchBlog = async (id) => {
-  const BLOGS_API = 'https://showblogbyid-f4dxh4bvgydmdzh6.eastus-01.azurewebsites.net/main'
+  const BLOGS_API = process.env.NEXT_PUBLIC_SHOW_BLOG_BY_ID;
 
   const body = {
     id

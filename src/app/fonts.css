@@ -266,7 +266,16 @@
   line-height: 60px;
   letter-spacing: 0em;
 }
-
+@media (min-width: 1600px) and (min-aspect-ratio: 1.8) {
+  .mega-bold {
+    font-family: 'Work Sans';
+    font-size: 86px;
+    font-weight: 700;
+    line-height: 116px;
+    letter-spacing: 0em;
+    text-wrap: balance;
+  }
+}
 .mega-medium {
   font-family: 'Work Sans';
   font-size: 48px;

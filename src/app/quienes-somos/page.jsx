@@ -46,7 +46,7 @@ export default function QuienesSomos() {
                     }}>
                     <div style={{ position: 'relative', width: '100%', height: '240px' }}>
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg`}
                         alt="Descripción de la imagen"
                         // height={240}
                         // width={0}
@@ -161,7 +161,7 @@ export default function QuienesSomos() {
               <div className="col-12 col-lg-6 d-flex justify-content-center mb-3">
                 <a href="https://maps.app.goo.gl/MgPjwoqPatGxty8W8" target="_blank">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}mapa-udp.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                    src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}mapa-udp.png`}
                     alt="Mapa ubicación Universidad"
                     height={0}
                     width={0}

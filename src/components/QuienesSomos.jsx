@@ -127,7 +127,7 @@ const QuienesSomos = () => {
                     }}>
                     <div style={{ position: 'relative', height: '240px', width: '100%' }}>
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_cabecera.jpg`}
                         alt="Quienes somos"
                         fill
                         sizes="100%"

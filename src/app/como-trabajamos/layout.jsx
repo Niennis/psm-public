@@ -22,7 +22,7 @@ export default function ComoTrabajamos({ children }) {
         position: 'relative'
       }}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
+          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_cabecera.jpg`}
           alt="Quienes somos cabecera"
           height={0}
           width={0}
