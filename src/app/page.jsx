@@ -127,7 +127,6 @@ export default function Home() {
       });
     };
   }, [setActiveSection]);
-  // console.log('BLOGS', blogs.slice(-4 ))
 
   const fetchData = useCallback(async () => {
     // try {

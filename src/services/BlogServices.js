@@ -44,7 +44,6 @@ export const fetchBlogs = async () => {
     })
     const { blogs } = await data.json()
     const response = groupBlogsByDescargas(blogs)
-    // console.log('response', response)
     return response
   } catch (err) {
     console.log(err)
@@ -82,7 +81,6 @@ export const addBlog = async (blog) => {
   const body = {
     title, author_name, category, subcategory, status_blog, content, image
   }
-  console.log(body);
 
   try {
     const data = await fetch(BLOGS_API, {
@@ -96,9 +94,7 @@ export const addBlog = async (blog) => {
       body: JSON.stringify(body)
     })
 
-    console.log('STATUS', data.status, data.ok, data)
     const response = await data.json()
-    console.log('response', response)
     if (!data.ok && response.message.includes('Duplicate entry')) return { err: 'Usuario duplicado' }
 
     return response

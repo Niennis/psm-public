@@ -162,7 +162,6 @@ const ImageSlider = ({ innerRef }) => {
   const isWideScreen = useMediaQuery("(min-aspect-ratio: 1.8")
   const isTooWide = useMediaQuery("(min-aspect-ratio: 2")
   const aspectRatio = window.innerWidth / window.innerHeight;
-console.log(aspectRatio);
 
   const fetch = async () => {
     if (!apiCall) {

@@ -28,7 +28,6 @@ const ParserImgToImage = ({ htmlContent, classType }) => {
   }
 
   const prepareImg = (src) => {
-    console.log('src', src)
     const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
     const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
     const match_key = src.match(new RegExp(removeInterrogationMark)) || []
