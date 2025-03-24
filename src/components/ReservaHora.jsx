@@ -39,7 +39,7 @@ const ReservaTuHora = () => {
   })
 
   return (
-    <div className={`container col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} style={{ background: '#f1f1f1' }}>
+    <div className={`container-md col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} style={{ background: '#f1f1f1' }}>
       {/* <TestCard test={slides} /> */}
       <div>
         <Box sx={{

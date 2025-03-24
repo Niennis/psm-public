@@ -36,7 +36,7 @@ const QuienesSomos = () => {
   })
 
   return (
-    <div className={`container col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} >
+    <div className={`container-md col-12 col-lg-10 align-self-center p-0 ${isMediumSize && 'mb-5'}`} >
       <div>
         <Box sx={{
           borderRadius: '32px',

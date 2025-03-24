@@ -12,16 +12,20 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
   const matches = useMediaQuery('(min-width:600px)');
+  const isMediumDevice = useMediaQuery('(min-width:601px and max-width:1280px)');
   const URL_RESERVAR = process.env.NEXT_PUBLIC_URL_RESERVAR
-  
+
   return (
     <>
       <Link href={URL_RESERVAR}>
+
+        {/* DESKTOP */}
         <button
           className=' btn-reservar ui-large btn-shadow desktop-container '
           style={{
             backgroundColor: bgColor,
             color: color,
+            width: isMediumDevice ? '189px' : '140px',
           }}
         // onClick={handleOpen}
         >
@@ -29,6 +33,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
           {text}
         </button>
 
+        {/* MOBILE */}
         <button
           className=' btn-reservar-mobile lato-btn btn-shadow mobile-container'
           style={{
