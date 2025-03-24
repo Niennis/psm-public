@@ -41,9 +41,9 @@ const theme = createTheme({
     values: {
       xs: 0,
       sm: 641,
-      md: 769,
+      md: 768,
       lg: 1024,
-      xl: 1536,
+      xl: 1280,
     },
   },
 });
@@ -60,9 +60,10 @@ const Header = () => {
 
   const BOTON_RESERVAR = process.env.NEXT_PUBLIC_ACTIVATE_BUTTON === "true"
 
-  const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
-  const isLargeSize = useMediaQuery("(min-width : 769px)");
-  const isExtaLargeSize = useMediaQuery("(min-width: 1025px)");
+  const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 767px)");
+  const isLargeSize = useMediaQuery("(min-width : 768px)");
+  const isExtaLargeSize = useMediaQuery("(min-width: 1025px) and (max-width: 1280px)");
+  const isXXLargeSize = useMediaQuery("(min-width:1281px)")
 
   useEffect(() => {
     const handleResize = () => {
@@ -153,19 +154,33 @@ const Header = () => {
                   component="a"
                   href="/"
                 >
-                  <Image
-                    alt="Logo"
-                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
-                    height={0}
-                    width={0}
-                    priority
-                    sizes="100%"
-                    style={{
-                      height: '70px',
-                      width: '263px',
+                  {
+                    isXXLargeSize ?
+                      <Image
+                        alt="Logo"
+                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png`}
+                        height={0}
+                        width={0}
+                        priority
+                        sizes="100%"
+                        style={{
+                          height: '70px',
+                          width: '263px',
 
-                    }}
-                  />{" "}
+                        }}
+                      />
+                      :
+                      <Image
+                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png`}
+                        height={0}
+                        width={0}
+                        alt="logo udp"
+                        sizes="100%"
+                        style={{
+                          height: 'auto',
+                          width: '100px',
+                        }} />
+                  }
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
                   {pages.map((page) => {
@@ -178,7 +193,7 @@ const Header = () => {
                             }`}
 
                           onClick={() => handleNavClick(page.label)}
-                          sx={{ ...style, m: 2, color: 'black', display: 'block', width: 'min-content' }}
+                          sx={{ ...style, my: 2, mx: isExtaLargeSize ? 2 : 1 , color: 'black', display: 'block', width: 'min-content' }}
                         >
                           {page.title}
                         </Button>
@@ -239,7 +254,7 @@ const Header = () => {
             ) : (
               <>
                 {/*  MENU MOBILE */}
-                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none' } }}>
+                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none', } }}>
                   <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -328,7 +343,7 @@ const Header = () => {
                   }}
                 >
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                    src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png`}
                     height={0}
                     width={0}
                     alt="logo udp"
