@@ -17,6 +17,7 @@ const TestSlider = ({ slides, innerRef }) => {
   const timeoutRef = useRef(null);
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isLargeSize = useMediaQuery('(min-width:1025px)');
+  const isXL = useMediaQuery('(min-width:1280px)')
   
   const divRef = useRef();
   const sliderStyles = {
@@ -75,19 +76,11 @@ const TestSlider = ({ slides, innerRef }) => {
   };
 
   const nextSlide = () => {
-    if (currentIndex + 1 < slides.length) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
-    }
+    setCurrentIndex((prevIndex) => (prevIndex + (isLargeSize ? 2 : 1)) % totalSlides);
   };
 
   const prevSlide = () => {
-    if (currentIndex - 1 > 0) {
-      setCurrentIndex(currentIndex - 1);
-    } else {
-      setCurrentIndex(slides.length - 1)
-    }
+    setCurrentIndex((prevIndex) => (prevIndex - (isLargeSize ? 2 : 1) + totalSlides) % totalSlides);
   };
 
   const goToSlide = slideIndex => {
@@ -102,16 +95,17 @@ const TestSlider = ({ slides, innerRef }) => {
 
   useEffect(() => {
     if (totalSlides > 2) {
+      const slidesToShow = isLargeSize ? 2 : 1; // Determina cuántas diapositivas mostrar
       resetTimeout();
       timeoutRef.current = setTimeout(
-        () => setCurrentIndex((prevIndex) => (prevIndex + 2) % totalSlides),
+        () => setCurrentIndex((prevIndex) => (prevIndex + slidesToShow) % totalSlides),
         5500 // Cambiar el slide cada 3 segundos
       );
     }
     if (!isMediumSize) {
       resetTimeout();
       timeoutRef.current = setTimeout(
-        () => setCurrentIndex((prevIndex) => (prevIndex + 2) % totalSlides),
+        () => setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides),
         5500 // Cambiar el slide cada 3 segundos
       );
     }
@@ -119,7 +113,7 @@ const TestSlider = ({ slides, innerRef }) => {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex, totalSlides]);
+  }, [currentIndex, totalSlides, isLargeSize]);
 
 
   return (
@@ -141,7 +135,7 @@ const TestSlider = ({ slides, innerRef }) => {
                     if (slideIndex < slides.length) {
                       const slide = slides[slideIndex];
                       return (
-                        <div key={slideIndex} className="col-4 col-md-5" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: isLargeSize ? '30vw' :'100%' }}>
+                        <div key={slideIndex} className="col-4 col-md-5" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', maxWidth: isXL ? '30vw' : isLargeSize ? '40vw' :'100%', flex: 1 }}>
                           <Card
                             sx={{
                               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.45)',
@@ -165,7 +159,7 @@ const TestSlider = ({ slides, innerRef }) => {
                             <CardContent>
                               <Typography variant="body2" color="text.secondary" className="header-3-bold"
                                 sx={{ color: '#000', height: '2em' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary" className="body-large-regular" sx={{ height: '5.5em' }}>{slide.bajada}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="body-large-regular" sx={{ minHeight: '6em', height: '100%'}}>{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
@@ -198,7 +192,9 @@ const TestSlider = ({ slides, innerRef }) => {
               ))}
             </div>}
           </div>
-          : <div style={sliderStyles}>
+          : 
+          //*  MOBILE, FORMATO DE UNA DIAPOSITIVA */
+          <div style={sliderStyles}>
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
               <div className="row" style={{ paddingTop: '32px', margin: 0 }}>
                 <h2
