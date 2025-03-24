@@ -122,8 +122,8 @@ const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => 
       {value === index && (
         <Box sx={{ p: 2 }}>
           <Typography
-            className={`${ isMediumDevice ? "ui-large": "title-regular" }`}
-            >{children}</Typography>
+            className={`${isMediumDevice ? "ui-large" : "title-regular"}`}
+          >{children}</Typography>
         </Box>
       )}
     </div>
@@ -146,9 +146,9 @@ const ImageSlider = ({ innerRef }) => {
   // const totalSlides = slides?.length;
   const timeoutRef = useRef(null);
 
-  const [title, setTitle] = useState(blogs[0].blog_titulo)
-  const [content, setContent] = useState(blogs[0].blog_bajada)
-  const [idBlog, setIdBlog] = useState(blogs[0].blog_id)
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [idBlog, setIdBlog] = useState(0)
   const [data, setData] = useState(null)
   const [apiCall, setApiCall] = useState(false); // Nueva bandera
 
@@ -158,7 +158,7 @@ const ImageSlider = ({ innerRef }) => {
   const isMediumDevice = useMediaQuery("(min-width : 768px) and (max-width: 1280px");
   const isLargeDevice = useMediaQuery("(min-width : 1281px)");
   const isShortDevice = useMediaQuery("(max-height: 600px)")
-  
+
   const isWideScreen = useMediaQuery("(min-aspect-ratio: 1.8")
   const isTooWide = useMediaQuery("(min-aspect-ratio: 2")
   const aspectRatio = window.innerWidth / window.innerHeight;
@@ -169,7 +169,11 @@ const ImageSlider = ({ innerRef }) => {
         const response = await fetchBlogs();
         const reverse = response.reverse()
         setApiCall(true); // Marca que ya se hizo la Call
-        setSlides(reverse.slice(0, 4))
+        const blogs = reverse.slice(0, 4)
+        setSlides(blogs)
+        setTitle(blogs[0].blog_titulo)
+        setContent(blogs[0].blog_bajada)
+        setIdBlog(blogs[0].blog_id)
       } catch (error) {
         console.log('Error:', error.message);
       }
@@ -235,13 +239,13 @@ const ImageSlider = ({ innerRef }) => {
     return `${sliced.slice(0, indexLastBlankSpace)}...`;
   }
 
-const truncateTablet = (text) => {
-  if(isMediumDevice  ) {
-    return truncateWords(text, 100)
-  } else {
-    return truncateWords(text, 200)
+  const truncateTablet = (text) => {
+    if (isMediumDevice) {
+      return truncateWords(text, 100)
+    } else {
+      return truncateWords(text, 200)
+    }
   }
-}
 
   const imgHeightMobile = '80vh'
   const imgHeightDesktop = '100vh'
@@ -253,7 +257,7 @@ const truncateTablet = (text) => {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
-// Carrusel
+  // Carrusel
   const goToNext = () => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
@@ -263,7 +267,7 @@ const truncateTablet = (text) => {
     // setColor(styles[newIndex].color)
     setIdBlog(slides[newIndex].blog_id)
   }
-// Seleccionar artículo
+  // Seleccionar artículo
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
     setTitle(slides[slideIndex].blog_titulo)
@@ -277,7 +281,7 @@ const truncateTablet = (text) => {
     backgroundColor: '#00000089',
     display: 'flex',
     height: imgHeightDesktop,
-    margin: `calc(-${imgHeightDesktop} - ${isLargeDevice ? "155px": "50px"}) auto 0px`,
+    margin: `calc(-${imgHeightDesktop} - ${isLargeDevice ? "155px" : "50px"}) auto 0px`,
     padding: '150px 0 32px 0',
     textWrap: 'pretty',
     width: '100%',
@@ -294,13 +298,13 @@ const truncateTablet = (text) => {
   }
 
   return (
-    <div id="inicio" className={isMediumDevice ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef}>
+    <div id="inicio" className={isMediumDevice ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef} >
 
       {/* {isMediumSize ? */}
-     {slides &&  <div className="desktop-container">
+      {slides && <div className="desktop-container">
         {/* DESKTOP */}
         <div className="slide-styles" >
-          
+
           <Image
             src={prepareImg(slides[currentIndex].blog_imagen)}
             // src={slides[currentIndex].blog_imagen.includes(process.env.NEXT_PUBLIC_KEY_IMG) ? `${slides[currentIndex].blog_imagen}` : `${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
@@ -317,7 +321,7 @@ const truncateTablet = (text) => {
               width: 'calc(100vw - 60px)',
               marginLeft: '60px'
             }}>
-              <div className={`d-flex flex-column  ${ !isWideScreen || !isLargeDevice ? "col-12" :"col-10"}`}>
+              <div className={`d-flex flex-column  ${!isWideScreen || !isLargeDevice ? "col-12" : "col-10"}`}>
                 <h2
                   className={`${!isLargeDevice && isWideScreen ? "mega-bold" : !isLargeDevice && !isWideScreen ? "mega-bold" : isLargeDevice && isTooWide ? "mega-bold" : "mega-title"} mt-5 font-white`}
                 >
@@ -339,7 +343,7 @@ const truncateTablet = (text) => {
                     className={`font-white ui-medium submit-form me-2 ${'btn-' + currentIndex}`}
                     style={{
                       width: '209px',
-                      height:  '56px',
+                      height: '56px',
                       backgroundColor: styles[currentIndex].color,
                       border: `1px solid ${styles[currentIndex].border}`,
                       borderRadius: '100px',
@@ -369,7 +373,7 @@ const truncateTablet = (text) => {
             isShort={isShort}
             isMediumDevice={isMediumDevice}
           >
-            { truncateTablet(slides[currentIndex].blog_bajada)}
+            {truncateTablet(slides[currentIndex].blog_bajada)}
           </CustomTabPanel>
         </div>
         <ThemeProvider theme={theme}>
@@ -405,10 +409,11 @@ const truncateTablet = (text) => {
             ))}
           </Tabs>
         </ThemeProvider>
-      </div>} {/* : */}
+      </div>
+      } {/* : */}
 
       {/* MOBILE */}
-     {slides &&  <div className="mobile-container">
+      {slides && <div className="mobile-container">
         <div style={slideStylesMobile}></div>
         <Box sx={boxStyleMobile}>
           <div className="row" >
@@ -429,7 +434,9 @@ const truncateTablet = (text) => {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="baseline"
-                sx={{ width: '90vw' }}
+                sx={{ 
+                  width: '90vw',
+                }}
               >
                 <Link href={`/blog/${idBlog}`}>
                   <button
