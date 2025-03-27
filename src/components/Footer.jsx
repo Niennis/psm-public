@@ -15,7 +15,7 @@ const FooterDae = () => {
   const isExtraLarge = useMediaQuery('(min-width:1440px)');
   const LINKS = [
     {
-      title: 'Vida Universitaria',
+      title: 'Vida Universitaria UDP',
       url: 'https://dae.udp.cl/vida-universitaria/',
     },
     {
