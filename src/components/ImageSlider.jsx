@@ -118,11 +118,19 @@ const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => 
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      style={{ height: '100%' }}
     >
       {value === index && (
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ p: 1, height: '100%' }}>
           <Typography
             className={`${isMediumDevice ? "ui-large" : "title-regular"}`}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              height: '100%',
+              justifyContent: 'space-around'
+            }}
           >{children}</Typography>
         </Box>
       )}
@@ -154,12 +162,12 @@ const ImageSlider = ({ innerRef }) => {
 
   const [value, setValue] = useState(0);
 
-  const isSmallDevice = useMediaQuery("max-width : 767px)");
+  const isSmallDevice = useMediaQuery("max-width : 767px");
   const isMediumDevice = useMediaQuery("(min-width : 768px) and (max-width: 1280px");
   const isLargeDevice = useMediaQuery("(min-width : 1281px)");
   const isShortDevice = useMediaQuery("(max-height: 600px)")
 
-  const isWideScreen = useMediaQuery("(min-aspect-ratio: 1.8")
+  const isWideScreen = useMediaQuery("(min-aspect-ratio: 1.7")
   const isTooWide = useMediaQuery("(min-aspect-ratio: 2")
   const aspectRatio = window.innerWidth / window.innerHeight;
 
@@ -210,7 +218,7 @@ const ImageSlider = ({ innerRef }) => {
 
     // Configurar el timeout para cambiar el slide cada 8 segundos
     resetTimeout();
-    timeoutRef.current = setTimeout(changeSlide, 8000);
+    // timeoutRef.current = setTimeout(changeSlide, 8000);
 
     // Agregar el event listener para el cambio de tamaño de la ventana
     if (typeof window !== 'undefined') {
@@ -253,7 +261,7 @@ const ImageSlider = ({ innerRef }) => {
   const slideStylesMobile = {
     backgroundColor: styles[currentIndex].color,
     width: '100%',
-    height: isShortDevice ? '100vh' : imgHeightMobile,
+    height: 'calc(100vh - 98px)',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
@@ -280,9 +288,8 @@ const ImageSlider = ({ innerRef }) => {
     alignItems: 'flex-start',
     backgroundColor: '#00000089',
     display: 'flex',
-    height: imgHeightDesktop,
-    margin: `calc(-${imgHeightDesktop} - ${isLargeDevice ? "155px" : "50px"}) auto 0px`,
-    padding: '150px 0 32px 0',
+    height: 'calc(100vh - 98px)',
+    marginTop: 'calc(-100vh + 98px)',
     textWrap: 'pretty',
     width: '100%',
     zIndex: 99999,
@@ -290,126 +297,122 @@ const ImageSlider = ({ innerRef }) => {
 
   const boxStyleMobile = {
     display: 'flex',
-    height: isShortDevice ? '100vh' : imgHeightMobile, // 100vh si es chico, imgHeightMobile si es grande
-    marginTop: isShortDevice ? '-100vh' : 'calc(-80vh)', // -100vh si es chico, 'calc(-100vh + 150px)' si es grande
-    padding: '24px 16px',
+    height: 'calc(100vh - 98px)',
+    marginTop: 'calc(-100vh + 98px)',
+    padding: '0 16px',
     textWrap: 'pretty',
     width: '100vw',
   }
 
   return (
-    <div id="inicio" className={isMediumDevice ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef} >
+    <div id="inicio" className={isLargeDevice ? 'slider-styles slider-styles-desktop' : 'slider-styles slider-styles-mobile'} ref={innerRef} >
 
       {/* {isMediumSize ? */}
-      {slides && <div className="desktop-container">
-        {/* DESKTOP */}
-        <div className="slide-styles" >
-
-          <Image
-            src={prepareImg(slides[currentIndex].blog_imagen)}
-            // src={slides[currentIndex].blog_imagen.includes(process.env.NEXT_PUBLIC_KEY_IMG) ? `${slides[currentIndex].blog_imagen}` : `${slides[currentIndex].blog_imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
-            alt={slides[currentIndex].blog_imagen}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority
-            className="slide-img "
-          />
-        </div>
-        <Box sx={boxStyleDesktop}>
-          <div className="row" >
-            <div className="col-sm-12" style={{
-              width: 'calc(100vw - 60px)',
-              marginLeft: '60px'
-            }}>
-              <div className={`d-flex flex-column  ${!isWideScreen || !isLargeDevice ? "col-12" : "col-10"}`}>
-                <h2
-                  className={`${!isLargeDevice && isWideScreen ? "mega-bold" : !isLargeDevice && !isWideScreen ? "mega-bold" : isLargeDevice && isTooWide ? "mega-bold" : "mega-title"} mt-5 font-white`}
-                >
-                  {slides[currentIndex].blog_titulo}
-                </h2>
-                {/* <p className="font-white title-medium">
-                  <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_texto)} min.
-                </p> */}
-                <p className="font-white title-medium">
-                  <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_bajada)} min.
-                </p>
-              </div>
-              <Grid
-                container
-                direction="row"
-              >
-                <Link href={`/blog/${idBlog}`}>
-                  <button
-                    className={`font-white ui-medium submit-form me-2 ${'btn-' + currentIndex}`}
-                    style={{
-                      width: '209px',
-                      height: '56px',
-                      backgroundColor: styles[currentIndex].color,
-                      border: `1px solid ${styles[currentIndex].border}`,
-                      borderRadius: '100px',
-                    }}> Ver más + </button>
-                </Link>
-              </Grid>
-            </div>
+      {slides &&
+        <div className="desktop-container">
+          {/* DESKTOP */}
+          <div className="slide-styles" style={{ height: 'calc(100vh - 98px)' }} >
+            <Image
+              src={prepareImg(slides[currentIndex].blog_imagen)}
+              alt={slides[currentIndex].blog_imagen}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
+              className="slide-img "
+            />
           </div>
-        </Box>
-        <div
-          key={slides[currentIndex].blog_titulo}
-          className="col col-3 title-regular"
-          style={{
-            borderBottom: '1px solid white',
-            height: isShort ? '180px' : '200px',
-            marginTop: isShort ? '-210px' : '-240px',
-            marginLeft: `calc(25vw * ${currentIndex})`,
-            backgroundColor: styles[currentIndex].color,
-            color: "#fff",
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <CustomTabPanel
-            value={currentIndex}
-            index={currentIndex}
-            isShort={isShort}
-            isMediumDevice={isMediumDevice}
+
+          <Box sx={boxStyleDesktop}>
+            <div className="row" >
+              <div className="col-sm-12" style={{
+                width: 'calc(100vw - 60px)',
+                marginLeft: '60px'
+              }}>
+                <div className={`d-flex flex-column  ${!isWideScreen || !isLargeDevice ? "col-12" : "col-10"}`}>
+                  <h2
+                    className={`${!isLargeDevice && isWideScreen ? "mega-bold" : !isLargeDevice && !isWideScreen ? "mega-bold" : isLargeDevice && isTooWide ? "mega-bold" : "mega-title"} mt-5 font-white`}
+                  >
+                    {slides[currentIndex].blog_titulo}
+                  </h2>
+                  <p className="font-white title-medium">
+                    <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].blog_bajada)} min.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Box>
+
+          {/* BOX WITH BAJADA */}
+          <div
+            key={slides[currentIndex].blog_titulo}
+            className="col col-3 title-regular"
+            style={{
+              borderBottom: '1px solid white',
+              height: '12em',
+              marginTop: 'calc(-12em - 97px)',
+              marginLeft: `calc(25vw * ${currentIndex})`,
+              backgroundColor: styles[currentIndex].color,
+              color: "#fff",
+              display: 'flex',
+              alignItems: 'center',
+            }}
           >
-            {truncateTablet(slides[currentIndex].blog_bajada)}
-          </CustomTabPanel>
+            <CustomTabPanel
+              value={currentIndex}
+              index={currentIndex}
+              isShort={isShort}
+              isMediumDevice={isMediumDevice}
+            >
+              {truncateTablet(slides[currentIndex].blog_bajada)}
+              <Link href={`/blog/${idBlog}`}>
+                <button
+                  className={`font-white ui-medium submit-form me-2 ${'btn-' + currentIndex}`}
+                  style={{
+
+                    display: 'block',
+                    padding: '0 20px',
+                    height: '56px',
+                    backgroundColor: styles[currentIndex].color,
+                    border: `1px solid ${styles[currentIndex].border}`,
+                    borderRadius: '100px',
+                  }}> Ver más + </button>
+              </Link>
+            </CustomTabPanel>
+          </div>
+          <ThemeProvider theme={theme}>
+
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              textColor="primary"
+              indicatorColor="white"
+            >
+              {slides.map((slide, slideIndex) => (
+                <Tab
+                  key={slideIndex}
+                  className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-medium" : "title-regular"}`}
+                  onClick={() => goToSlide(slideIndex)}
+                  sx={{
+                    alignItems: 'baseline',
+                    bgcolor: styles[slideIndex].color,
+                    color: '#fff',
+                    fontSize: isMediumDevice ? '12px' : isShort ? '20px' : '24px',
+                    fontWeight: 700,
+                    height: '97px',
+                    lineHeight: isMediumDevice ? '22px' : '32px',
+                    maxWidth: 'unset',
+                    textAlign: 'left',
+                    textTransform: 'capitalize',
+
+                  }}
+                  label={slide.blog_titulo}
+                  {...a11yProps(slideIndex)}
+                />
+              ))}
+            </Tabs>
+          </ThemeProvider>
         </div>
-        <ThemeProvider theme={theme}>
-
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            textColor="primary"
-            indicatorColor="white"
-          >
-            {slides.map((slide, slideIndex) => (
-              <Tab
-                key={slideIndex}
-                className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-medium" : "title-regular"}`}
-                onClick={() => goToSlide(slideIndex)}
-                sx={{
-                  alignItems: 'baseline',
-                  bgcolor: styles[slideIndex].color,
-                  color: '#fff',
-                  fontSize: isMediumDevice ? '12px' : isShort ? '20px' : '24px',
-                  fontWeight: 700,
-                  height: '97px',
-                  lineHeight: isMediumDevice ? '22px' : '32px',
-                  maxWidth: 'unset',
-                  textAlign: 'left',
-                  textTransform: 'capitalize',
-
-                }}
-                label={slide.blog_titulo}
-                {...a11yProps(slideIndex)}
-              />
-            ))}
-          </Tabs>
-        </ThemeProvider>
-      </div>
       } {/* : */}
 
       {/* MOBILE */}
@@ -420,25 +423,26 @@ const ImageSlider = ({ innerRef }) => {
             <div className="col-sm-12" style={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-evenly',
+              justifyContent: 'space-between',
             }
             }>
               {/* <div style={{ minHeight: '30vh' }}> */}
-              <h2 className={`${isShort ? "header-3-bold" : "header-1-bold"} font-white`} >{title}</h2>
+              <h2 className={`${isShort ? "header-2-bold" : "header-1-bold"} font-white mt-3`} >{title}</h2>
               <p className={`${isShort ? "body-regular" : "body-large-medium"} font-white`}>
                 {content.slice(0, 205)}
               </p>
               {/* </div> */}
               <Grid
                 container
-                direction="row"
+                direction="column"
                 justifyContent="flex-end"
-                alignItems="baseline"
-                sx={{ 
+                alignItems="flex-end"
+                sx={{
                   width: '90vw',
+                  height: '40vh',
                 }}
               >
-                <Link href={`/blog/${idBlog}`}>
+                <Link href={`/blog/${idBlog}`} style={{display: 'block'}}>
                   <button
                     className="font-white submit-form me-2 lato-btn btn-slide-mobile "> Ver más + </button>
                 </Link>
@@ -450,6 +454,9 @@ const ImageSlider = ({ innerRef }) => {
                   width={0}
                   sizes="100vw"
                   className="slide-img-mobile"
+                  style={{
+                    height: '31vh',
+                  }}
                 />
               </Grid>
               <div className='dots-container-styles'>

@@ -20,7 +20,7 @@ const questions = [
 3. Tomar una hora en la agenda electrónica
 4. Leer el consentimiento informado que se encuentra en el link
 
-*Importante: Si no se completan los 3 primeros pasos, la hora no será agendada
+*Importante: Si no se completan los 3 primeros pasos, la hora no será agendada.
 `
   }, {
     id: 'question02',
@@ -128,7 +128,7 @@ Si has vivido experiencias traumáticas;
 Si presentas dificultad para conciliar el sueño y/o comer;
 </li>
 </ul>
-Las recomendaciones previas no abarcan todos los motivos que pueden motivar una consulta psicológica, sólo son una guía. Te invitamos a consultar en caso de que experimentes algunas de las situaciones descritas o bien tengas otras preocupaciones pue puedan ser abordadas en conjunto con un especialista. ¡Recuerda que es muy importante la consulta precoz, no dejes pasar tiempo!
+Las recomendaciones previas no abarcan todos los motivos que pueden motivar una consulta psicológica, sólo son una guía. Te invitamos a consultar en caso de que experimentes algunas de las situaciones descritas o bien tengas otras preocupaciones pue puedan ser abordadas en conjunto con un especialista. ¡Recuerda que es muy importante la consulta oportuna, no dejes pasar tiempo!
     `
   }
 ]

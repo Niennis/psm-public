@@ -36,13 +36,15 @@ const subMenu = [
   { title: 'Convenios y profesionales', url: '/como-trabajamos/convenios-y-profesionales', label: '/convenios-y-profesionales' },
 ];
 
+const URL_AGENDA = process.env.NEXT_PUBLIC_URL_AGENDA
+
 const theme = createTheme({
   breakpoints: {
     values: {
-      xs: 0,
-      sm: 641,
-      md: 768,
-      lg: 1024,
+      xs: 0, // 640
+      sm: 641, // 767
+      md: 768, // 1023
+      lg: 1024, // 1279
       xl: 1280,
     },
   },
@@ -60,10 +62,10 @@ const Header = () => {
 
   const BOTON_RESERVAR = process.env.NEXT_PUBLIC_ACTIVATE_BUTTON === "true"
 
-  const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 767px)");
-  const isLargeSize = useMediaQuery("(min-width : 768px)");
-  const isExtaLargeSize = useMediaQuery("(min-width: 1025px) and (max-width: 1280px)");
-  const isXXLargeSize = useMediaQuery("(min-width:1281px)")
+  const isSmallSize = useMediaQuery("(max-width : 767px)");
+  const isMediumSize = useMediaQuery("(min-width : 768px) and (max-width : 1023px)");
+  const isLargeSize = useMediaQuery("(min-width: 1024px) ");
+  // const isXXLargeSize = useMediaQuery("(min-width:1281px)")
 
   useEffect(() => {
     const handleResize = () => {
@@ -134,175 +136,108 @@ const Header = () => {
         style={{
           background: 'white',
           color: 'black',
-          justifyContent: isMediumSize ? 'center' : 'flex-end',
+          // justifyContent: isSmallSize ? 'center' : 'flex-end',
+          justifyContent: 'center',
           margin: "0", // 0 72px
-          maxHeight: '112px',
-          minHeight: '98px',
+          height: '98px',
           width: '100vw',
           left: '0',
           right: '0',
         }}
       >
-        <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
-          <Toolbar disableGutters>
+        <Container maxWidth="false" style={{ background: 'white', color: 'black', paddingLeft: '8px', paddingRight: '8px' }}>
+          <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
             {isLargeSize ? (
               <>
                 {/* MENU DASHBOARD */}
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="a"
-                  href="/"
-                >
-                  {
-                    isXXLargeSize ?
-                      <Image
-                        alt="Logo"
-                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png`}
-                        height={0}
-                        width={0}
-                        priority
-                        sizes="100%"
-                        style={{
-                          height: '70px',
-                          width: '263px',
-
-                        }}
-                      />
-                      :
-                      <Image
-                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png`}
-                        height={0}
-                        width={0}
-                        alt="logo udp"
-                        sizes="100%"
-                        style={{
-                          height: 'auto',
-                          width: '100px',
-                        }} />
-                  }
-                </Typography>
-                <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-                  {pages.map((page) => {
-                    return (
-                      <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
-                        <Button
-                          className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === page.label
-                            ? 'active-header'
-                            : ''
-                            }`}
-
-                          onClick={() => handleNavClick(page.label)}
-                          sx={{ ...style, my: 2, mx: isExtaLargeSize ? 2 : 1 , color: 'black', display: 'block', width: 'min-content' }}
+                <Box sx={{
+                  flexShrink: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  // Tamaños responsivos con límites:
+                  width: { sm: '150px', md: '180px', lg: '200px', xl: '263px' },
+                  // Altura proporcional (ajusta según necesidad):
+                  height: { xs: '40px', sm: '48px', md: '53px', lg: '70px' },
+                  position: 'relative', // Necesario para Image con fill
+                  overflow: 'hidden' // Previene desbordamientos
+                }}>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="a"
+                    href="/"
+                  >
+                    <Image
+                      alt="Logo"
+                      src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png`}
+                      height={70}
+                      width={263}
+                      priority
+                      style={{
+                        height: 'auto',
+                        width: '100%',
+                        maxWidth: '263px',
+                        objectFit: 'contain'
+                      }}
+                    />
+                  </Typography>
+                </Box>
+                <Box sx={{display: 'flex', flexDirection: 'row', }}>
+                  <Box sx={{
+                    flexGrow: 1,
+                    display: { xs: 'none', md: 'flex' },
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    maxWidth: '800px',
+                    margin: '0 16px'
+                  }}>
+                    {pages.map((page) => {
+                      return (
+                        <Link
+                          style={{
+                            color: 'black',
+                            textDecoration: 'none',
+                            flexShrink: 0
+                          }}
+                          href={page.url}
+                          key={page.title}
                         >
-                          {page.title}
-                        </Button>
-                      </Link>
-                    )
-                  }
-                  )}
-                  <Tooltip title="Como trabajamos">
-                    <Button
-                      className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === 'como_trabajamos'
-                        ? 'active-header'
-                        : ''
-                        }`}
-                      onMouseOver={handleOpenUserMenu} sx={{ ...style, p: 0, m: 2, width: 'min-content', color: 'black', marginTop: '16px', marginBottom: '16px' }}
-                    >
-                      CÓMO TRABAJAMOS
-                    </Button>
-                  </Tooltip>
+                          <Button
+                            className={`ui-small ${activeSection === page.label
+                              ? 'active-header'
+                              : ''
+                              }`}
 
-                  <Box sx={{ flexGrow: 0, }} className="ui-medium" >
-                    <Menu
-                      sx={{ mt: '45px' }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
-                    >
-                      {subMenu.map((setting) => (
-                        <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center" className="ui-medium"
-                            onMouseLeave={handleCloseUserMenu}>
-                            <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
-                              {setting.title}
-                            </a>
-                          </Typography>
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </Box>
-                </Box>
-                {/* BOTON RESERVAR DESKTOP */}
-                <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                  <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="https://sitioprivado-b2beb6cmh0b7cuf7.eastus-01.azurewebsites.net/#profesionales" style={{ textDecoration: 'none' }} >
-                    <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
-                  </Link>
-                </Box>
-              </>
-            ) : (
-              <>
-                {/*  MENU MOBILE */}
-                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none', } }}>
-                  <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenNavMenu}
-                    color="inherit"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElNav}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'left',
-                    }}
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
-                    sx={{
-                      display: { xs: 'block', lg: 'none', margin: 0 },
-                    }}
-                  >
-                    {
-                      pages.map((page) => (
-                        <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                          <Typography textAlign="center" className="ui-medium">
-                            <a href={page.url} style={{ color: 'black', }}>
-                              {page.title}
-                            </a>
-                          </Typography>
-                        </MenuItem>
-                      ))
+                            onClick={() => handleNavClick(page.label)}
+                            sx={{
+                              ...style, my: 2, mx: { lg: '4px', xl: 1 },
+                              color: 'black',
+                              display: 'block',
+                              width: 'min-content'
+
+                            }}
+                          >
+                            {page.title}
+                          </Button>
+                        </Link>
+                      )
                     }
-                    <MenuItem onClick={handleOpenUserMenu}>
-                      <Typography textAlign="center" className="ui-medium font-black" >
-                        CÓMO TRABAJAMOS <FaChevronDown />
-                      </Typography>
-                    </MenuItem>
+                    )}
+                    <Tooltip title="Como trabajamos">
+                      <Button
+                        className={`ui-small ${activeSection === 'como_trabajamos'
+                          ? 'active-header'
+                          : ''
+                          }`}
+                        onMouseOver={handleOpenUserMenu} sx={{ ...style, p: 0, my: 2, mx: 1, width: 'min-content', color: 'black', marginTop: '16px', marginBottom: '16px' }}
+                      >
+                        CÓMO TRABAJAMOS
+                      </Button>
+                    </Tooltip>
 
-                    <Box sx={{ flexGrow: 0 }} >
+                    <Box sx={{ flexGrow: 0, }} className="ui-medium" >
                       <Menu
-                        sx={{ mt: '45px', }}
+                        sx={{ mt: '45px' }}
                         id="menu-appbar"
                         anchorEl={anchorElUser}
                         anchorOrigin={{
@@ -319,7 +254,8 @@ const Header = () => {
                       >
                         {subMenu.map((setting) => (
                           <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center" className="ui-medium">
+                            <Typography textAlign="center" className="ui-medium"
+                              onMouseLeave={handleCloseUserMenu}>
                               <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
                                 {setting.title}
                               </a>
@@ -328,36 +264,132 @@ const Header = () => {
                         ))}
                       </Menu>
                     </Box>
-                  </Menu>
+                  </Box>
+                  {/* BOTON RESERVAR DESKTOP */}
+                  <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                    <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                    <Link href={`${URL_AGENDA}/#profesionales`} style={{ textDecoration: 'none' }} >
+                      <FaUserCircle className={`btn-fa-user ${isSmallSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
+                    </Link>
+                  </Box>
                 </Box>
-                <Typography
-                  variant="h5"
-                  noWrap
-                  component="a"
-                  href="/"
-                  sx={{
-                    mr: { xs: 0, lg: 2 },
-                    display: { xs: 'flex', lg: 'none' },
-                    /* flexGrow: 1, temporal mientras botones están desactivados */
-                    color: 'inherit',
-                  }}
-                >
-                  <Image
-                    src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png`}
-                    height={0}
-                    width={0}
-                    alt="logo udp"
-                    sizes="100%"
-                    style={{
-                      height: 'auto',
-                      width: '100px',
-                    }} />{" "}
-                </Typography>
+              </>
+            ) : (
+              <>
+                {/*  MENU MOBILE */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', width: 'fit-content', alignItems: 'center' }}>
+                  <Box sx={{
+                    flexGrow: 'unset', display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'none' },
+                  }}>
+                    <IconButton
+                      size="small"
+                      aria-label="account of current user"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      onClick={handleOpenNavMenu}
+                      color="inherit"
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                    <Menu
+                      id="menu-appbar"
+                      anchorEl={anchorElNav}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                      open={Boolean(anchorElNav)}
+                      onClose={handleCloseNavMenu}
+                      sx={{
+                        display: { xs: 'block', lg: 'none', margin: 0 },
+                      }}
+                    >
+                      {
+                        pages.map((page) => (
+                          <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center" className="ui-medium">
+                              <a href={page.url} style={{ color: 'black', }}>
+                                {page.title}
+                              </a>
+                            </Typography>
+                          </MenuItem>
+                        ))
+                      }
+                      <MenuItem onClick={handleOpenUserMenu}>
+                        <Typography textAlign="center" className="ui-medium font-black" >
+                          CÓMO TRABAJAMOS <FaChevronDown />
+                        </Typography>
+                      </MenuItem>
+
+                      <Box sx={{ flexGrow: 0 }} >
+                        <Menu
+                          sx={{ mt: '45px', }}
+                          id="menu-appbar"
+                          anchorEl={anchorElUser}
+                          anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                          }}
+                          keepMounted
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                          }}
+                          open={Boolean(anchorElUser)}
+                          onClose={handleCloseUserMenu}
+                        >
+                          {subMenu.map((setting) => (
+                            <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                              <Typography textAlign="center" className="ui-medium">
+                                <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
+                                  {setting.title}
+                                </a>
+                              </Typography>
+                            </MenuItem>
+                          ))}
+                        </Menu>
+                      </Box>
+                    </Menu>
+                  </Box>
+                  <Typography
+                    variant="h5"
+                    noWrap
+                    component="a"
+                    href="/"
+                    sx={{
+                      // mr: { xs: 0, lg: 2 },
+                      display: { xs: 'flex', lg: 'none' },
+                      /* flexGrow: 1, temporal mientras botones están desactivados */
+                      color: 'inherit',
+                      overflow: 'unset',
+                      // Tamaños responsivos con límites:
+                      width: { xs: '100px', sm: '200px', md: '250px', lg: '200px', xl: '263px' },
+                      // Altura proporcional (ajusta según necesidad):
+                      height: { xs: '45px', sm: '40px', md: '60px', lg: '53px', xl: '70px' },
+                    }}
+                  >
+                    <Image
+                      src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png`}
+                      height={0}
+                      width={0}
+                      alt="logo udp"
+                      sizes="100%"
+                      style={{
+                        height: 'auto',
+                        width: 'auto',
+                      }} />{" "}
+                  </Typography>
+                </Box>
                 {/* BOTON RESERVAR MOBILE */}
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="https://sitioprivado-b2beb6cmh0b7cuf7.eastus-01.azurewebsites.net/#profesionales" style={{ textDecoration: 'none' }} >
-                    <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
+                  <Link href={`${URL_AGENDA}/#profesionales`} style={{ textDecoration: 'none' }} >
+                    <FaUserCircle className={`btn-fa-user ${isSmallSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>
               </>

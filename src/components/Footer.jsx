@@ -15,11 +15,11 @@ const FooterDae = () => {
   const isExtraLarge = useMediaQuery('(min-width:1440px)');
   const LINKS = [
     {
-      title: 'Departamento de vida universitaria',
+      title: 'Vida Universitaria',
       url: 'https://dae.udp.cl/vida-universitaria/',
     },
     {
-      title: 'Departamento de bienestar',
+      title: 'Bienestar UDP',
       url: 'https://dae.udp.cl/bienestar-estudiantil/',
     },
     {
@@ -27,7 +27,7 @@ const FooterDae = () => {
       url: 'https://inclusiva.udp.cl/',
     },
     {
-      title: 'Departamento de género UDP',
+      title: 'Género UDP',
       url: 'https://genero.udp.cl/',
     },
   ]
