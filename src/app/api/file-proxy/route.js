@@ -46,6 +46,14 @@ export async function GET(req) {
       return NextResponse.json({ error: 'Formato de archivo no permitido' }, { status: 415 });
     }
     
+    
+    // Obtener el nombre del archivo desde la ruta
+    const fileName = filePath.split('/').pop(); // Extrae el nombre del archivo de la ruta
+
+    // Configurar el encabezado Content-Disposition
+    const contentDisposition = `inline; filename="${fileName}"`;
+
+
     return new Response(fileBuffer, {
       headers: { 'Content-Type': contentType },
       status: 200,
