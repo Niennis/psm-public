@@ -168,7 +168,7 @@ const FrequentAskedQuestions = () => {
             <AccordionDetails>
               {/* <Typography className={'ui-medium'}>
                 {question.answer}
-              </Typography> */}<div dangerouslySetInnerHTML={{ __html: `<ul>${question.answer}</ul>` }} />
+              </Typography> */}<div className="ui-medium" dangerouslySetInnerHTML={{ __html: `<ul>${question.answer}</ul>` }} />
             </AccordionDetails>
           </Accordion>
         ))

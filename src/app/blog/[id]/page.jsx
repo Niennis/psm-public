@@ -121,6 +121,7 @@ const Blogdetails = ({ params }) => {
   // const [blog, setBlog] = useState({})
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const isLargeSiza = useMediaQuery('(min-width:1024px)');
+  const isSmallSize = useMediaQuery('(max-width:389px')
   const isExtraLargeSiza = useMediaQuery('(min-width:1440px)');
   const [descargas, setDescargas] = useState()
   const router = useRouter()
@@ -181,9 +182,10 @@ const Blogdetails = ({ params }) => {
 
                 {/* CONTENIDO DEL BLOG */}
                 <div className="col-12 " style={{ padding: isMediumSize ? 0 : '24px' }}>
-                  <div className="blog-view" style={{ paddingLeft: isMediumSize && '96px' }}>
-                    <div className="col-lg-12" style={{ padding: isMediumSize ? 0 : '32px 0 0 0', margin: isMediumSize ? '0' : '80px 0 0 0' }}>
-                      <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+                  <div className="blog-view" style={{ paddingInline: isMediumSize && '96px' }}>
+                    <div className="col-lg-12" style={{ padding: isMediumSize ? 0 : '0 0 0 0', margin: isMediumSize ? '0' : '80px 0 0 0' }}>
+
+                      <h3 className={isSmallSize ? "header-2-bold" : isMediumSize ? "mega-bold" : "header-1-bold"} style={{ marginTop: !isMediumSize && '120px', textWrap: 'balance' }}>
                         {blog && blog.blog_titulo}
                       </h3>
                     </div>
@@ -192,7 +194,7 @@ const Blogdetails = ({ params }) => {
                       {/* TEXTO */}
                       <div className="header-3-regular col-lg-10 col-12" style={{ marginLeft: '0px' }}>
                         {/* {blog.texto} */}
-                        {blog && <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.blog_texto} />}
+                        {blog && <ParserImgToImage classType={isMediumSize ? "blog-content" : "blog-content-sm"} htmlContent={blog.blog_texto} size={isLargeSiza} />}
                         {/* </div> */}
                       </div>
 

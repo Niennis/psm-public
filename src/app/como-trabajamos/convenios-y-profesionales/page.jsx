@@ -5,7 +5,8 @@ import FrequentAskedQuestions from "@/components/FAQ";
 import { useMediaQuery } from "@mui/material";
 
 const ConveniosYProfesionales = () => {
-  const isMediaSize = useMediaQuery('(min-width:768px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isSmallSize = useMediaQuery('(max-width:389px')
   const [activeTab, setActiveTab] = useState('descripcion-general');
 
   const handleTabClick = (tabId) => {
@@ -15,15 +16,15 @@ const ConveniosYProfesionales = () => {
 
     <div className="row prevencion flex-column d-flex m-0" >
       <div className="col-12" >
-        <div className="card quienes-somos" style={{ padding: isMediaSize ? '0px 96px' : '120px 24px 0px', margin: '0px', border: 'none' }}>
+        <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '120px 24px 0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-          <h3 className={isMediaSize ? "blog-title" : "blog-title-sm"} style={{ marginTop: !isMediaSize && '20px', fontSize: isMediaSize ? '48px' : '36px', lineHeight: isMediaSize ? '60px': '46px', fontWeight: 700, textWrap: 'balance' }}>
-            Convenios y Profesionales recomendados
+            <h3 className={isSmallSize ? "header-2-bold" : isMediumSize ? "mega-bold" : "header-1-bold"} style={{ marginTop: !isMediumSize && '120px', textWrap: 'balance' }}>
+              Convenios y Profesionales recomendados
             </h3>
+
             <div className="tab-content tab-dsme-content">
-             
               <div className='convenios-y-profesionales-recomendados' id="convenios-y-profesionales-recomendados">
-                <div className="blog-content">
+                <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
                   <h2>Convenios</h2>
                   <ul>
                     <li>

@@ -2,6 +2,7 @@
 import { Fragment, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import Image from "next/image";
 
 import { sendMailTests } from "@/services/TestServices";
 
@@ -211,12 +212,17 @@ const TestDepresion = () => {
         height: '520px',
         overflow: 'hidden'
       }}>
-        <img
+        <Image
           alt="#"
           src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}saludMental01.jpeg`}
-          width={'100%'}
+          height={0}
+          width={0}
+          sizes="100vw"
+          priority
           style={{
-            backgroundPosition: 'center'
+            backgroundPosition: 'center',
+            height: 'auto',
+            width: '100%',
           }}
         />
       </div>

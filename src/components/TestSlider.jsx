@@ -113,6 +113,7 @@ const TestSlider = ({ slides, innerRef }) => {
     return () => {
       resetTimeout();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, totalSlides, isLargeSize]);
 
 

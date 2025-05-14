@@ -8,6 +8,7 @@ import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa"
 import { BsInstagram } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import ReserveBtn from './ReserveBtn';
+import { acreditacion } from './imagepath';
 
 const FooterDae = () => {
   const isMediumSize = useMediaQuery('(min-width:768px)');
@@ -91,7 +92,7 @@ const FooterDae = () => {
             }}
           >
             <div className={`col-12 col-md-9 ${isMediumSize ? '' : 'mt-4'}`}>
-              <div className="row" style={{ height: '80%',margin: 0, }} >
+              <div className="row" style={{ height: '80%', margin: 0, }} >
 
                 {
                   LINKS.map((link, index) => (
@@ -124,15 +125,15 @@ const FooterDae = () => {
               <ReserveBtn text='Reservar' bgColor="#FABB00" color="#000" />
             </div>
           </div>
-          
+
           {(isMediumSize || isLargSize)
             ? <>
               <div className="row my-4"
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',margin: 0,
+                  justifyContent: 'space-between', margin: 0,
                 }}>
-                <div className="col-10 col-lg-4 p-0">
+                <div className="col-10 col-md-4 col-lg-4 p-0 d-flex flex-column align-items-start">
                   <Image
                     src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02_white.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     sizes="100vw"
@@ -146,8 +147,23 @@ const FooterDae = () => {
                     alt="Logo UDP"
                   />
                 </div>
+                <div className="col-10 col-md-4 col-lg-4 d-flex flex-column align-items-center">
+                  <Image
+                    src={acreditacion}
+                    sizes="100vw"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      // maxWidth: '285px',
+                    }}
+                    width={500}
+                    height={300}
+                    alt="Logo acreditación"
+                  />
+                </div>
+
                 {/* REDES SOCIALES */}
-                <div className="col-10 col-lg-2 d-flex flex-column align-items-end ">
+                <div className="col-10 col-md-4 col-lg-4 d-flex flex-column align-items-end " >
                   <p>Síguenos en</p>
                   <div style={{ display: 'inline-flex' }}>
                     <a href="https://www.linkedin.com/company/udiegoportales"
@@ -156,7 +172,7 @@ const FooterDae = () => {
                         display: 'flex',
                         alignItems: 'start',
                         fontSize: '25px',
-                        margin: '0 10px',
+                        margin: '0 5px',
                       }}>
                       <FaLinkedinIn />
                     </a>
@@ -166,7 +182,7 @@ const FooterDae = () => {
                         display: 'flex',
                         alignItems: 'start',
                         fontSize: '25px',
-                        margin: '0 10px',
+                        margin: '0 5px',
                       }}>
                       <FaFacebookF />
                     </a>
@@ -177,7 +193,7 @@ const FooterDae = () => {
                         display: 'flex',
                         alignItems: 'start',
                         fontSize: '25px',
-                        margin: '0 10px',
+                        margin: '0 5px',
                       }}>
                       <BsInstagram />
                     </a>
@@ -187,7 +203,7 @@ const FooterDae = () => {
                         display: 'flex',
                         alignItems: 'start',
                         fontSize: '25px',
-                        margin: '0 10px',
+                        margin: '0 5px',
                       }}>
 
                       <FaTwitter />
@@ -199,7 +215,7 @@ const FooterDae = () => {
                         display: 'flex',
                         alignItems: 'start',
                         fontSize: '25px',
-                        margin: '0 10px',
+                        margin: '0 5px',
                       }}>
                       <FaYoutube />
                     </a>
@@ -291,6 +307,22 @@ const FooterDae = () => {
                     alt=""
                   />
                 </div>
+                <div className="col-12 col-lg-4 d-flex flex-column align-items-center" >
+                  <Image
+                    src={acreditacion}
+                    sizes="100vw"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      margin: 0,
+                      padding:0,
+                      // maxWidth: '285px',
+                    }}
+                    width={700}
+                    height={500}
+                    alt="Logo acreditación"
+                  />
+                </div>
               </div>
             </>
           }
@@ -348,7 +380,7 @@ const FooterDae = () => {
                   </p>
                 </div>
                 <div className="col-12 align-self-center" style={{ borderRadius: '8px 8px 0 0', backgroundColor: '#A6A6A6' }}>
-                  <p className="body-small-regular m-0 px-0 py-2 text-center" style={{textWrap: 'balance'}}>
+                  <p className="body-small-regular m-0 px-0 py-2 text-center" style={{ textWrap: 'balance' }}>
                     Dirección de Asuntos Estudiantiles - Departamento de Salud Mental Estudiantil
                   </p>
                   <p className="body-small-regular m-0 px-0 py-2 text-center">

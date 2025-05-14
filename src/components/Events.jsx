@@ -126,7 +126,7 @@ const Events = ({ events, innerRef }) => {
   }
 
   return (
-    <div className='container col-12 align-self-center sailec' id="eventos" ref={innerRef}>
+    <div className='container col-12 align-self-center' id="eventos" ref={innerRef}>
       <div className="row" style={{ padding: 0, margin: 0 }}>
         <div className="col-sm-12 text-center" style={{ padding: 0 }}>
           <h2 style={{ fontSize: '32px', fontWeight: 700, lineHeight: '40px', paddingTop: '32px' }}>Eventos</h2>

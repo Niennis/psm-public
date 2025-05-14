@@ -175,9 +175,10 @@ const ImageSlider = ({ innerRef }) => {
     if (!apiCall) {
       try {
         const response = await fetchBlogs();
-        const reverse = response.reverse()
         setApiCall(true); // Marca que ya se hizo la Call
-        const blogs = reverse.slice(0, 4)
+        const blogs = response.slice(0, 4).reverse();
+        //  const blogs = response.slice(-4).reverse();
+
         setSlides(blogs)
         setTitle(blogs[0].blog_titulo)
         setContent(blogs[0].blog_bajada)
@@ -218,7 +219,7 @@ const ImageSlider = ({ innerRef }) => {
 
     // Configurar el timeout para cambiar el slide cada 8 segundos
     resetTimeout();
-    // timeoutRef.current = setTimeout(changeSlide, 8000);
+    timeoutRef.current = setTimeout(changeSlide, 8000);
 
     // Agregar el event listener para el cambio de tamaño de la ventana
     if (typeof window !== 'undefined') {
@@ -233,6 +234,7 @@ const ImageSlider = ({ innerRef }) => {
         window.removeEventListener('resize', handleResize);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, totalSlides, apiCall]);
 
   const handleChange = (event, newValue) => {

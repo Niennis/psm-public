@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import parse, { domToReact } from 'html-react-parser';
 
-const ParserImgToImage = ({ htmlContent, classType }) => {
+const ParserImgToImage = ({ htmlContent, classType, size }) => {
   // Definir el transformador que convierte <img> en <Image>
 
   const normalizarTexto = (texto) => {
@@ -68,7 +68,7 @@ const ParserImgToImage = ({ htmlContent, classType }) => {
               style={{
                 layout: width === '100%' ? 'responsive' : 'intrinsic',
                 maxWidth: '100%',
-                width: '50%',
+                width: size ? '50%' :'100%',
                 height: 'auto'
               }}
             />

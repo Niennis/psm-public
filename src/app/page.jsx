@@ -106,7 +106,7 @@ export default function Home() {
       rootMargin: '0px',
       threshold: 0.5,
     };
-
+  
     const observerCallback = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -114,15 +114,19 @@ export default function Home() {
         }
       });
     };
-
+  
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    sectionRefs.current.forEach(section => {
+  
+    // Capturamos el valor actual en una variable
+    const currentSectionRefs = sectionRefs.current;
+  
+    currentSectionRefs.forEach(section => {
       if (section) observer.observe(section);
     });
-
+  
     return () => {
-      sectionRefs.current.forEach(section => {
+      // Usamos la variable capturada en el cleanup
+      currentSectionRefs.forEach(section => {
         if (section) observer.unobserve(section);
       });
     };
@@ -146,6 +150,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -187,7 +192,7 @@ export default function Home() {
 
       <div className="row m-0 p-0">
         <div className="col-sm-12 text-center p-0" style={{ margin: '32px 0 0' }}>
-          <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
+          <h2 className="header-2-bold" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center'  }}>Preguntas frecuentes</h2>
         </div>
       </div>
       <FrequentAskedQuestions innerRef={el => sectionRefs.current[0] = el} className="home-section" />
