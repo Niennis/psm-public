@@ -11,13 +11,6 @@ const siteId = 3920275;
 // const hotjarVersion = 6;
 // Hotjar.init(siteId, hotjarVersion);
 
-const SailecFont = localFont({
-  src: [
-    { path: '../assets/fonts/Sailec-Font/SailecMedium/SailecMedium.woff2', weight: '400', style: 'normal' },
-  ],
-  variable: '--font-sailec',
-});
-
 export const metadata = {
   title: "Salud Mental Estudiantil UDP",
 };
@@ -48,7 +41,6 @@ export default async function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
 
-        {/* <link rel="preload" href="../assets/fonts/Sailec-Font/SailecMedium/SailecMedium.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/> */}
         {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" as="script" crossOrigin="anonymous" /> */}
 
         {/* <Script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" as="script" crossOrigin="anonymous"></Script> */}
