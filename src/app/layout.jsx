@@ -2,6 +2,7 @@ import "./globals.css";
 import "./fonts.css";
 import "../assets/css/bootstrap.css"
 import Header from "@/components/Header";
+import FooterDae from "@/components/Footer";
 import Script from 'next/script'
 import localFont from 'next/font/local';
 import { SectionProvider } from "@/context/SectionContext";
@@ -64,6 +65,7 @@ export default async function RootLayout({ children }) {
         <SectionProvider>
           <Header />
           {children}
+          <FooterDae />
         </SectionProvider>
         {/* <Script src="./bot.js" data-args="Salud mental, #FFFFFF, #AA3C80FF, ./bot_salud_mental.png" id="bot"></Script> */}
       </body>

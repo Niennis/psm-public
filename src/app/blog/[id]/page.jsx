@@ -210,29 +210,23 @@ const Blogdetails = ({ params }) => {
                     </article>
 
                     <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center' }} >
-                      <div className="col-12">
-                        <h3 className='header-2-bold mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
-                      </div>
-                      <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
-
-                        {descargas && descargas?.map((item, index) => (
-                          <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
-                            <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
-                              <Card variant="outlined">{card(item)}</Card>
-                            </Box>
+                      {descargas &&
+                        <>
+                          <div className="col-12">
+                            <h3 className='header-2-bold mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                           </div>
-                        ))}
+                          <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
 
-                        {/*  {
-                          descargas && descargas.map((item, index) => (
-                            <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
-                              <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
-                                <Card variant="outlined">{card(item)}</Card>
-                              </Box>
-                            </div>
-                          ))
-                        } */}
-                      </div>
+                            {descargas?.map((item, index) => (
+                              <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
+                                <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
+                                  <Card variant="outlined">{card(item)}</Card>
+                                </Box>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      }
                     </div>
                   </div>
                 </div>
@@ -242,8 +236,8 @@ const Blogdetails = ({ params }) => {
         </div>
         <div className="sidebar-overlay" data-reff="" />
       </>
-      <FooterDae isMediumSize={isMediumSize} />
-    </div>
+      {/* <FooterDae isMediumSize={isMediumSize} /> */}
+    </div >
   )
 }
 

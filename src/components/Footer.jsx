@@ -223,7 +223,9 @@ const FooterDae = () => {
                 </div>
               </div>
             </>
-            : <>
+
+            :
+            <>
               <div className="row my-4"
                 style={{
                   display: 'flex',
@@ -315,7 +317,7 @@ const FooterDae = () => {
                       width: '100%',
                       height: 'auto',
                       margin: 0,
-                      padding:0,
+                      padding: 0,
                       // maxWidth: '285px',
                     }}
                     width={700}

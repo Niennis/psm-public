@@ -58,7 +58,7 @@ export default function PlanDeAccionEnSaludMental({ children }) {
           </div>
         </div>
       </div>
-      <FooterDae />
+      {/* <FooterDae /> */}
     </>
   );
 }

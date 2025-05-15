@@ -55,7 +55,7 @@ export default function IntervencionEnPromocionYPrevencion({ children }) {
           </div>
         </div>
       </div>
-      <FooterDae />
+      {/* <FooterDae /> */}
     </>
   );
 }

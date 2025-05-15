@@ -57,7 +57,7 @@ export default function QuienesSomosLayout({ children }) {
           </div>
         </div>
       </div>
-      <FooterDae />
+      {/* <FooterDae /> */}
     </>
   );
 }

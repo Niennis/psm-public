@@ -196,7 +196,7 @@ export default function Home() {
         </div>
       </div>
       <FrequentAskedQuestions innerRef={el => sectionRefs.current[0] = el} className="home-section" />
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

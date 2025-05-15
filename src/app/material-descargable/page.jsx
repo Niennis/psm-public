@@ -224,7 +224,7 @@ export default function MaterialDescargable() {
           </div>
         </div>
       </div>
-      <FooterDae isMediumSize={isMediumSize} />
+      {/* <FooterDae isMediumSize={isMediumSize} /> */}
     </>
   );
 }
