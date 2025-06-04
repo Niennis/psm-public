@@ -253,7 +253,7 @@ const TestDepresion = () => {
                             </h2>
                           </div>
                           <div className="row m-0">
-                            <div className={`${isMediumSize ? 'header-3-regular' : 'body-regular'} col-12 col-md-10`}>
+                            <div className={`${isMediumSize ? 'ui-xlarge' : 'body-regular'} col-12 col-md-10`}>
                               <p>
                                 Durante las dos últimas semanas ¿con qué frecuencia le han molestado los siguientes problemas?
                               </p>
@@ -270,7 +270,7 @@ const TestDepresion = () => {
                         {
                           preguntas.map((item, index) => (
                             <div
-                              className={`col-12 ${isMediumSize ? 'header-3-regular' : 'body-regular'}`}
+                              className={`col-12 ${isMediumSize ? 'ui-xlarge' : 'body-regular'}`}
                               key={index + item.label}
                               style={{
                                 background: index % 2 === 0 && '#E6E9EC'
@@ -406,8 +406,8 @@ const TestDepresion = () => {
                 aria-describedby="modal-modal-description"
               >
                 {category ?
-                  <Box className={isMediumSize ? "header-3-regular" : "body-regular"} sx={{ ...style }}>
-                    <Typography className={isMediumSize ? "header-3-regular" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
+                  <Box className={isMediumSize ? "ui-xlarge" : "body-regular"} sx={{ ...style }}>
+                    <Typography className={isMediumSize ? "ui-xlarge" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
                       Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
                     </Typography>
                     <div className="col-12">
@@ -486,7 +486,7 @@ const TestDepresion = () => {
                     </div>
                     {category && <ChildModal result={category} enviar={onSubmit} isMediumSize={isMediumSize} />}
                   </Box>
-                  : <Box sx={{ ...style, textAlign: 'center' }}><Typography className={isMediumSize ? "header-3-regular" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
+                  : <Box sx={{ ...style, textAlign: 'center' }}><Typography className={isMediumSize ? "ui-xlarge" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
                     ¡Importante! Debes seleccionar una opción por cada pregunta
                   </Typography> </Box>
                 }

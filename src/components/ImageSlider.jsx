@@ -123,7 +123,7 @@ const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => 
       {value === index && (
         <Box sx={{ p: 1, height: '100%' }}>
           <Typography
-            className={`${isMediumDevice ? "ui-large" : "title-regular"}`}
+            className={`${isMediumDevice ? "ui-large" : "ui-large"}`}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -393,7 +393,7 @@ const ImageSlider = ({ innerRef }) => {
               {slides.map((slide, slideIndex) => (
                 <Tab
                   key={slideIndex}
-                  className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-medium" : "title-regular"}`}
+                  className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-medium" : "ui-large"}`}
                   onClick={() => goToSlide(slideIndex)}
                   sx={{
                     alignItems: 'baseline',

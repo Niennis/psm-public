@@ -158,7 +158,7 @@ export default function MaterialDescargable() {
               </h3>
             </div>
 
-            <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
+            <div className={` ${isSmallSize ? "body-regular" : "ui-xlarge"}`} >
               <p>
                 El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
               </p>

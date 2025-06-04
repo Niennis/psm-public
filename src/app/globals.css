@@ -15,8 +15,204 @@
 /*-----------------
 	1. General
 -----------------------*/
+/* work-sans-100 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 100;
+  src: url('../assets/fonts/work-sans-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-100italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 100;
+  src: url('../assets/fonts/work-sans-100italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-200 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 200;
+  src: url('../assets/fonts/work-sans-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-200italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 200;
+  src: url('../assets/fonts/work-sans-200italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-300 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/work-sans-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-300italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 300;
+  src: url('../assets/fonts/work-sans-300italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/work-sans-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: url('../assets/fonts/work-sans-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-500 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/work-sans-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-500italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 500;
+  src: url('../assets/fonts/work-sans-500italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-600 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../assets/fonts/work-sans-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-600italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 600;
+  src: url('../assets/fonts/work-sans-600italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/work-sans-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-700italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/work-sans-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-800 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: url('../assets/fonts/work-sans-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-800italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 800;
+  src: url('../assets/fonts/work-sans-800italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-900 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 900;
+  src: url('../assets/fonts/work-sans-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-900italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 900;
+  src: url('../assets/fonts/work-sans-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600");
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'ABC Arizona Flare';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-Bold.woff2') format('woff2'),
+    url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'ABC Arizona Flare';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-BoldItalic.woff2') format('woff2'),
+    url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'ABC Arizona Flare';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-Medium.woff2') format('woff2'),
+    url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'ABC Arizona Flare';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-MediumItalic.woff2') format('woff2'),
+    url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'ABC Arizona Flare';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-Regular.woff2') format('woff2'),
+    url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'ABC Arizona Flare';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-RegularItalic.woff2') format('woff2'),
+    url('../assets/fonts/ArizonaFlare/ABCArizonaFlare-RegularItalic.woff') format('woff');
+}
 
 
 html {
@@ -24,7 +220,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: Work Sans, sans-serif;
   font-size: 16px;
   color: #333448;
   /* background: linear-gradient(
@@ -13053,7 +13249,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 }
 
 .ant-table-wrapper .ant-table {
-  font-family: 'Poppins', sans-serif;
+  font-family: Work Sans, sans-serif;
 }
 
 .ant-table-wrapper .ant-table-pagination.ant-pagination {
@@ -13315,7 +13511,7 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 }
 
 .blog-content-sm p, .blog-content-sm li {
-  font-family: lato;
+  font-family: Work Sans, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -13343,7 +13539,7 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 }
 
 .blog-content h3 {
-  font-family: 'sailecmedium';
+  font-family: 'ABC Arizona Flare', sans-serif;
 }
 
 .blog-content table {
@@ -13352,7 +13548,7 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 }
 
 .blog-content th {
-  font-family: sailecmedium;
+  font-family: 'ABC Arizona Flare', sans-serif;
 }
 
 .blog-content td {
@@ -13494,49 +13690,49 @@ td:has(div.text-end) {
 }
 
 .blog-title {
-  font-family: sailecbold;
+  font-family: 'ABC Arizona Flare', sans-serif;
   font-weight: 700;
   font-size: 48px;
   line-height: 60px;
 }
 
 .blog-title-sm {
-  font-family: sailecbold;
+  font-family: 'ABC Arizona Flare', sans-serif;
   font-weight: 700;
   font-size: 40px;
   line-height: 52px;
 }
 
 .blog-subtitle {
-  font-family: sailecbold;
+  font-family: 'ABC Arizona Flare', sans-serif;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
 }
 
 .blog-subtitle-sm {
-  font-family: sailecmedium;
+  font-family: 'ABC Arizona Flare', sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
 }
 
 .blog-text {
-  font-family: sailec;
+  font-family: Work Sans, sans-serif;
   font-weight: 400;
   font-size: 24px;
   line-height: 32px;
 }
 
 .blog-text-sm {
-  font-family: lato;
+  font-family: Work Sans, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
 }
 
 .blog-time {
-  font-family: sailecmedium;
+  font-family: Work Sans, sans-serif;
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;

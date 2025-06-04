@@ -71,7 +71,7 @@ export default function QuienesSomos() {
 
                     <Typography
                       variant="body2"
-                      className="header-3-regular"
+                      className="ui-xlarge"
                       sx={{
                         color: '#000',
                         textWrap: 'pretty',
@@ -83,7 +83,7 @@ export default function QuienesSomos() {
 
                     <Typography
                       variant="body2"
-                      className="header-3-regular"
+                      className="ui-xlarge"
                     >
                       Nuestro modelo de intervención se basa en la <strong>Promoción, Prevención, Atención Grupal y Atención Clínica Individual</strong>; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
                     </Typography>
@@ -122,7 +122,7 @@ export default function QuienesSomos() {
               }
               <Typography
                 variant="body2"
-                className={isMediumSize ? "header-3-regular" : "body-regular"}
+                className={isMediumSize ? "ui-xlarge" : "body-regular"}
                 sx={{
                   color: '#000',
                   fontSize: '20px',
@@ -140,7 +140,7 @@ export default function QuienesSomos() {
               <h2 className={`${isMediumSize ? "header-2-bold" : "header-3-medium"} mt-3`}>
                 ¿Tienes preguntas o sugerencias?
               </h2>
-              <p className={isMediumSize ? "header-3-regular" : "body-regular"}>
+              <p className={isMediumSize ? "ui-xlarge" : "body-regular"}>
                 Puedes preguntar o sugerir lo que quieras, es totalmente anónimo, por lo que puedes sentirte seguro. Tus preguntas serán respondidas en el Canal de WhatsApp.</p>
               <button className=" btn-test-home me-1 py-2 px-3 my-3 ui-medium btn-shadow">
                 <a className="font-white" href="https://forms.gle/nFShGTzpaBKcvhCX9">

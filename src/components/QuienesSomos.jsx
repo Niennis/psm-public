@@ -82,7 +82,7 @@ const QuienesSomos = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      className="title-regular"
+                      className="ui-large"
                       sx={{
                         color: '#000',
                         // textWrap: 'balance',
@@ -93,7 +93,7 @@ const QuienesSomos = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      className="title-regular"
+                      className="ui-large"
                       sx={{
                         color: '#000',
                         // textWrap: 'balance',
@@ -163,7 +163,7 @@ const QuienesSomos = () => {
                         Quiénes somos
                       </Typography>
 
-                      <p className={`${isShort ? "body-regular" : "title-regular"} media-body `} style={{ textWrap: 'pretty' }}>
+                      <p className={`${isShort ? "body-regular" : "ui-large"} media-body `} style={{ textWrap: 'pretty' }}>
                         El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado. Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
                       </p>
                       <Link href={`/quienes-somos`}>

@@ -30,7 +30,7 @@ const ProtocoloAccionSaludMental = () => {
 
             <div className="tab-content tab-dsme-content">
               <div className={`tab-pane ${activeTab === 'protocolo-de-accion-en-salud-mental' ? 'show active' : ''}`} id="protocolo-de-accion-en-salud-mental">
-                <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
+                <div className={` ${isSmallSize ? "body-regular" : "ui-xlarge"}`} >
                   <p>
                     Este plan tiene como objetivo establecer las acciones y directrices estandarizadas que permitan realizar una respuesta adecuada consistente en identificar, contener y derivar casos de urgencia y emergencia de carácter psiquiátrico y/o psicológico ocurridos en la Universidad.
                   </p>

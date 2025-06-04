@@ -70,7 +70,7 @@ const IntervencionesClinicas = () => {
                 <div id="descripcion-general">
                   {/* <h2>Descripción General</h2> */}
                     
-                  <div className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`} >
+                  <div className={` ${isSmallSize  ? "body-regular" : "ui-xlarge"}`} >
                     <p>
                       En el área de intervención clínica el equipo del Departamento de Salud Mental Estudiantil realiza contención y apoyo emocional, acompañamiento e intervenciones psicológicas individuales breves e intervención grupal terapéutica gratuitas, a todos/as aquellos/as estudiantes de pregrado de la universidad, que lo soliciten y que manifiesten dificultades de tipo emocional, relacional, social, de rendimiento académico y/o vocacional.
                     </p>
@@ -95,9 +95,9 @@ const IntervencionesClinicas = () => {
           left={false}
           bgColor={'#f1f1f1'}
         ><>
-            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
+            <p className={` ${isSmallSize  ? "body-regular" : "ui-xlarge"}`}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
             </p>
-            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
+            <p className={` ${isSmallSize  ? "body-regular" : "ui-xlarge"}`}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
         </Section>
 
       </div>
@@ -109,9 +109,9 @@ const IntervencionesClinicas = () => {
           bgColor={'#ffffff'}
         >
           <>
-            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
+            <p className={` ${isSmallSize  ? "body-regular" : "ui-xlarge"}`}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
             </p>
-            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
+            <p className={` ${isSmallSize  ? "body-regular" : "ui-xlarge"}`}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
             </p>
           </>
         </Section>
@@ -125,7 +125,7 @@ const IntervencionesClinicas = () => {
           bgColor={'#f1f1f1'}
         >
           <>
-            <p className={` ${isSmallSize  ? "body-regular" : "header-3-regular"}`}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
+            <p className={` ${isSmallSize  ? "body-regular" : "ui-xlarge"}`}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
           </>
         </Section>
       </div>

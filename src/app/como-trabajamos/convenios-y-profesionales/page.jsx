@@ -24,7 +24,7 @@ const ConveniosYProfesionales = () => {
 
             <div className="tab-content tab-dsme-content">
               <div className='convenios-y-profesionales-recomendados' id="convenios-y-profesionales-recomendados">
-                <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
+                <div className={` ${isSmallSize ? "body-regular" : "ui-xlarge"}`} >
                   <h2>Convenios</h2>
                   <ul>
                     <li>

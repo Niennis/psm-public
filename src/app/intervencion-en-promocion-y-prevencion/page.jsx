@@ -29,7 +29,7 @@ const PromocionYPrevencion = () => {
 
             <div className="tab-content tab-dsme-content">
               <div className={`tab-pane ${activeTab === 'promocion-y-prevencion' ? 'show active' : ''}`} id="promocion-y-prevencion">
-                <div className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
+                <div className={` ${isSmallSize ? "body-regular" : "ui-xlarge"}`} >
                   <p>
                     El Departamento de Salud Mental de la UDP aborda la promoción y prevención en salud mental, centrando esfuerzos en mejorar el bienestar emocional y psicológico de la comunidad universitaria. Implementa estrategias para reducir los riesgos de trastornos mentales y desarrolla un Plan de Formación en Salud Mental para capacitar a docentes y administrativos en habilidades de manejo de crisis y primeros auxilios psicológicos, incluyendo cursos específicos orientados a mejorar la salud mental en contextos universitarios.
                   </p>
