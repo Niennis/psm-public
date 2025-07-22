@@ -150,7 +150,7 @@ const FrequentAskedQuestions = () => {
             onChange={handleChange(question.id)}
             sx={
               expanded === question.id
-                ? { bgcolor: '#3886FF', color: '#fff',  margin: '16px 12px !important', padding: 0, borderRadius: '8px' }
+                ? { bgcolor: '#005ac8', color: '#fff',  margin: '16px 12px !important', padding: 0, borderRadius: '8px' }
                 : { boxShadow: 'none', border: '1px solid black', margin: '16px 12px', padding: 0, borderRadius: '8px !important' }
             }
           >
