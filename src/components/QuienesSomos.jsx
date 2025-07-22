@@ -106,7 +106,7 @@ const QuienesSomos = () => {
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
                         <Link href={`/quienes-somos`}>
                           <button
-                            className={`submit-form me-2 ui-medium font-white`}
+                            className={`btn-ver-mas btn-shadow submit-form me-2 ui-medium`}
                             style={{
                               width: '209px',
                               height: '56px',

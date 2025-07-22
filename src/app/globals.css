@@ -13460,6 +13460,11 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
   border: none;
 }
 
+.btn-ver-mas:hover {
+  background-color: #13ae8f !important;
+  border: none;
+}
+
 .btn-shadow:hover {
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
   -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.30);
