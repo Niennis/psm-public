@@ -79,25 +79,25 @@ const styles = [
   {
     id: 0,
     key: 'banner01',
-    color: '#3886FF',
+    color: '#005ac8',
     border: '#A5C8FF',
   },
   {
     id: 1,
     key: 'banner02',
-    color: '#FABB00',
+    color: '#C29100',
     border: '#FFCB7E',
   },
   {
     id: 2,
     key: 'banner03',
-    color: '#1ABC9C',
+    color: '#007864',
     border: '#73CDCD',
   },
   {
     id: 3,
     key: 'banner04',
-    color: '#B82925',
+    color: '#780000',
     border: '#FF5253',
   },
 
