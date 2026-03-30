@@ -28,12 +28,19 @@ const ParserImgToImage = ({ htmlContent, classType, size }) => {
   }
 
   const prepareImg = (src) => {
-    const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
-    const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
-    const match_key = src.match(new RegExp(removeInterrogationMark)) || []
+    if (!src || typeof src !== 'string') return src;
 
-    if (match_base.length > 1 || match_key.length > 1) {
-      normalizarTexto(src)
+    // Si ya es una ruta local de Next.js o una URL de datos, no la tocamos
+    if (src.startsWith('/_next/') || src.startsWith('static/') || src.startsWith('data:')) {
+      return src;
+    }
+
+    const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
+    const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG ? process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1] : ''
+    const match_key = removeInterrogationMark ? src.match(new RegExp(removeInterrogationMark)) : []
+
+    if (match_base.length > 1 || (match_key && match_key.length > 1)) {
+      return normalizarTexto(src)
     } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
 
       return `/api/file-proxy?filePath=${src}`
@@ -47,9 +54,13 @@ const ParserImgToImage = ({ htmlContent, classType, size }) => {
 
       return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
     } else if (!src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-
+      // Si parece una imagen local (solo nombre de archivo), no le ponemos el proxy de Azure si no es necesario
+      if (!src.includes('://') && !src.startsWith('/')) {
+        return src;
+      }
       return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
     }
+    return src;
   }
 
   const options = {
@@ -68,7 +79,7 @@ const ParserImgToImage = ({ htmlContent, classType, size }) => {
               style={{
                 layout: width === '100%' ? 'responsive' : 'intrinsic',
                 maxWidth: '100%',
-                width: size ? '50%' :'100%',
+                width: size ? '50%' : '100%',
                 height: 'auto'
               }}
             />
@@ -79,6 +90,7 @@ const ParserImgToImage = ({ htmlContent, classType, size }) => {
   };
 
   // Usar html-react-parser para convertir el HTML a JSX
+  if (!htmlContent) return null;
   const content = parse(htmlContent, options);
 
   return <div>{content}</div>;

@@ -24,7 +24,7 @@ export default function QuienesSomosLayout({ children }) {
         position: 'relative'
       }}>
         <Image
-          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}quienes_somos_cabecera.jpg`}
+          src="/quienes_somos_cabecera.webp"
           alt="Quienes somos cabecera"
           height={0}
           width={0}

@@ -40,12 +40,19 @@ const normalizarTexto = (texto) => {
 }
 
 const prepareImg = (src) => {
-  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
-  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
-  const match_key = src.match(new RegExp(removeInterrogationMark)) || []
+  if (typeof src === 'object' && src !== null) {
+    // Si ya es un objeto (StaticImageData de Next.js), lo devolvemos tal cual
+    return src;
+  }
 
-  if (match_base.length > 1 || match_key.length > 1) {
-    normalizarTexto(src)
+  if (typeof src !== 'string') return src;
+
+  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
+  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG ? process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1] : '';
+  const match_key = removeInterrogationMark ? src.match(new RegExp(removeInterrogationMark)) : []
+
+  if (match_base.length > 1 || (match_key && match_key.length > 1)) {
+    return normalizarTexto(src)
   } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
 
     return `/api/file-proxy?filePath=${src}`
@@ -62,6 +69,7 @@ const prepareImg = (src) => {
 
     return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
   }
+  return src;
 }
 
 const theme = createTheme({
@@ -444,7 +452,7 @@ const ImageSlider = ({ innerRef }) => {
                   height: '40vh',
                 }}
               >
-                <Link href={`/blog/${idBlog}`} style={{display: 'block'}}>
+                <Link href={`/blog/${idBlog}`} style={{ display: 'block' }}>
                   <button
                     className="font-white submit-form me-2 lato-btn btn-slide-mobile "> Ver más + </button>
                 </Link>

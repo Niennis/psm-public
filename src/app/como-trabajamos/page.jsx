@@ -91,7 +91,7 @@ const IntervencionesClinicas = () => {
       <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'¿Qué es la entrevista de despeje?'}
-          image={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_entrevista_despeje.jpg`}
+          image="/intervenciones_entrevista_despeje.webp"
           left={false}
           bgColor={'#f1f1f1'}
         ><>
@@ -104,7 +104,7 @@ const IntervencionesClinicas = () => {
       <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#ffffff' }}>
         <Section
           title={'Intervenciones grupales'}
-          image={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_cabecera.jpg`}
+          image="/promocion_prevencion_cabecera.webp"
           left={true}
           bgColor={'#ffffff'}
         >
@@ -120,7 +120,7 @@ const IntervencionesClinicas = () => {
       <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'Intervenciones psicoeducativas'}
-          image={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_psicoeducativas.jpg`}
+          image="/intervenciones_clinicas_psicoeducativas.webp"
           left={false}
           bgColor={'#f1f1f1'}
         >

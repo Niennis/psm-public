@@ -64,7 +64,7 @@ const tests = [
     titulo: 'Test de ansiedad de Beck',
     bajada: 'El test de ansiedad de Beck es un cuestionario que ayuda a saber cuánta ansiedad siente una persona. Tiene 21 preguntas sobre cómo se ha sentido recientemente.',
     url: '/tests/test-de-ansiedad',
-    imagen: 'https://github.com/Niennis/imagesudp/blob/main/home_ansiedad.jpg?raw=true',
+    imagen: '/home_ansiedad.jpg',
   },
   {
     id: '0',
@@ -106,7 +106,7 @@ export default function Home() {
       rootMargin: '0px',
       threshold: 0.5,
     };
-  
+
     const observerCallback = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -114,16 +114,16 @@ export default function Home() {
         }
       });
     };
-  
+
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-  
+
     // Capturamos el valor actual en una variable
     const currentSectionRefs = sectionRefs.current;
-  
+
     currentSectionRefs.forEach(section => {
       if (section) observer.observe(section);
     });
-  
+
     return () => {
       // Usamos la variable capturada en el cleanup
       currentSectionRefs.forEach(section => {
@@ -133,19 +133,17 @@ export default function Home() {
   }, [setActiveSection]);
 
   const fetchData = useCallback(async () => {
-    // try {
-    //   // setIsLoading(true);
-    //   const response = await fetchBlogs();
-    //   // setSlides(blogs.slice(0, 4));
-    //   if (response.length === 0) setSlides(blogs.slice(blogs.length - 4))
-    //   if (response.length > 0) {
-    //     setSlides(response.slice(response.length - 4));
-    //   }
-    // } catch (error) {
-    //   console.error('Error fetching blogs:', error);
-    // } finally {
-    //   // setIsLoading(false);
-    // }
+    try {
+      const response = await fetchBlogs();
+      if (response && response.length === 0) setSlides(blogs.slice(blogs.length - 4))
+      if (response && response.length > 0) {
+        setSlides(response.slice(response.length - 4));
+      }
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    } finally {
+      // setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -192,7 +190,7 @@ export default function Home() {
 
       <div className="row m-0 p-0">
         <div className="col-sm-12 text-center p-0" style={{ margin: '32px 0 0' }}>
-          <h2 className="header-2-bold" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center'  }}>Preguntas frecuentes</h2>
+          <h2 className="header-2-bold" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>Preguntas frecuentes</h2>
         </div>
       </div>
       <FrequentAskedQuestions innerRef={el => sectionRefs.current[0] = el} className="home-section" />

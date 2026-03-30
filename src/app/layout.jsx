@@ -34,6 +34,13 @@ const fetchStaticData = async () => {
   }
 }
 
+import { MSWComponent } from "@/components/MSWComponent";
+
+if (typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
+  const { server } = require('../mocks/server');
+  server.listen({ onUnhandledRequest: 'bypass' });
+}
+
 export default async function RootLayout({ children }) {
   // const staticData = await fetchStaticData();
 
@@ -62,11 +69,13 @@ export default async function RootLayout({ children }) {
         }}></Script>
       </head>
       <body>
-        <SectionProvider>
-          <Header />
-          {children}
-          <FooterDae />
-        </SectionProvider>
+        <MSWComponent>
+          <SectionProvider>
+            <Header />
+            {children}
+            <FooterDae />
+          </SectionProvider>
+        </MSWComponent>
         {/* <Script src="./bot.js" data-args="Salud mental, #FFFFFF, #AA3C80FF, ./bot_salud_mental.png" id="bot"></Script> */}
       </body>
     </html>

@@ -25,7 +25,7 @@ export default function PlanDeAccionEnSaludMental({ children }) {
         position: 'relative'
       }}>
         <Image
-          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}plan_accion_cabecera.jpg`}
+          src="/plan_accion_cabecera.webp"
           alt="Quienes somos cabecera"
           height={0}
           width={0}

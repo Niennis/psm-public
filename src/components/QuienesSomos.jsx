@@ -127,7 +127,7 @@ const QuienesSomos = () => {
                     }}>
                     <div style={{ position: 'relative', height: '240px', width: '100%' }}>
                       <Image
-                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_cabecera.jpg`}
+                        src="/intervenciones_clinicas_cabecera.webp"
                         alt="Quienes somos"
                         fill
                         sizes="100%"

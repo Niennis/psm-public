@@ -48,12 +48,17 @@ const normalizarTexto = (texto) => {
   return `${base} ${url} ${key}`;
 }
 const prepareImg = (src) => {
-  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
-  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
-  const match_key = src.match(new RegExp(removeInterrogationMark)) || []
+  if (typeof src === 'object' && src !== null) {
+    return src;
+  }
+  if (typeof src !== 'string') return src;
 
-  if (match_base.length > 1 || match_key.length > 1) {
-    normalizarTexto(src)
+  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
+  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG ? process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1] : '';
+  const match_key = removeInterrogationMark ? src.match(new RegExp(removeInterrogationMark)) : []
+
+  if (match_base.length > 1 || (match_key && match_key.length > 1)) {
+    return normalizarTexto(src)
   } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
 
     return `/api/file-proxy?filePath=${src}`
@@ -70,24 +75,25 @@ const prepareImg = (src) => {
 
     return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
   }
+  return src;
 }
 
 
-const card = (item) => {
-
-  if (item.descarga_url.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
+const downloadComponent = (item) => {
+  if (item.descarga_url && item.descarga_url.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
     item.descarga_url = item.descarga_url.split('?')[0]
   }
 
   return (
-    <Fragment>
-      <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1' }}>
+    <Card variant="outlined" key={item.descarga_titulo} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1', flexGrow: 1 }}>
         <Typography variant="h5" component="div" className='title-medium'
           sx={{
             bgcolor: "#FABB00",
             height: '6rem',
             minHeight: 'fit-content',
-            padding: '16px 24px 16px 24px'
+            padding: '16px 24px 16px 24px',
+            color: 'black'
           }}
         >
           {item.descarga_titulo}
@@ -98,21 +104,21 @@ const card = (item) => {
             fontSize: '18px',
             lineHeight: '28px',
             fontWeight: 400,
-            minHeight: '8rem'
+            minHeight: '8rem',
+            color: 'black'
           }}>
           {item.descarga_bajada}
         </Typography>
       </CardContent>
-      <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
+      <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end', padding: '16px' }}>
         <a href={`/api/file-proxy?filePath=${item.descarga_url}`}>
-          {/* <a href={process.env.NEXT_PUBLIC_BASE_IMG + item.url + process.env.NEXT_PUBLIC_KEY_IMG} > */}
           <button
             className='btn-0 ui-medium btn-descargas btn-0'>
             Descargar <FaDownload />
           </button>
         </a>
       </CardActions>
-    </Fragment>
+    </Card>
   );
 }
 
@@ -130,14 +136,10 @@ const Blogdetails = ({ params }) => {
     const fetchData = async () => {
       const { blogs: data } = await fetchBlog(params.id);
 
-      setBlog(data[0])
-      const newArray = data.map(item => ({
-        descarga_bajada: item.descarga_bajada,
-        descarga_titulo: item.descarga_titulo,
-        descarga_url: item.descarga_url
-      }));
-      setDescargas(newArray)
-
+      if (data && data.length > 0) {
+        setBlog(data[0])
+        setDescargas(data[0].descargas || [])
+      }
     }
     fetchData()
     // if (blogs && !blog) {
@@ -161,8 +163,9 @@ const Blogdetails = ({ params }) => {
               priority
               src={prepareImg(blog?.blog_imagen)}
               style={{
-                backgroundPosition: 'center',
-                height: 'auto',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                height: '100%',
                 width: '100%',
               }}
             />}
@@ -210,18 +213,16 @@ const Blogdetails = ({ params }) => {
                     </article>
 
                     <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center' }} >
-                      {descargas &&
+                      {descargas && descargas.length > 0 &&
                         <>
                           <div className="col-12">
                             <h3 className='header-2-bold mt-4' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                           </div>
-                          <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'center', height: 'fit-content' }} >
+                          <div className="row d-flex my-4 p-0 ml-0" style={{ marginRight: isMediumSize ? '96px' : 0, borderTop: '1px solid grey', textAlign: 'left', height: 'fit-content', width: '100%' }} >
 
                             {descargas?.map((item, index) => (
-                              <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto', flex: isExtraLargeSiza ? 'none' : '1' }}>
-                                <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
-                                  <Card variant="outlined">{card(item)}</Card>
-                                </Box>
+                              <div className="col-12 col-lg-6 mb-3 mt-3 mt-md-4" key={index}>
+                                {downloadComponent(item)}
                               </div>
                             ))}
                           </div>

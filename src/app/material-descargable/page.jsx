@@ -126,7 +126,7 @@ export default function MaterialDescargable() {
         position: 'relative'
       }}>
         <Image
-          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}saludMental03.jpeg`}
+          src="/saludMental03.webp"
           alt="Quienes somos cabecera"
           height={0}
           width={0}

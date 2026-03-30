@@ -74,7 +74,7 @@ const ReservaTuHora = () => {
                     }}>
                     <div style={{ position: 'relative', height: '240px', width: '100%' }}>
                       <Image
-                        src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}profesional01.jpg`}
+                        src="/profesional01.webp"
                         alt="Imagen profesional"
                         fill
                         sizes="100%"

@@ -5,7 +5,7 @@ export { default as loginicon02 } from "../assets/img/icons/login-icon-02.svg";
 export { default as loginicon03 } from "../assets/img/icons/login-icon-03.svg";
 export { default as logout } from "../assets/img/icons/logout.svg";
 
-export { default as logo } from "../assets/img/logo02.png";
+export const logo = "/logo02.png";
 export { default as logoudp } from "../assets/img/logo03.png";
 export { default as logojpg } from "../assets/img/logo.jpg";
 
@@ -274,8 +274,17 @@ export { default as report_icon3 } from "../assets/img/icons/report-icon-03.svg"
 export { default as report_icon4 } from "../assets/img/icons/report-icon-04.svg";
 
 export { default as white_logo } from "../assets/img/logoudp_blanco_footer.png"
-export { default as logo02_white } from "../assets/img/logo02_white.png"
+export const logo02_white = "/logo02_white.png"
 export { default as white_acreditacion } from "../assets/img/Logo_Acreditacion_udp.png"
 
 export { default as bot_icon } from "../assets/img/bot_salud_mental.png"
 export { default as acreditacion } from "../assets/img/SelloAcreditacion_UDP_CNA_Lexend_Blanco_SinBorde.png"
+
+export { default as ansiedad01 } from "../assets/img/ansiedad01.jpg";
+export { default as ansiedad02 } from "../assets/img/ansiedad02.jpg";
+export { default as suicidio01 } from "../assets/img/suicidio01.jpg";
+export { default as suicidio02 } from "../assets/img/suicidio02.jpg";
+export { default as drogas01 } from "../assets/img/drogas01.jpg";
+export { default as drogas02 } from "../assets/img/drogas02.jpg";
+export { default as primeros_dias_01 } from "../assets/img/primeros_dias_01.jpg";
+export { default as primeros_dias_02 } from "../assets/img/primeros_dias_02.jpg";

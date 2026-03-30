@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
-import { sendMailTests } from "@/services/TestServices";
+// import { sendMailTests } from "@/services/TestServices"; // APP SERVICE DESHABILITADO
 
 import { useForm } from 'react-hook-form';
 import { FaArrowLeft } from "react-icons/fa";
@@ -146,7 +146,7 @@ const ChildModal = ({ result, enviar, isMediumSize }) => {
     setOpenChildModal(true)
   };
   const handleOpenWithMail = () => {
-    enviar(result)
+    // enviar(result) // APP SERVICE DESHABILITADO
     // setOpenChildModal(true)
   };
   const handleClose = () => {
@@ -155,7 +155,7 @@ const ChildModal = ({ result, enviar, isMediumSize }) => {
 
   return (
     <Fragment>
-      <Button onClick={handleOpenWithMail}>Enviar correo</Button>
+      <Button onClick={handleOpenWithMail} disabled style={{ opacity: 0.4, cursor: 'not-allowed' }}>Enviar correo</Button>
       <Button onClick={handleOpenAnon}>Resultados anónimos</Button>
       <Modal
         open={openChildModal}
@@ -226,7 +226,9 @@ const TestAnsiedad = () => {
   };
   const handleClose = () => { setOpen(false); }
 
+  // APP SERVICE DESHABILITADO
   const onSubmit = handleSubmit(async (data, result) => {
+    /*
     setSuccess('initial')
 
     const body = {
@@ -250,6 +252,7 @@ const TestAnsiedad = () => {
       console.log('Error de conexión, intenta de nuevo más tarde.', error)
       setError('Error de conexión, intenta de nuevo más tarde.')
     }
+    */
   })
 
   const handleOnClose = () => {
@@ -264,7 +267,7 @@ const TestAnsiedad = () => {
       }}>
         <Image
           alt="#"
-          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}home_ansiedad.jpg`}
+          src="/home_ansiedad.jpg"
           height={0}
           width={0}
           sizes="100vw"
@@ -456,6 +459,7 @@ const TestAnsiedad = () => {
               >
                 {category ?
                   <Box className={isMediumSize ? "ui-xlarge" : "body-regular"} sx={{ ...style }}>
+                    {/* APP SERVICE DESHABILITADO - formulario de envío de correo
                     <Typography className={isMediumSize ? "ui-xlarge" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>
                       Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
                     </Typography>
@@ -464,16 +468,8 @@ const TestAnsiedad = () => {
                         <label style={{ top: '-20px' }}>
                           Nombre <span className="login-danger">*</span>
                         </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder=""
-                          {...register('nombre', {
-                            required: {
-                              value: true,
-                              message: 'Nombre es requerido'
-                            }
-                          })}
+                        <input className="form-control" type="text" placeholder=""
+                          {...register('nombre', { required: { value: true, message: 'Nombre es requerido' } })}
                         />
                       </div>
                     </div>
@@ -482,16 +478,8 @@ const TestAnsiedad = () => {
                         <label style={{ top: '-20px' }}>
                           Apellido <span className="login-danger">*</span>
                         </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder=""
-                          {...register('apellido', {
-                            required: {
-                              value: true,
-                              message: 'Apellido es requerido'
-                            }
-                          })}
+                        <input className="form-control" type="text" placeholder=""
+                          {...register('apellido', { required: { value: true, message: 'Apellido es requerido' } })}
                         />
                       </div>
                     </div>
@@ -500,16 +488,8 @@ const TestAnsiedad = () => {
                         <label style={{ top: '-20px' }}>
                           Email <span className="login-danger">*</span>
                         </label>
-                        <input
-                          className="form-control"
-                          type="email"
-                          placeholder=""
-                          {...register('email', {
-                            required: {
-                              value: true,
-                              message: 'Correo electrónico es requerido'
-                            }
-                          })}
+                        <input className="form-control" type="email" placeholder=""
+                          {...register('email', { required: { value: true, message: 'Correo electrónico es requerido' } })}
                         />
                       </div>
                     </div>
@@ -517,22 +497,15 @@ const TestAnsiedad = () => {
                       <div className="form-group select-gender">
                         <div className="form-check-inline">
                           <label className='blog-text-sm ui-small'>
-                            <input
-                              type="checkbox"
-                              name="consentimiento"
-                              className="form-check-input"
-                              {...register('consentimiento', {
-                                required: {
-                                  value: true,
-                                  message: 'Debes aceptar el consentimiento'
-                                }
-                              })}
+                            <input type="checkbox" name="consentimiento" className="form-check-input"
+                              {...register('consentimiento', { required: { value: true, message: 'Debes aceptar el consentimiento' } })}
                             />
                             Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSME, con fines de investigación.
                           </label>
                         </div>
                       </div>
                     </div>
+                    */}
                     {category && <ChildModal result={category} enviar={onSubmit} />}
                   </Box>
                   : <Box sx={{ ...style, textAlign: 'center' }}><Typography className={isMediumSize ? "ui-xlarge" : "body-regular"} id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px', }}>

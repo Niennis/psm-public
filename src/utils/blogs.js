@@ -1,6 +1,7 @@
 
 import {
-  banner04, banner05, banner06, banner07, blog0101, blog0102, blog0201, blog0202, blog0301, blog0302
+  banner04, banner05, banner06, banner07, blog0101, blog0102, blog0201, blog0202, blog0301, blog0302,
+  ansiedad01, ansiedad02, suicidio01, suicidio02, drogas01, drogas02, primeros_dias_01, primeros_dias_02
 }
   from '@/components/imagepath';
 export const blogs = [
@@ -42,7 +43,7 @@ export const blogs = [
 </ul>
 
   
-  <img src="${process.env.NEXT_PUBLIC_BASE_IMG}ansiedad02.jpg${process.env.NEXT_PUBLIC_KEY_IMG}" alt="" width="100%" class="blog-img"/>
+  <img src="${ansiedad02.src}" alt="" width="100%" class="blog-img"/>
   
 <h2>Técnica 4: Exposición Gradual</h2>
 <p><strong>Exposición gradual: Enfrentando los miedos paso a paso.</strong></p>
@@ -74,7 +75,7 @@ export const blogs = [
 <li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
 </ul>
 `,
-    blog_imagen: `ansiedad01.jpg`,
+    blog_imagen: ansiedad01,
     // blog_video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     descargas: [
       {
@@ -103,7 +104,7 @@ export const blogs = [
 </ol>
 <p>Identificar tus emociones y compartirlas es el primer paso para superar el aislamiento. No subestimes el poder de compartir cómo te sientes con alguien que pueda ofrecerte un apoyo genuino.</p>
 
-<img src="${process.env.NEXT_PUBLIC_BASE_IMG}02%20Suicidio%20c%C3%B3mo%20buscar%20ayuda%20y%20ayudar/im%C3%A1genes/iStock-1455922844.jpg${process.env.NEXT_PUBLIC_KEY_IMG}" alt="" width="100%" class="blog-img"/>
+<img src="${suicidio02.src}" alt="" width="100%" class="blog-img"/>
 
 <h2>Cómo ayudar</h2>
 <p>Si conoces a alguien que está pasando por un momento difícil y considera el suicidio, aquí tienes tres pasos concretos que puedes seguir para ofrecer tu ayuda:</p>
@@ -125,7 +126,7 @@ export const blogs = [
 <li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
 </ul>
 `,
-    blog_imagen: `suicidio01.jpg`,
+    blog_imagen: suicidio01,
     blog_video: '',
     // blog_video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     descargas: [
@@ -154,7 +155,7 @@ export const blogs = [
 <h2>Desarrolla Habilidades de Resistencia</h2>
 <p>Aprender a decir "no" es una habilidad crucial. En muchas situaciones, la presión social ejerce una gran influencia sobre el consumo de sustancias. Tener estrategias para manejar estas situaciones puede ser muy útil. Practica respuestas y mantén una postura firme sobre tus decisiones personales sin sentirte obligado a ceder.</p>
 
-<img src="${process.env.NEXT_PUBLIC_BASE_IMG}drogas01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}" alt="" width="100%" class="blog-img"/>
+<img src="${drogas01.src}" alt="" width="100%" class="blog-img"/>
 
 <h2>Apóyate en Redes Positivas</h2>
 <p>El apoyo social es un factor protector clave contra el consumo de sustancias. Rodéate de amigos y compañeros que respeten tus decisiones y compartan tus valores. Participa en actividades y clubs universitarios que promuevan un estilo de vida saludable. Según estudios, los estudiantes que tienen un sistema de apoyo sólido son menos propensos a participar en el consumo de drogas y alcohol.</p>
@@ -174,7 +175,7 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    blog_imagen: `drogas02.jpg`,
+    blog_imagen: drogas02,
     blog_video: '',
     // blog_video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     descargas: [
@@ -188,7 +189,7 @@ export const blogs = [
         descarga_bajada: 'Identifica las señales de riesgo en tu consumo de alcohol y drogas para tomar acción temprana y proteger tu bienestar general.',
         descarga_url: 'https://reposaludmental.blob.core.windows.net/publicsite/03%20Drogas%20y%20alcohol%20c%C3%B3mo%20evitar%20el%20exceso/descargables/Señales%20de%20riesgo%20en%20mi%20consumo%20de%20alcohol%20y%20drogas.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       }
-   
+
     ]
   },
   {
@@ -215,7 +216,7 @@ export const blogs = [
 <p>En la universidad, pedir ayuda no solo es aceptable, sino que es una parte esencial del proceso de aprendizaje. Si no entiendes algo, acércate a tus profesores o compañeros. Las universidades suelen ofrecer una amplia gama de recursos, como tutorías, clases de refuerzo y materiales de apoyo en línea.</p>
 <p>No tengas miedo de acudir a tus profesores durante las horas de consulta, especialmente si sientes que te estás quedando atrás. También puedes preguntar a estudiantes de cursos superiores por consejos o recomendaciones para afrontar las materias.</p>
 
-<img src="${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}" alt="" width="100%" class="blog-img"/>
+<img src="${primeros_dias_02.src}" alt="" width="100%" class="blog-img"/>
 
 <h2>5. Socializa y crea conexiones</h2>
 <p>Otro aspecto clave para adaptarte a la vida universitaria es la socialización. Hacer nuevos amigos y establecer relaciones con tus compañeros de clase puede ser una de las mejores formas de superar los primeros días. Según estudios recientes, la socialización ayuda a reducir el estrés, fomenta el trabajo en equipo y crea una red de apoyo que puede ser muy útil durante tu estancia en la universidad.</p>
@@ -241,7 +242,7 @@ export const blogs = [
 <p>Los primeros días en la universidad pueden ser desafiantes, pero con una buena organización, actitud positiva y el apoyo de tus seres queridos y compañeros, podrás superar cualquier obstáculo. Recuerda que la universidad es una oportunidad para crecer tanto académica como personalmente. No te preocupes si las cosas no salen perfectas al principio; lo importante es aprender de cada experiencia y seguir adelante. ¡Ánimo y éxito en esta nueva etapa de tu vida!</p>
 
 `,
-    blog_imagen: `primeros_dias_01.jpg`,
+    blog_imagen: primeros_dias_01,
     blog_video: '',
     // blog_video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     descargas: [

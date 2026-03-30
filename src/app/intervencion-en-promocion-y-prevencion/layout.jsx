@@ -22,7 +22,7 @@ export default function IntervencionEnPromocionYPrevencion({ children }) {
         position: 'relative'
       }}>
         <Image
-          src={`/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_cabecera.jpg`}
+          src="/promocion_prevencion_cabecera.webp"
           alt="Promoción y prevención cabecera"
           height={0}
           width={0}
