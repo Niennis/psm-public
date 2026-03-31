@@ -47,3 +47,4 @@ prisma/schema.prisma
 certificates
 .unlighthouse
 .codegpt
+cache/
