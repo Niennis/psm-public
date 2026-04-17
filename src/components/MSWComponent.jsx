@@ -8,14 +8,14 @@ export function MSWComponent({ children }) {
   useEffect(() => {
     const initMsw = async () => {
       if (process.env.NEXT_PUBLIC_USE_MOCKS === 'true') {
-        const { worker } = await import('../mocks/browser')
-        await worker.start({
-          onUnhandledRequest: 'bypass',
-        })
-        setMswReady(true)
-      } else {
-        setMswReady(true)
+        try {
+          const { worker } = await import('../mocks/browser')
+          await worker.start({ onUnhandledRequest: 'bypass' })
+        } catch (e) {
+          console.warn('[MSW] Failed to start:', e)
+        }
       }
+      setMswReady(true)
     }
 
     if (!mswReady) {

@@ -20,7 +20,6 @@
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
     "@mui/system": "^5.15.15",
-    "antd": "5.14.1",
     "bootstrap": "^5.3.3",
     "dayjs": "1.11.10",
     "feather-icons-react": "0.7.0",
