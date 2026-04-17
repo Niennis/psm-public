@@ -1,38 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Zerus — Portal Público de Salud Mental UDP
 
-## Getting Started
+Portal web público de la Dirección de Salud Mental de la **Universidad Diego Portales**, diseñado para entregar información y recursos educativos sobre salud mental a la comunidad universitaria.
 
-First, run the development server:
+> Este es uno de los dos portales del proyecto Zerus. Ver también: [Portal Privado](https://github.com/Niennis/psm-private)
+
+## 🚀 Demo
+
+[Ver sitio en producción](https://psm-public.vercel.app/)
+
+## ✨ Funcionalidades
+
+- Información pública sobre el área de salud mental de la UDP
+- Recursos educativos sobre bienestar y salud mental
+- Acceso al portal privado para agendar horas de atención
+
+## 🛠️ Stack tecnológico
+
+- **Framework:** Next.js (App Router)
+- **Lenguaje:** JavaScript
+- **Estilos:** CSS / Bootstrap / Material UI
+- **Despliegue:** Vercel / Azure App Services
+
+## ⚙️ Cómo correr localmente
 
 ```bash
+# Clonar el repositorio
+git clone https://github.com/Niennis/psm-public.git
+cd psm-public
+
+# Instalar dependencias
+npm install
+
+# Correr en modo desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000) en el navegador.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+> **Nota:** Este proyecto requiere variables de entorno para conectarse al backend. Contactar al equipo para obtener acceso.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📁 Estructura del proyecto
 
-## Learn More
+```
+public/           # Recursos estáticos públicos
+src/
+├── app/          # Páginas y rutas (App Router)
+│   ├── api/      # Route handlers
+│   ├── blog/
+│   ├── tests/    # Tests psicológicos (ansiedad, depresión)
+│   └── ...       # Resto de secciones del sitio
+├── assets/       # CSS, fuentes e imágenes
+├── components/   # Componentes reutilizables
+├── context/      # React Context
+├── mocks/        # Mocks de API con MSW (desarrollo)
+├── services/     # Llamadas a la API
+└── utils/        # Funciones utilitarias
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🔗 Proyecto relacionado
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Este portal es la cara pública del sistema Zerus. El [portal privado](https://github.com/Niennis/psm-private) permite a estudiantes y profesionales gestionar horas de atención y fichas clínicas.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 👩‍💻 Desarrollado por
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-
+[Estefanía Osses Vera](https://github.com/Niennis) — Freelance, 2023–2025
