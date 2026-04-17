@@ -135,14 +135,10 @@ export default function Home() {
   const fetchData = useCallback(async () => {
     try {
       const response = await fetchBlogs();
-      if (response && response.length === 0) setSlides(blogs.slice(blogs.length - 4))
-      if (response && response.length > 0) {
-        setSlides(response.slice(response.length - 4));
-      }
+      const data = (response && response.length > 0) ? response : blogs;
+      setSlides(data.slice(data.length - 4));
     } catch (error) {
-      console.error('Error fetching blogs:', error);
-    } finally {
-      // setIsLoading(false);
+      setSlides(blogs.slice(blogs.length - 4));
     }
   }, []);
 

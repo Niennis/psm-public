@@ -123,22 +123,23 @@ const ImageSlider = ({ innerRef }) => {
 
   const isWideScreen = useMediaQuery("(min-aspect-ratio: 1.7")
   const isTooWide = useMediaQuery("(min-aspect-ratio: 2")
-  const aspectRatio = window.innerWidth / window.innerHeight;
 
   const fetch = async () => {
     if (!apiCall) {
+      setApiCall(true);
       try {
         const response = await fetchBlogs();
-        setApiCall(true); // Marca que ya se hizo la Call
-        const blogs = response.slice(0, 4).reverse();
-        //  const blogs = response.slice(-4).reverse();
-
-        setSlides(blogs)
-        setTitle(blogs[0].blog_titulo)
-        setContent(blogs[0].blog_bajada)
-        setIdBlog(blogs[0].blog_id)
+        const data = (response && response.length > 0 ? response : blogs).slice(0, 4).reverse();
+        setSlides(data)
+        setTitle(data[0].blog_titulo)
+        setContent(data[0].blog_bajada)
+        setIdBlog(data[0].blog_id)
       } catch (error) {
-        console.log('Error:', error.message);
+        const data = blogs.slice(0, 4).reverse();
+        setSlides(data)
+        setTitle(data[0].blog_titulo)
+        setContent(data[0].blog_bajada)
+        setIdBlog(data[0].blog_id)
       }
     }
   }
