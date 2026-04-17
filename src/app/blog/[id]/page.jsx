@@ -20,62 +20,11 @@ import Typography from '@mui/material/Typography';
 import { FaArrowLeft, FaDownload } from "react-icons/fa";
 
 
-const normalizarTexto = (texto) => {
-  // Expresiones regulares dinámicas para base y key
-  const baseRegex = new RegExp(`(${process.env.NEXT_PUBLIC_BASE_IMG})`, "i");
-  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
-  const keyRegex = new RegExp(removeInterrogationMark, "i");
-
-  // Expresión regular para la URL (nombre de archivo de imagen con extensión)
-  const urlRegex = /(\b\w+\.(jpg|png|gif|jpeg|webp)\b)/i;
-
-  // Extraer las partes
-  const baseMatch = texto.match(baseRegex);
-  const urlMatch = texto.match(urlRegex);
-  const keyMatch = texto.match(keyRegex);
-
-  // Verificar que cada parte esté presente
-  if (!baseMatch || !urlMatch || !keyMatch) {
-    throw new Error("El texto no contiene base, url o key válidos.");
-  }
-
-  // Obtener los valores únicos (en caso de que haya duplicados)
-  const base = baseMatch[1];
-  const url = urlMatch[1];
-  const key = keyMatch[1];
-
-  // Reconstruir el texto en el orden correcto
-  return `${base} ${url} ${key}`;
-}
 const prepareImg = (src) => {
   if (typeof src === 'object' && src !== null) {
     return src;
   }
-  if (typeof src !== 'string') return src;
-
-  const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
-  const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG ? process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1] : '';
-  const match_key = removeInterrogationMark ? src.match(new RegExp(removeInterrogationMark)) : []
-
-  if (match_base.length > 1 || (match_key && match_key.length > 1)) {
-    return normalizarTexto(src)
-  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-
-    return `/api/file-proxy?filePath=${src}`
-  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-    const removeKey = src.split('?')[0]
-    return `/api/file-proxy?filePath=${removeKey}`
-  } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-
-    return `/api/file-proxy?filePath=${src}`
-  } else if (src.includes(process.env.NEXT_PUBLIC_KEY_IMG) && !src.includes(process.env.NEXT_PUBLIC_BASE_IMG)) {
-
-    return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
-  } else if (!src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-
-    return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
-  }
-  return src;
+  return src ?? null;
 }
 
 

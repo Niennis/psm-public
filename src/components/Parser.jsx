@@ -4,62 +4,8 @@ import parse, { domToReact } from 'html-react-parser';
 const ParserImgToImage = ({ htmlContent, classType, size }) => {
   // Definir el transformador que convierte <img> en <Image>
 
-  const normalizarTexto = (texto) => {
-    // Expresiones regulares dinámicas para base y key
-    const baseRegex = new RegExp(`(${process.env.NEXT_PUBLIC_BASE_IMG})`, "i");
-    const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1]
-    const keyRegex = new RegExp(removeInterrogationMark, "i");
-
-    // Expresión regular para la URL (nombre de archivo de imagen con extensión)
-    const urlRegex = /(\b\w+\.(jpg|png|gif|jpeg|webp)\b)/i;
-
-    // Extraer las partes
-    const baseMatch = texto.match(baseRegex) || process.env.NEXT_PUBLIC_BASE_IMG;
-    const urlMatch = texto.match(urlRegex);
-    const keyMatch = texto.match(keyRegex) || process.env.NEXT_PUBLIC_KEY_IMG;
-
-    // Obtener los valores únicos (en caso de que haya duplicados)
-    const base = typeof baseMatch === 'string' ? baseMatch : baseMatch[1];
-    const url = urlMatch[1];
-    const key = typeof keyMatch === 'string' ? keyMatch : keyMatch[1];
-
-    // Reconstruir el texto en el orden correcto
-    return `${base}${url}${key}`;
-  }
-
   const prepareImg = (src) => {
     if (!src || typeof src !== 'string') return src;
-
-    // Si ya es una ruta local de Next.js o una URL de datos, no la tocamos
-    if (src.startsWith('/_next/') || src.startsWith('static/') || src.startsWith('data:')) {
-      return src;
-    }
-
-    const match_base = src.match(new RegExp(process.env.NEXT_PUBLIC_BASE_IMG)) || [];
-    const removeInterrogationMark = process.env.NEXT_PUBLIC_KEY_IMG ? process.env.NEXT_PUBLIC_KEY_IMG.split('?')[1] : ''
-    const match_key = removeInterrogationMark ? src.match(new RegExp(removeInterrogationMark)) : []
-
-    if (match_base.length > 1 || (match_key && match_key.length > 1)) {
-      return normalizarTexto(src)
-    } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes('https://reposaludmental.blob.core.windows.net/test/') && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-
-      return `/api/file-proxy?filePath=${src}`
-    } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-      const removeKey = src.split('?')[0]
-      return `/api/file-proxy?filePath=${removeKey}`
-    } else if (src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-
-      return `/api/file-proxy?filePath=${src}`
-    } else if (src.includes(process.env.NEXT_PUBLIC_KEY_IMG) && !src.includes(process.env.NEXT_PUBLIC_BASE_IMG)) {
-
-      return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
-    } else if (!src.includes(process.env.NEXT_PUBLIC_BASE_IMG) && !src.includes(process.env.NEXT_PUBLIC_KEY_IMG)) {
-      // Si parece una imagen local (solo nombre de archivo), no le ponemos el proxy de Azure si no es necesario
-      if (!src.includes('://') && !src.startsWith('/')) {
-        return src;
-      }
-      return `/api/file-proxy?filePath=${process.env.NEXT_PUBLIC_BASE_IMG}${src}`
-    }
     return src;
   }
 

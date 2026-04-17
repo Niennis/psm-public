@@ -13,7 +13,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   // const handleClose = () => setOpen(false);
   const matches = useMediaQuery('(min-width:600px)');
   const isMediumDevice = useMediaQuery('(min-width:601px and max-width:1280px)');
-  const URL_RESERVAR = process.env.NEXT_PUBLIC_URL_RESERVAR
+  const URL_RESERVAR = '#'
 
   return (
     <>

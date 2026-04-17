@@ -1,5 +1,5 @@
 export const sendMailTests = async (input) => {
-  const SEND_MAIL_URL = process.env.NEXT_PUBLIC_SEND_MAIL_TESTS
+  const SEND_MAIL_URL = 'https://calculatetestpoints-fpdthpb8d3fqh2a4.eastus-01.azurewebsites.net/main'
 
   const body = {
     nombre: input.nombre,
